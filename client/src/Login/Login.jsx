@@ -12,7 +12,49 @@
   }
   ```
 */
+
+import axios from "axios";
+import { useState } from "react";
+import { errorToast, successToast } from "../Toastify/Toast";
+import { Navigate, useNavigate } from "react-router-dom";
+
+
+
+
 export default function Example() {
+
+  const navigate = useNavigate()
+
+
+const [email,setEmail] = useState(null)
+const [password,setPasswrod] = useState(null)
+
+
+ const handlePassword = (e)=> setPasswrod(e.target.value)
+ const handleEmail = (e)=> setEmail(e.target.value)
+
+
+  const handleSubmitData = async(e)=>{
+    e.preventDefault()
+
+    console.log(email,password);
+    try {
+      const response = await axios.post('http://localhost:4000/api/admin/login', {email,password} );
+      console.log(response,'ress');
+      if (response.data) {
+        successToast("success");
+        navigate('/admin')
+      } else {
+        errorToast(response.data.message)
+      }
+    } catch (error) {
+      errorToast(error.response.data.message)
+    }
+    
+  }
+
+
+
   return (
     <>
       {/*
@@ -36,7 +78,7 @@ export default function Example() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <form className="space-y-6" onSubmit={handleSubmitData} >
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                 Email address
@@ -46,6 +88,7 @@ export default function Example() {
                   id="email"
                   name="email"
                   type="email"
+                  onChange={handleEmail}
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -68,6 +111,8 @@ export default function Example() {
                 <input
                   id="password"
                   name="password"
+                  onChange={handlePassword}
+
                   type="password"
                   autoComplete="current-password"
                   required

@@ -30,10 +30,10 @@ export const login = async (req, res, next) => {
         const user = await Admin.findOne({ email: email });
 
   
-        if(!user){
-            res.json({message:"user not found!"})
-        }
-
+        if (!user) {
+            res.status(404).json({ message: "User not found!" });
+          }
+          
         const isPassword = await bcrypt.compare(req.body.password, user.password)
         console.log(isPassword);
 
@@ -42,7 +42,8 @@ export const login = async (req, res, next) => {
         if(isPassword){
             res.json(user);
         }else{
-            res.json({message:"user not found!"})
+            res.status(404).json({ message: "User not found!" });
+
 
         }
 

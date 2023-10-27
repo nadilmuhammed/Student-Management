@@ -4,6 +4,8 @@ import "./charts/ChartjsConfig";
 // Import pages
 import Dashboard from "./pages/Dashboard";
 import Login from "./Login/Login";
+import Users from "./pages/Users";
+import DashboardCard12 from "./partials/dashboard/DashboardCard12";
 
 function App() {
   const location = useLocation();
@@ -17,7 +19,9 @@ function App() {
   return (
     <>
       <Routes>
-        <Route exact path="/admin" element={<Dashboard />} />
+        <Route exact path="/admin" element={<Dashboard />}>
+          <Route exact path="/admin/addtrainee"element={<Users/>} />
+        </Route>
         <Route exact path="/admin/login" element={<Login/>} />
       </Routes>
     </>
