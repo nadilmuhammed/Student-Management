@@ -1,4 +1,6 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "tw-elements-react/dist/css/tw-elements-react.min.css";
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ThemeProvider from './utils/ThemeContext';

@@ -1,0 +1,105 @@
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { TEInput, TERipple } from "tw-elements-react";
+
+export default function RegisterForm() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [batch, setBatch] = useState('');
+    console.log(name);
+
+    const {id} = useParams();
+    const onSubmitAll = async(e) => {
+      e.preventDefault();
+    try {
+      const response  = await axios.put(`http://localhost:4000/admin/${id}`,{
+          name:name,
+          email:email,
+          batch:batch,
+      })
+
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+
+  };
+
+
+
+
+    const fetchData= async(id)=>{
+        try {
+            let response = await axios.get(`http://localhost:4000/admintraine/${id}`);
+            console.log(response.data);
+            setName(response.data.name);
+            console.log(setName,'nsnfknsd');
+            setEmail(response.data.email);
+            setBatch(response.data.batch);
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+
+    useEffect(()=>{
+        fetchData(id);
+    },[])
+
+
+
+
+
+  return (
+    <div className="block max-w-sm rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+       style={{margin:"0% 30% 0% 30%"}}>
+        <p style={{textAlign:"center",fontSize:"25px",fontWeight:"bold"}}>Update Traine</p>
+      <form className="mt-3"  onSubmit={onSubmitAll}>
+          {/* <!--First name input--> */}
+          <TEInput
+            type="text"
+            label="Name"
+            value={name}
+            onChange={(e)=>setName(e.target.value)}
+            className="mb-6"
+          ></TEInput>
+
+        {/* <!--Email input--> */}
+        <TEInput
+          type="email"
+          label="Email address"
+          value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+          className="mb-6"
+        ></TEInput>
+
+        {/* <!--Password input--> */}
+        <TEInput
+          type="text"
+          label="batch"
+          value={batch}
+          onChange={(e)=>setBatch(e.target.value)}
+          className="mb-6"
+        ></TEInput>
+
+        {/* <!--Submit button--> */}
+        <TERipple rippleColor="light" className="w-full" style={{display:"flex",justifyContent:"space-around"}}>
+          <button
+            type="submit"
+            className="block w-20% rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]]"
+          >
+            Update
+          </button>
+          <button
+            type="submit"
+            className="block w-20% rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]]"
+          >
+            <Link to="/admin/viewtrainee">
+              traine
+            </Link>
+          </button>
+        </TERipple>
+      </form>
+    </div>
+  );
+}
