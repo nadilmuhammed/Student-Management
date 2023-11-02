@@ -16,7 +16,11 @@ export default function BasicExample({setRefresh,refresh}) {
     e.preventDefault();
 
     try {
-        const response = await axios.post(`http://localhost:4000/admin`,{name,email,batch});
+        const response = await axios.post(`http://localhost:4000/api/admin/createtraine`,{
+          name:name,
+          email:email,
+          batch:batch,
+        });
         console.log(response.data,"response");
 
         successToast('Created.')

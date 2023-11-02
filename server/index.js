@@ -23,20 +23,20 @@ app.use("/api/admin", adminRoute);
 
 dotenv.config();
 
-app.post("/admin", async (req, res) => {
-  console.log(req.body, "req.body");
+// app.post("/admin", async (req, res) => {
+//   console.log(req.body, "req.body");
 
-  try {
-    const result = await mongoose.connection
-      .collection("user")
-      .insertOne(req.body);
+//   try {
+//     const result = await mongoose.connection
+//       .collection("user")
+//       .insertOne(req.body);
 
-    console.log(result);
-    res.json({ result: result, status: true });
-  } catch (error) {
-    res.json({ message: error.message, status: false });
-  }
-});
+//     console.log(result);
+//     res.json({ result: result, status: true });
+//   } catch (error) {
+//     res.json({ message: error.message, status: false });
+//   }
+// });
 
 app.put("/admin/:id", async(req,res) =>{
   const {id} = req.params;
@@ -60,7 +60,7 @@ app.delete("/admin/:id", async (req, res) => {
     const objectId = new mongoose.Types.ObjectId(req.params.id);
 
     const result = await mongoose.connection
-      .collection("user")
+      .collection("users")
       .deleteOne({ _id: objectId });
     res.json({ result: result, status: true });
   } catch (error) {
@@ -73,7 +73,7 @@ app.delete("/admin/:id", async (req, res) => {
 app.get("/admintraine/:id", async (req, res) => {
   const {id} = req.params;
   try {
-    const result = await User.findById(id)
+    const result = await UUser.findById(id)
     res.json({ result: result, status: true });
   } catch (error) {
     res.json({ message: error.message, status: false });
@@ -87,7 +87,7 @@ app.get("/admintraine/:id", async (req, res) => {
 app.get("/admintraine", async (req, res) => {
   try {
     const result = await mongoose.connection
-      .collection("user")
+      .collection("users")
       .find()
       .toArray();
     console.log(result);
