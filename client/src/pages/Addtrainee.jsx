@@ -2,10 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { errorToast,successToast } from "../Toastify/Toast";
 import { TEInput, TERipple } from "tw-elements-react";
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 
 
 export default function BasicExample({setRefresh,refresh}) {
@@ -14,11 +10,6 @@ export default function BasicExample({setRefresh,refresh}) {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [batch, setBatch] = useState(null);
-  // const [selectedOption, setSelectedOption] = useState(""); // State to store the selected option
-  
-  //   const handleChange = (e) => {
-  //     setSelectedOption(e.target.value); // Update the selected option when the user makes a selection
-  //   };
 
 
   const handleSubmit = async (e) => {

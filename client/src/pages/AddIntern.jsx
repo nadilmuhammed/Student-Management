@@ -16,6 +16,7 @@ function AddIntern() {
             </div>
             <div>
                 <button type='submit'>Submit</button>
+                <button>sample</button>
             </div>
         </form>
     </div>
