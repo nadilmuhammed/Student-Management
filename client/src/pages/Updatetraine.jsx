@@ -13,15 +13,16 @@ export default function RegisterForm() {
     const onSubmitAll = async(e) => {
       e.preventDefault();
     try {
-      const response  = await axios.put(`http://localhost:4000/admin/${id}`,{
+      const response  = await axios.put(`http://localhost:4000/api/admin/updatetraine/${id}`,{
           name:name,
           email:email,
           batch:batch,
       })
-
-      console.log(response.data);
+      console.log(response.data,'lll');
+      console.log(response.data.result);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+      console.log(error.response.data.message);
     }
 
   };
@@ -31,7 +32,7 @@ export default function RegisterForm() {
 
     const fetchData= async(id)=>{
         try {
-            let response = await axios.get(`http://localhost:4000/admintraine/${id}`);
+            let response = await axios.get(`http://localhost:4000/api/admin/admintraineID/${id}`);
             console.log(response.data);
             setName(response.data.name);
             console.log(setName,'nsnfknsd');
@@ -51,7 +52,7 @@ export default function RegisterForm() {
 
 
   return (
-    <div className="block max-w-sm rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700"
+    <div className="block max-w-sm rounded-lg bg-dark p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] white:bg-neutral-700"
        style={{margin:"0% 30% 0% 30%"}}>
         <p style={{textAlign:"center",fontSize:"25px",fontWeight:"bold"}}>Update Traine</p>
       <form className="mt-3"  onSubmit={onSubmitAll}>

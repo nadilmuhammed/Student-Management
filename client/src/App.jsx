@@ -8,6 +8,7 @@ import DashboardCard12 from "./partials/dashboard/DashboardCard12";
 import Addtrainee from "./pages/Addtrainee";
 import Viewtraine from "./pages/Viewtraine";
 import Updatetraine from "./pages/Updatetraine";
+import AddIntern from "./pages/AddIntern";
 
 function App() {
   const location = useLocation();
@@ -24,7 +25,8 @@ function App() {
         <Route exact path="/admin" element={<Dashboard />}>
           <Route exact path="/admin/addtrainee"element={<Addtrainee />} />
           <Route exact path="/admin/viewtrainee"element={<Viewtraine />} />
-          <Route exact path="/admin/update"element={<Updatetraine />} />
+          <Route exact path="/admin/update/:id"element={<Updatetraine />} />
+          <Route exact path="/admin/addIntern"element={<AddIntern />} />
         </Route>
         <Route exact path="/admin/login" element={<Login/>} />
       </Routes>

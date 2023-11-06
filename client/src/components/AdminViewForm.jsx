@@ -12,9 +12,9 @@ export default function App() {
 
     const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:4000/admintraine");
+          const response = await axios.get("http://localhost:4000/api/admin/admintraine");
     
-          setData(response.data.result);
+          setData(response.data);
         } catch (error) {
           errorToast(error.message);
         }
@@ -24,7 +24,7 @@ export default function App() {
 
       const handleDelete = async (id) => {
         try {
-          const response = await axios.delete(`http://localhost:4000/admin/${id}`);
+          const response = await axios.delete(`http://localhost:4000/api/admin/deletetraine/${id}`);
           successToast('Deleted.')
           setRefresh(!refresh)
         } catch (error) {
@@ -61,18 +61,18 @@ export default function App() {
                 </tr>
               </thead>
               <tbody>
-                {data.map(({name,email,batch,_id},index)=>{
+                {data.map((user,index)=>{
                     return(
                         <>
 
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{name}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{email}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{batch}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.email}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
                             <div className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(_id)}>Delete</button>
-                                <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}><Link to="/admin/update">Edit</Link></button>
+                                <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}><Link to={`/admin/update/${user._id}`}>Edit</Link></button>
                                 {/* <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button> */}
                             </div>
                             </tr>

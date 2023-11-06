@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import { errorToast,successToast } from "../Toastify/Toast";
 import { TEInput, TERipple } from "tw-elements-react";
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+
 
 export default function BasicExample({setRefresh,refresh}) {
 
@@ -9,7 +14,11 @@ export default function BasicExample({setRefresh,refresh}) {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [batch, setBatch] = useState(null);
+  // const [selectedOption, setSelectedOption] = useState(""); // State to store the selected option
   
+  //   const handleChange = (e) => {
+  //     setSelectedOption(e.target.value); // Update the selected option when the user makes a selection
+  //   };
 
 
   const handleSubmit = async (e) => {
@@ -22,20 +31,21 @@ export default function BasicExample({setRefresh,refresh}) {
           batch:batch,
         });
         console.log(response.data,"response");
-
-        successToast('Created.')
-        setRefresh(!refresh)
+        if(response.data.result){
+          successToast('Created.')
+          setRefresh(!refresh)
+        }
       } catch (error) {
-        errorToast(error.message);
+        errorToast(error.response.data.message);
         // console.log(error.message);
       }
-      console.log(setRefresh,"refreshed");
   };
 
   return (
-    <div className="block max-w-sm rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700" style={{alignItems:"center",margin:"0% 30% 0% 30%"}}>
+    <div className="block max-w-sm rounded-lg bg-dark p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] white:bg-neutral-700" style={{alignItems:"center",margin:"0% 30% 0% 30%"}}>
       <form onSubmit={handleSubmit}>
         {/* <!--E-mail input--> */}
+        <p style={{textAlign:"center",fontSize:"25px",fontWeight:"bold"}}>Add Traine</p>
         <TEInput
           type="text"
           label="Name"
@@ -63,7 +73,17 @@ export default function BasicExample({setRefresh,refresh}) {
           value={batch}
           onChange={(e)=>setBatch(e.target.value)}
         ></TEInput>
-
+         {/* <div>
+            <h2>Batch</h2>
+            <select value={selectedOption} onChange={handleChange} style={{background:"transparent", color:"white"}}>
+              <option value="">Select a batch</option>
+              <option value="mern stacjk" onChange={(e)=>setBatch(e.target.value)}>Mern stack</option>
+              <option value="option2" onChange={(e)=>setBatch(e.target.value)}>flutter</option>
+              <option value="option3" onChange={(e)=>setBatch(e.target.value)}>ui design</option>
+            </select>
+            <p>Selected batch: {selectedOption}</p>
+          </div> */}
+  
         {/* <!--Checkbox--> */}
         <div className="mb-6 block min-h-[1.5rem] pl-[1.5rem]">
           <input
