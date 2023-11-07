@@ -51,6 +51,7 @@ export default function App() {
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <div className="overflow-hidden" style={{margin:"0% 10% 0% 10%"}}>
+          <Link to="/admin/addIntern"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
                 <tr>
@@ -72,7 +73,7 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
                             <div className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
-                                <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}><Link to={`/admin/update/${user._id}`}>Edit</Link></button>
+                                  <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}><Link to={`/admin/update/${user._id}`}>Edit</Link></button>
                                 {/* <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button> */}
                             </div>
                             </tr>
