@@ -4,9 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
-import Admin from "./models/Admin.js";
 import adminRoute from "./routes/admin.js";
-import UUser from "./models/update.js";
 
 const app = express();
 
