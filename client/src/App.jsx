@@ -4,6 +4,7 @@ import "./charts/ChartjsConfig";
 // Import pages
 import Dashboard from "./pages/Dashboard";
 import Login from "./Login/Login";
+
 import DashboardCard12 from "./partials/dashboard/DashboardCard12";
 import Addtrainee from "./pages/Addtrainee";
 import Viewtraine from "./pages/Viewtraine";
@@ -11,7 +12,11 @@ import Updatetraine from "./pages/Updatetraine";
 import AddIntern from "./pages/AddIntern";
 import ViewIntern from "./pages/ViewIntern";
 import UpdateIntern from "./pages/UpdateIntern";
+<<<<<<< HEAD
 import Adminbatch from "./pages/Adminbatch";
+=======
+import Register from "./Login/Register";
+>>>>>>> 4b6f7b3b0268d5184c503e62f8f73e1e66a5ebc4
 
 function App() {
   const location = useLocation();
@@ -34,7 +39,8 @@ function App() {
           <Route exact path="/admin/updateintern/:id"element={<UpdateIntern />} />
           <Route exact path="/admin/batches"element={<Adminbatch />} />
         </Route>
-        <Route exact path="/admin/login" element={<Login/>} />
+        <Route exact path="" element={<Login/>} />
+        <Route exact path="user/register" element= {<Register/>}/>       
       </Routes>
     </>
   );

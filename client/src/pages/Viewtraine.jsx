@@ -1,5 +1,5 @@
 import React from 'react'
-import AdminViewForm from '../components/adminViewForm'
+import AdminViewForm from '../components/AdminViewForm'
 
 function Viewtraine() {
   return (
