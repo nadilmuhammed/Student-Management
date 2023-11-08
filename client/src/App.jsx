@@ -4,6 +4,7 @@ import "./charts/ChartjsConfig";
 // Import pages
 import Dashboard from "./pages/Dashboard";
 import Login from "./Login/Login";
+
 import DashboardCard12 from "./partials/dashboard/DashboardCard12";
 import Addtrainee from "./pages/Addtrainee";
 import Viewtraine from "./pages/Viewtraine";
@@ -11,6 +12,7 @@ import Updatetraine from "./pages/Updatetraine";
 import AddIntern from "./pages/AddIntern";
 import ViewIntern from "./pages/ViewIntern";
 import UpdateIntern from "./pages/UpdateIntern";
+import Register from "./Login/Register";
 
 function App() {
   const location = useLocation();
@@ -32,7 +34,8 @@ function App() {
           <Route exact path="/admin/viewIntern"element={<ViewIntern />} />
           <Route exact path="/admin/updateintern/:id"element={<UpdateIntern />} />
         </Route>
-        <Route exact path="/admin/login" element={<Login/>} />
+        <Route exact path="" element={<Login/>} />
+        <Route exact path="user/register" element= {<Register/>}/>       
       </Routes>
     </>
   );
