@@ -11,6 +11,7 @@ import Updatetraine from "./pages/Updatetraine";
 import AddIntern from "./pages/AddIntern";
 import ViewIntern from "./pages/ViewIntern";
 import UpdateIntern from "./pages/UpdateIntern";
+import Adminbatch from "./pages/Adminbatch";
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/admin/addIntern"element={<AddIntern />} />
           <Route exact path="/admin/viewIntern"element={<ViewIntern />} />
           <Route exact path="/admin/updateintern/:id"element={<UpdateIntern />} />
+          <Route exact path="/admin/batches"element={<Adminbatch />} />
         </Route>
         <Route exact path="/admin/login" element={<Login/>} />
       </Routes>

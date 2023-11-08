@@ -48,12 +48,12 @@ function Dashboard() {
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
 
               {/* Left: Avatars */}
-              <DashboardAvatars />
+              {/* <DashboardAvatars /> */}
 
               {/* Right: Actions */}
               <div className="grid grid-flow-col sm:auto-cols-max justify-start sm:justify-end gap-2">
                 {/* Filter button */}
-                <FilterButton />
+                {/* <FilterButton /> */}
                 {/* Datepicker built with flatpickr */}
                 <Datepicker />
                 {/* Add view button */}
