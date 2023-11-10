@@ -12,6 +12,6 @@ const adminSchema = new Schema({
     },
 }, { timestamps: true })
 
-const Admin = model("Admin", adminSchema);
+const Admin = model("admins", adminSchema);
 
 export default Admin;
