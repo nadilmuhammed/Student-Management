@@ -1,21 +1,13 @@
-import User from "../models/admIntern.js";
+import Batch from "../models/adminBatch.js";
 
- export const createIntern = async(req,res)=>{
-    const { name,email,traine,batch } = req.body;
+
+export const createBatch = async(req,res)=>{
+    const { batch } = req.body;
     console.log(req.body);
-    if(!name) {
-      return res.status(400).json({message:"Name is required"})
-    }
-    if(!email) {
-      return res.status(400).json({message:"Email is required"})
-    }
-    if(!traine) {
-        return res.status(400).json({message:"Traine is required"})
-      }
     if(!batch) {
       return res.status(400).json({message:"Batch is required"})
     }
-    let product = await User({name,email,traine,batch})
+    let product = await Batch({batch})
     console.log(req.body, "req.body");
 
   try {
@@ -28,13 +20,13 @@ import User from "../models/admIntern.js";
 }
 
 
-export const updateintern= async(req,res)=>{
+export const updatebatch= async(req,res)=>{
     const {id} = req.params;
     console.log(id)
-    const {name, email, batch} = req.body;
+    const {batch} = req.body;
   
     try {
-        const updatedUser = await User.findByIdAndUpdate(id,{$set:{name, email, batch}},{new:true});
+        const updatedUser = await Batch.findByIdAndUpdate(id,{$set:{batch}},{new:true});
         res.status(201).json(updatedUser);
     } catch (error) {
       console.log('errr',error);
@@ -43,12 +35,12 @@ export const updateintern= async(req,res)=>{
   }
 
 
-export const deleteintern = async(req,res)=>{
+  export const deletebatch = async(req,res)=>{
     console.log("delte", req.params);
     const { id } = req.params;
     try {
   
-      const result = await User.findByIdAndDelete(id);
+      const result = await Batch.findByIdAndDelete(id);
       res.status(200).json(result)
     } catch (error) {
       res.json({ message: error.message, status: false });
@@ -56,9 +48,9 @@ export const deleteintern = async(req,res)=>{
   }
 
 
-export const getIntern = async(req,res)=>{
+export const getBatch = async(req,res)=>{
     try {
-      const result = await User.find(); 
+      const result = await Batch.find(); 
       console.log(result);
       res.status(200).json(result);
     } catch (error) {
@@ -67,10 +59,10 @@ export const getIntern = async(req,res)=>{
   } 
 
 
-  export const getInternID = async(req,res)=>{
+  export const getBatchID = async(req,res)=>{
     const {id} = req.params;
     try {
-      const result = await User.findById(id)
+      const result = await Batch.findById(id)
       res.json(result );
       return true
     } catch (error) {

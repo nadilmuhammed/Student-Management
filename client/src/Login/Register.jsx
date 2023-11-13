@@ -6,25 +6,27 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 export default function Example() {
   const navigate = useNavigate();
 
+  const [username,setName] = useState(null)
   const [email, setEmail] = useState(null);
   const [password, setPasswrod] = useState(null);
 
   const handlePassword = (e) => setPasswrod(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
+  const handleName = (e) => setName(e.target.value);
 
   const handleSubmitData = async (e) => {
     e.preventDefault();
 
-    console.log(email, password);
+    console.log(username,  email, password);
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/admin/login",
-        { email, password }
+        "http://localhost:4000/api/admin/register",
+        { username, email, password }
       );
       console.log(response, "ress");
       if (response.data) {
         successToast("success");
-        navigate("/admin");
+        navigate("/");
       } else {
         errorToast(response.data.message);
       }
@@ -59,7 +61,7 @@ export default function Example() {
           <form className="space-y-6" onSubmit={handleSubmitData}>
           <div>
               <label
-                htmlFor="email"
+                htmlFor="name"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
                Name
@@ -68,8 +70,10 @@ export default function Example() {
                 <input
                   id="name"
                   name="name"
-                  type="name"
-                  autoComplete="email"
+                  type="text"
+                  autoComplete="name"
+                  value={username}
+                  onChange={handleName}
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -87,6 +91,8 @@ export default function Example() {
                   id="email"
                   name="email"
                   type="email"
+                  value={email}
+                  onChange={handleEmail}
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -116,6 +122,8 @@ export default function Example() {
                   id="password"
                   name="password"
                   type="password"
+                  value={password}
+                  onChange={handlePassword}
                   autoComplete="current-password"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"

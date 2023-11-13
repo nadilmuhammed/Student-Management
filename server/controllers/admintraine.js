@@ -4,13 +4,13 @@ export const createtraine = async(req,res)=>{
     const { name,email,batch } = req.body;
     console.log(req.body);
     if(!name) {
-      return res.status(400).json({message:"name is required"})
+      return res.status(400).json({message:"Name is required"})
     }
     if(!email) {
-      return res.status(400).json({message:"email is required"})
+      return res.status(400).json({message:"Email is required"})
     }
     if(!batch) {
-      return res.status(400).json({message:"batch is required"})
+      return res.status(400).json({message:"Batch is required"})
     }
     let product = await UUser({name,email,batch})
     console.log(req.body, "req.body");
