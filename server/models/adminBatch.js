@@ -5,7 +5,12 @@ const UserSchema = new Schema({
         type: String,
         required:true,
         unique:true
-    }
+    },
+    trainerReference : [{
+        type: String,
+        required : true
+    }]
+ 
 },{timestamps : true})
 
 

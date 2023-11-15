@@ -17,6 +17,8 @@ import AddBatch from "./pages/adminbatch/AddBatch";
 import ViewBatch from "./pages/adminbatch/ViewBatch";
 import UpdateBatch from "./pages/adminbatch/UpdateBatch";
 
+import "./style.css"
+
 function App() {
   const location = useLocation();
 

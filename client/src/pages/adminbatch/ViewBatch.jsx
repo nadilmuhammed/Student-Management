@@ -56,6 +56,7 @@ export default function App() {
                 <tr>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Batch</th>
+                  <th scope="col" className="px-6 py-4">Traine</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,6 +67,7 @@ export default function App() {
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.trainerReference}</td>
                             <div className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
                                 <Link to={`/admin/updatebatch/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>

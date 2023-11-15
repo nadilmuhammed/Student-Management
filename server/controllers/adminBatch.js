@@ -2,12 +2,15 @@ import Batch from "../models/adminBatch.js";
 
 
 export const createBatch = async(req,res)=>{
-    const { batch } = req.body;
+    const { batch,trainerReference } = req.body;
     console.log(req.body);
     if(!batch) {
       return res.status(400).json({message:"Batch is required"})
     }
-    let product = await Batch({batch})
+    if(!trainerReference) {
+      return res.status(400).json({message:"trainerReference"})
+    }
+    let product = await Batch({batch,trainerReference})
     console.log(req.body, "req.body");
 
   try {

@@ -1,54 +1,98 @@
-import React, { useState } from "react";
-import { TEInput, TERipple } from "tw-elements-react";
-import { errorToast, successToast } from "../../Toastify/Toast";
-import axios from "axios";
 
-export default function BasicExample({setRefresh,refresh}){
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { errorToast, successToast } from '../../Toastify/Toast';
+import Select from 'react-select';
 
+function AddBatch() {
   const [batch, setBatch] = useState(null);
+  const [viewBatch, setViewBatch] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
+  const options =[
+    { value: 'option1', label: 'Option 1'},
+    { value: 'option2', label: 'Option 2'},
+  ]
+
+
+const fetchData = async()=>{
     try {
-        const response = await axios.post(`http://localhost:4000/api/admin/createBatch`,{
-          batch:batch,
-        });
-        console.log(response.data,"response");
-        if(response.data.result){
-          successToast('Created.')
-          setRefresh(!refresh)
-        }
-      } catch (error) {
-        errorToast(error.response.data.message);
-        // console.log(error.message);
-      }
-  };
-  return (
-    <div className="block max-w-sm rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-      <form onSubmit={handleSubmit}>
-        <p>Add Batches</p>
-        {/* <!--E-mail input--> */}
-        <TEInput
-          type="text"
-          label="Batches"
-          value={batch}
-          onChange={(e) => setBatch(e.target.value)}
-        >
-        </TEInput>
-        
+      const response = await axios.get("http://localhost:4000/api/admin/admintraine");
 
-        {/* <!--Submit button--> */}
-        <TERipple rippleColor="light" className="mt-6">
-          <button
-            type="submit"
-            className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-          >
-            Submit
-          </button>
-        </TERipple>
+      setViewBatch(response.data);
+    } catch (error) {
+      errorToast(error.message);
+    }
+}
+
+  useEffect(()=>{
+    fetchData()
+  },[])
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const mappedOptions = selectedOptions.map(item => (
+        item.value
+      ) );
+  
+  
+      console.log({trainerReference:mappedOptions},'selected user')
+      try {
+          const response = await axios.post(`http://localhost:4000/api/admin/createBatch`,{
+            batch:batch,
+            trainerReference:mappedOptions
+          });
+          console.log(response.data,"response");
+          if(response.data.result){
+            successToast('Created.')
+            setRefresh(!refresh)
+          }
+        } catch (error) {
+          errorToast(error.response.data.message);
+          // console.log(error.message);
+        }
+    };
+
+
+    const mappedOptions = viewBatch.map(item => ({
+      value: item.name,
+      label: item.name
+    }));
+
+  return (
+    <>
+    <div className='main' style={{textAlign:"center",border:"1px solid black",borderRadius:"10px", margin:"5% 30%"}}>
+        <div>
+          <h3 style={{padding: "20px",fontSize: "25px", fontWeight: "bolder",fontFamily: "cursive", color:"white"}}>ADD BATCH</h3>
+          
+        </div>
+      <form onSubmit={handleSubmit}>
+        <div className='batch-input' style={{padding:"2rem"}}>
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
+          value={batch}
+          onChange={(e) => setBatch(e.target.value)} />
+        </div>
+        <div className='dropdown'>
+              
+
+              <Select
+              isMulti
+              options={mappedOptions}
+              value={selectedOptions}
+              onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}
+            />
+        </div>
+        <div>
+        <button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>Add</button>
+        </div>
       </form>
     </div>
-  );
+    </>
+  )
 }
+
+export default AddBatch
