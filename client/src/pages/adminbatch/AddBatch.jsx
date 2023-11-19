@@ -10,22 +10,15 @@ function AddBatch() {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
 
-
-  const options =[
-    { value: 'option1', label: 'Option 1'},
-    { value: 'option2', label: 'Option 2'},
-  ]
-
-
 const fetchData = async()=>{
     try {
       const response = await axios.get("http://localhost:4000/api/admin/admintraine");
-
       setViewBatch(response.data);
     } catch (error) {
       errorToast(error.message);
     }
 }
+
 
   useEffect(()=>{
     fetchData()
@@ -77,10 +70,9 @@ const fetchData = async()=>{
           onChange={(e) => setBatch(e.target.value)} />
         </div>
         <div className='dropdown'>
-              
-
               <Select
               isMulti
+              placeholder="Select Traine"
               options={mappedOptions}
               value={selectedOptions}
               onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}

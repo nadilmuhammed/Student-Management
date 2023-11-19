@@ -9,10 +9,6 @@ const UserSchema = new Schema({
         type: String,
         required:true,
         unique: true
-    },
-    batch: {
-        type: String,
-        required:true
     }
 },{timestamps : true})
 

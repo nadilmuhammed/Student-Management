@@ -10,10 +10,10 @@ const UserSchema = new Schema({
         required:true,
         unique: true
     },
-    traine: {
+    traine : [{
         type: String,
-        required:true
-    },
+        required : true
+    }],
     batch: {
         type: String,
         required:true

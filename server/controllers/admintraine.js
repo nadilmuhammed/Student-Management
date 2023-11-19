@@ -1,7 +1,7 @@
-import UUser from "../models/update.js";
+import UUser from "../models/Admintraine.js";
 
 export const createtraine = async(req,res)=>{
-    const { name,email,batch } = req.body;
+    const { name,email } = req.body;
     console.log(req.body);
     if(!name) {
       return res.status(400).json({message:"Name is required"})
@@ -9,10 +9,7 @@ export const createtraine = async(req,res)=>{
     if(!email) {
       return res.status(400).json({message:"Email is required"})
     }
-    if(!batch) {
-      return res.status(400).json({message:"Batch is required"})
-    }
-    let product = await UUser({name,email,batch})
+    let product = await UUser({name,email})
     console.log(req.body, "req.body");
 
   try {
@@ -28,10 +25,15 @@ export const createtraine = async(req,res)=>{
 export const updatetraine= async(req,res)=>{
   const {id} = req.params;
   console.log(id)
-  const {name, email, batch} = req.body;
-
+  const {name, email} = req.body;
+  if(!name) {
+    return res.status(400).json({message:"Name is required"})
+  }
+  if(!email) {
+    return res.status(400).json({message:"Email is required"})
+  }
   try {
-      const updatedUser = await UUser.findByIdAndUpdate(id,{$set:{name, email, batch}},{new:true});
+      const updatedUser = await UUser.findByIdAndUpdate(id,{$set:{name, email}},{new:true});
       res.status(201).json(updatedUser);
   } catch (error) {
     console.log('errr',error);
