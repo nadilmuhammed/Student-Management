@@ -31,10 +31,10 @@ import User from "../models/admIntern.js";
 export const updateintern= async(req,res)=>{
     const {id} = req.params;
     console.log(id)
-    const {name, email, batch} = req.body;
+    const {name, email,traine, batch} = req.body;
   
     try {
-        const updatedUser = await User.findByIdAndUpdate(id,{$set:{name, email, batch}},{new:true});
+        const updatedUser = await User.findByIdAndUpdate(id,{$set:{name, email,traine,traine}},{new:true});
         res.status(201).json(updatedUser);
     } catch (error) {
       console.log('errr',error);

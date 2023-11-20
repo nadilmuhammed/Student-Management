@@ -58,7 +58,6 @@ export default function App() {
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Email</th>
-                  <th scope="col" className="px-6 py-4">Batch</th>
                 </tr>
               </thead>
               <tbody>

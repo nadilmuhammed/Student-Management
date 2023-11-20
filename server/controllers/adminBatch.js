@@ -8,7 +8,7 @@ export const createBatch = async(req,res)=>{
       return res.status(400).json({message:"Batch is required"})
     }
     if(!trainerReference) {
-      return res.status(400).json({message:"trainerReference"})
+      return res.status(400).json({message:"Select a traine"})
     }
     let product = await Batch({batch,trainerReference})
     console.log(req.body, "req.body");
@@ -25,11 +25,16 @@ export const createBatch = async(req,res)=>{
 
 export const updatebatch= async(req,res)=>{
     const {id} = req.params;
-    console.log(id)
-    const {batch} = req.body;
+    const {batch,trainerReference} = req.body;
+    if(!batch) {
+      return res.status(400).json({message:"Batch is required"})
+    }
+    if(!trainerReference) {
+      return res.status(400).json({message:"Select a traine"})
+    }
   
     try {
-        const updatedUser = await Batch.findByIdAndUpdate(id,{$set:{batch}},{new:true});
+        const updatedUser = await Batch.findByIdAndUpdate(id,{$set:{batch,trainerReference}},{new:true});
         res.status(201).json(updatedUser);
     } catch (error) {
       console.log('errr',error);
