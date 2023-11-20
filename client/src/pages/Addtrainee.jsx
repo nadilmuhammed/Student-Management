@@ -9,7 +9,6 @@ export default function BasicExample({setRefresh,refresh}) {
 
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
-  const [batch, setBatch] = useState(null);
 
 
   const handleSubmit = async (e) => {
@@ -18,8 +17,7 @@ export default function BasicExample({setRefresh,refresh}) {
     try {
         const response = await axios.post(`http://localhost:4000/api/admin/createtraine`,{
           name:name,
-          email:email,
-          batch:batch,
+          email:email
         });
         console.log(response.data,"response");
         if(response.data.result){

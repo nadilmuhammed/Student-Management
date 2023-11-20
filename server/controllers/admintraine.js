@@ -1,7 +1,7 @@
 import UUser from "../models/update.js";
 
 export const createtraine = async(req,res)=>{
-    const { name,email,batch } = req.body;
+    const { name,email } = req.body;
     console.log(req.body);
     if(!name) {
       return res.status(400).json({message:"Name is required"})
@@ -9,10 +9,7 @@ export const createtraine = async(req,res)=>{
     if(!email) {
       return res.status(400).json({message:"Email is required"})
     }
-    if(!batch) {
-      return res.status(400).json({message:"Batch is required"})
-    }
-    let product = await UUser({name,email,batch})
+    let product = await UUser({name,email})
     console.log(req.body, "req.body");
 
   try {
