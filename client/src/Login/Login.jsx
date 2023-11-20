@@ -126,7 +126,6 @@ export default function Example() {
               </button></Link>
             </div>
           </form>
-
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
             <a
