@@ -55,7 +55,6 @@ function AddIntern({setRefresh,refresh}) {
           }
         } catch (error) {
           errorToast(error.response.data.message);
-          // console.log(error.message);
         }
     };
 
