@@ -64,12 +64,12 @@ const fetchData = async()=>{
           
         </div>
       <form onSubmit={handleSubmit}>
-        <div className='batch-input' style={{padding:"2rem"}}>
+        <div className='batch-input mt-4 mb-3'>
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
           value={batch}
           onChange={(e) => setBatch(e.target.value)} />
         </div>
-        <div className='dropdown'>
+        <div className='dropdown mb-3'>
               <Select
               isMulti
               placeholder="Select Traine"

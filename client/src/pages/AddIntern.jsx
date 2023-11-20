@@ -1,5 +1,4 @@
 
-
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { errorToast, successToast } from '../Toastify/Toast';
@@ -20,7 +19,6 @@ function AddIntern({setRefresh,refresh}) {
   const fetchDatatraine = async()=>{
     try {
       const response = await axios.get("http://localhost:4000/api/admin/admintraine");
-
       setViewBatch(response.data);
     } catch (error) {
       errorToast(error.message);
@@ -72,7 +70,7 @@ function AddIntern({setRefresh,refresh}) {
           
         </div>
       <form onSubmit={handleSubmit}>
-      <div className='batch-input' style={{padding:"2rem"}} >
+      <div className='batch-input mt-3 mb-3' >
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Name'
           value={name}
           onChange={(e) => setName(e.target.value)} />
@@ -82,7 +80,7 @@ function AddIntern({setRefresh,refresh}) {
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div className='dropdown'>
+        <div className='dropdown mb-3'>
               <Select
               isMulti
               placeholder="Select Traine"
