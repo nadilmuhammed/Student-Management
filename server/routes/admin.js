@@ -1,6 +1,6 @@
 import express from "express";
 import { getadmin, login, register, updateadmin } from "../controllers/admin.js";
-import { createtraine, deletetraine, getByID, getraine, updatetraine } from "../controllers/admintraine.js";
+import { createtraine, deletetraine, getByID, getTraineBatch, getraine, updatetraine } from "../controllers/admintraine.js";
 import { createIntern, deleteintern, getIntern, getInternID, updateintern } from "../controllers/adminIntern.js";
 import { createBatch, deletebatch, getBatch, getBatchID, updatebatch } from "../controllers/adminBatch.js";
 
@@ -18,6 +18,7 @@ router.post("/createtraine", createtraine)
 router.put("/updatetraine/:id", updatetraine)
 router.delete("/deletetraine/:id", deletetraine)
 router.get("/admintraineID/:id", getByID)
+router.get("/getTrainebatch/:id" , getTraineBatch)
 router.get("/admintraine", getraine)
 
 

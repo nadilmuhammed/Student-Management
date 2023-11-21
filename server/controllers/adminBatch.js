@@ -70,7 +70,7 @@ export const getBatch = async(req,res)=>{
   export const getBatchID = async(req,res)=>{
     const {id} = req.params;
     try {
-      const result = await Batch.findById(id)
+      const result = await Batch.findById([id])
       res.json(result );
       return true
     } catch (error) {
