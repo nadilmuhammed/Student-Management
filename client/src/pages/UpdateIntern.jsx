@@ -88,7 +88,7 @@ function UpdateIntern() {
     <>
     <div className='main' style={{textAlign:"center",border:"1px solid black",borderRadius:"10px", margin:"5% 30%"}}>
         <div>
-          <h3 style={{padding: "20px",fontSize: "25px", fontWeight: "bolder",fontFamily: "cursive", color:"white"}}> UPDATE TRAINE </h3>
+          <h3 style={{padding: "20px",fontSize: "25px", fontWeight: "bolder",fontFamily: "cursive", color:"white"}}> UPDATE INTERN </h3>
           
         </div>
       <form onSubmit={onSubmitAll}>

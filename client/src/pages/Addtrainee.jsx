@@ -42,7 +42,7 @@ function AddBatch() {
           value={name}
           onChange={(e) => setName(e.target.value)} />
         </div>
-        <div className='batch-input mb-3' >
+        <div className='batch-input2 mb-3' >
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)} />

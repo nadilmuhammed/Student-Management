@@ -60,12 +60,12 @@ function UpdateTraine() {
           
         </div>
       <form onSubmit={onSubmitAll}>
-        <div className='batch-input mt-4 mb-3' >
+        <div className='batch-input1 mt-4 mb-3' >
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
           value={name}
           onChange={(e) => setName(e.target.value)} />
         </div>
-        <div className='batch-input mt-4 mb-3'>
+        <div className='batch-input2 mt-4 mb-3'>
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
