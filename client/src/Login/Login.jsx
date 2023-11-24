@@ -22,13 +22,21 @@ export default function Example() {
         "http://localhost:4000/api/admin/login",
         { email, password }
       );
-      console.log(response, "ress");
+      // console.log(response, "ress");
       if (response.data) {
+
+        const {  result,token } = response.data
+ 
+        // { 
+        //   result:''
+        //   token:''
+        // }
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', result.username);
+        localStorage.setItem('id', result._id);
         successToast("logged in");
         navigate("/admin");
-      } else {
-        errorToast(response.data.message);
-      }
+      } 
     } catch (error) {
       errorToast(error.response.data.message);
     }

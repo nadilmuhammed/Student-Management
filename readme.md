@@ -1,0 +1,1 @@
+localstorage, session,cookie

@@ -72,7 +72,7 @@ export const getTraineBatch = async(req,res)=>{
   const {id} = req.params;
   console.log(id);
   try {
-    const result = await Batch.find({getTraineBatch: id });
+    const result = await Batch.find({trainerReference: id });
     res.json(result)
     console.log(result);
   } catch (error) {
