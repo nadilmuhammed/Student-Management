@@ -52,7 +52,7 @@ const fetchData = async()=>{
 
 
     const mappedOptions = viewBatch.map(item => ({
-      value: item.name,
+      value: item._id,
       label: item.name
     }));
 

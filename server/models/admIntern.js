@@ -10,10 +10,10 @@ const UserSchema = new Schema({
         required:true,
         unique: true
     },
-    trainerReference : [{
+    trainerReference : {
         type: String,
         required : true
-    }],
+    },
     batch: {
         type: String,
         required:true
@@ -21,5 +21,5 @@ const UserSchema = new Schema({
 },{timestamps : true})
 
 
-const User = model("intern", UserSchema);
-export default User
+const Intern = model("intern", UserSchema);
+export default Intern

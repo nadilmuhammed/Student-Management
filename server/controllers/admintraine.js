@@ -5,7 +5,12 @@ import Batch from "../models/adminBatch.js";
 
 export const createtraine = async(req,res)=>{
     const { name,email } = req.body;
-    console.log(req.body);
+
+  // payload data
+  // { name: 'example', email: 'example@gmail.com' } 
+
+
+    console.log(req.body,"create trainer api");
     if(!name) {
       return res.status(400).json({message:"Name is required"})
     }
@@ -68,12 +73,13 @@ export const getByID = async(req,res)=>{
   }
 }
 
+
 export const getTraineBatch = async(req,res)=>{
   const {id} = req.params;
   console.log(id);
   try {
-    const result = await Batch.find({trainerReference: id });
-    res.json(result)
+    const result = await Batch.find({trainerReference:id});
+    res.json(result);
     console.log(result);
   } catch (error) {
     res.json({message : error.message})

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Transition from '../utils/Transition';
 
 import UserAvatar from '../images/user-avatar-32.png';
@@ -9,6 +9,16 @@ function DropdownProfile({
 }) {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const navigate = useNavigate()
+
+  const signOutnavigate = () =>{
+    setDropdownOpen(!dropdownOpen)
+    localStorage.removeItem("token")
+    localStorage.removeItem("id")
+    localStorage.removeItem("username")
+    navigate("/")
+  }
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
@@ -82,13 +92,13 @@ function DropdownProfile({
               </Link>
             </li> */}
             <li>
-              <Link
+              <p
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3"
-                to="/"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                
+                onClick={signOutnavigate}
               >
                 Sign Out
-              </Link>
+              </p>
             </li>
           </ul>
         </div>

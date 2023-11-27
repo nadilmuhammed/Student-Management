@@ -2,7 +2,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { errorToast, successToast } from '../Toastify/Toast';
-import Select from 'react-select';
 
 function AddIntern({setRefresh,refresh}) {
 
@@ -10,43 +9,37 @@ function AddIntern({setRefresh,refresh}) {
 
    const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
-    const [traine,setTraine] = useState(null)
-    const [batch, setBatch] = useState(null);
-    const [viewBatch, setViewBatch] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+    const [getBranches, setGetBranches] = useState([]);
+    const [getTrainers, setGetTrainers] = useState([]);
+  const [batch, setBatch] = useState([]);
+  const [trainerId, setTrainerId] = useState();
 
 
   const fetchDatatraine = async()=>{
     try {
       const response = await axios.get("http://localhost:4000/api/admin/admintraine");
-      setViewBatch(response.data);
+      setGetTrainers(response.data);
     } catch (error) {
       errorToast(error.message);
     }
 }
 
   useEffect(()=>{
-    fetchDatatraine()
+    fetchDatatraine();
   },[])
-  
+
   
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const mappedOptions = selectedOptions.map(item => (
-        item.value
-      ) );
-
-      console.log({trainerReference:mappedOptions},'selected user')
   
       try {
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`,{
             name:name,
             email:email,
-            trainerReference:mappedOptions,
+            trainerReference:trainerId,
             batch:batch,
           });
-          console.log(response.data,"response");
           if(response.data.result){
             successToast('Created.')
             setRefresh(!refresh)
@@ -55,12 +48,19 @@ function AddIntern({setRefresh,refresh}) {
           errorToast(error.response.data.message);
         }
     };
+    
+    const handleClickTrainer = async(id)=>{
+      try {
+        setTrainerId(id)
+        const response = await axios.get(`http://localhost:4000/api/admin/getTrainebatch/${id}`);
+        setGetBranches(response.data)
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
 
 
-    const mappedOptions = viewBatch.map(item => ({
-      value: item.name,
-      label: item.name
-    }));
+  
   
   return (
     <>
@@ -80,7 +80,7 @@ function AddIntern({setRefresh,refresh}) {
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <div className='dropdown mb-3'>
+        {/* <div className='dropdown mb-3'>
               <Select
               isMulti
               placeholder="Select Traine"
@@ -88,11 +88,35 @@ function AddIntern({setRefresh,refresh}) {
               value={selectedOptions}
               onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}
             />
+        </div>*/}
+        <div className="">
+          <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
+            <option value="">choose</option>t
+            {
+              getTrainers.map((item)=>{
+                return(
+                    <option value={item._id}>{item.name}</option>
+                  )
+              })
+            }
+          </select>
         </div>
-        <div className='batch-input mb-3' >
-          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Batch'
+        <div className='batch-input mb-3' > 
+          {/* <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Batch'
           value={batch}
-          onChange={(e) => setBatch(e.target.value)} />
+          onChange={(e) => setBatch(e.target.value)} /> */}
+          <select name="" id="" onChange={(e)=>setBatch(e.target.value)}>
+          <option value="">choose</option>t
+
+            {
+              getBranches.map((item)=>{
+                return(
+                  <option value={item._id}>{item.batch}</option>
+                )
+              })
+
+            }
+          </select>
         </div>
         <div>
         <button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>Add</button>

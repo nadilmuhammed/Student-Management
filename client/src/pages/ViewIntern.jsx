@@ -63,6 +63,7 @@ export default function App() {
               </thead>
               <tbody>
                 {data.map((user,index)=>{
+                  console.log(user,"jnsdjsdn");
                     return(
                         <>
 
@@ -70,8 +71,8 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.email}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{user.trainerReference}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.trainerData.name}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.batchData.batch}</td>
                             <div className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
                                 <Link to={`/admin/updateintern/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
