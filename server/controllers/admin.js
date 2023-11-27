@@ -1,5 +1,6 @@
 import Admin from "../models/Admin.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
   try {
@@ -15,6 +16,8 @@ export const register = async (req, res, next) => {
     console.log(error);
   }
 };
+
+
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -33,6 +36,9 @@ export const login = async (req, res, next) => {
 
     const user = await Admin.findOne({ email: email });
 
+    // { } - single user
+    console.log(user);
+
     if (!user) {
       return res.status(404).json({ message: "User not found!" });
     }
@@ -40,14 +46,15 @@ export const login = async (req, res, next) => {
     const isPassword = await bcrypt.compare(req.body.password, user.password);
 
     if (isPassword) {
-      res.json(user);
+
+      const token = jwt.sign({ userId: user._id, username: user.username }, 'your-secret-key', { expiresIn: '1 days' });
+
+
+      res.json({result:user,token:token});
     } else {
       res.status(404).json({ message: "Incorrect password" });
     }
 
-    // const newAdmin = new Admin({ email,password:hash })
-    // const savedAdmin = await newAdmin.save();
-    res.status(200).json(user);
   } catch (error) {
     console.log(error);
   }

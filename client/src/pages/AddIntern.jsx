@@ -37,13 +37,13 @@ function AddIntern({setRefresh,refresh}) {
         item.value
       ) );
 
-      console.log({traine:mappedOptions},'selected user')
+      console.log({trainerReference:mappedOptions},'selected user')
   
       try {
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`,{
             name:name,
             email:email,
-            traine:mappedOptions,
+            trainerReference:mappedOptions,
             batch:batch,
           });
           console.log(response.data,"response");

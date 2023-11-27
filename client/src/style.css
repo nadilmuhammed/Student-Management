@@ -22,15 +22,15 @@
     .main{
         position: relative;
         inline-size: 90%;
-        inset-inline-start: -5rem;
-    }
+        inset-inline-start: -4rem;
+    } 
 
-    .input-id{
-        margin-left: -1.7rem;
+    .batch-input{
+        
     }
 
     .dropdown{
-        margin-left: 0.8rem;
+        margin-left: 0.5rem;
     }
 
 

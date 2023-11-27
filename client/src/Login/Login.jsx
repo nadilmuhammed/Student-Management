@@ -22,13 +22,21 @@ export default function Example() {
         "http://localhost:4000/api/admin/login",
         { email, password }
       );
-      console.log(response, "ress");
+      // console.log(response, "ress");
       if (response.data) {
+
+        const {  result,token } = response.data
+ 
+        // { 
+        //   result:''
+        //   token:''
+        // }
+        localStorage.setItem('token', token);
+        localStorage.setItem('username', result.username);
+        localStorage.setItem('id', result._id);
         successToast("logged in");
         navigate("/admin");
-      } else {
-        errorToast(response.data.message);
-      }
+      } 
     } catch (error) {
       errorToast(error.response.data.message);
     }
@@ -51,7 +59,7 @@ export default function Example() {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black-900">
             Sign in to your account
           </h2>
         </div>
@@ -61,7 +69,7 @@ export default function Example() {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block text-sm font-medium leading-6 text-black-900"
               >
                 Email address
               </label>
@@ -82,7 +90,7 @@ export default function Example() {
               <div className="flex items-center justify-between">
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block text-sm font-medium leading-6 text-black-900"
                 >
                   Password
                 </label>
@@ -126,15 +134,6 @@ export default function Example() {
               </button></Link>
             </div>
           </form>
-          <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{" "}
-            <a
-              href="#"
-              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-            >
-              Start a 14 day free trial
-            </a>
-          </p>
         </div>
       </div>
     </>

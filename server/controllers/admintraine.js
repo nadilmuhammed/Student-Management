@@ -1,4 +1,7 @@
 import UUser from "../models/Admintraine.js";
+// import User from "../models/admIntern.js";
+import Batch from "../models/adminBatch.js";
+// import Batch from "../models/adminBatch.js";
 
 export const createtraine = async(req,res)=>{
     const { name,email } = req.body;
@@ -64,6 +67,21 @@ export const getByID = async(req,res)=>{
     res.json({ message: error.message, status: false });
   }
 }
+
+export const getTraineBatch = async(req,res)=>{
+  const {id} = req.params;
+  console.log(id);
+  try {
+    const result = await Batch.find({trainerReference: id });
+    res.json(result)
+    console.log(result);
+  } catch (error) {
+    res.json({message : error.message})
+  }
+}
+
+
+
 
 export const getraine = async(req,res)=>{
   try {
