@@ -5,14 +5,13 @@ import { errorToast, successToast } from '../Toastify/Toast';
 
 function AddIntern({setRefresh,refresh}) {
 
-
-
-   const [name, setName] = useState(null);
+   
+    const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
     const [getBranches, setGetBranches] = useState([]);
-    const [getTrainers, setGetTrainers] = useState([]);
-  const [batch, setBatch] = useState([]);
-  const [trainerId, setTrainerId] = useState();
+    const [getTrainers, setGetTrainers] = useState([]); 
+    const [batch, setBatch] = useState([]);
+    const [trainerId, setTrainerId] = useState();
 
 
   const fetchDatatraine = async()=>{
@@ -32,7 +31,6 @@ function AddIntern({setRefresh,refresh}) {
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-  
       try {
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`,{
             name:name,
@@ -46,8 +44,9 @@ function AddIntern({setRefresh,refresh}) {
           }
         } catch (error) {
           errorToast(error.response.data.message);
-        }
+      }
     };
+    
     
     const handleClickTrainer = async(id)=>{
       try {
@@ -59,9 +58,8 @@ function AddIntern({setRefresh,refresh}) {
       }
     }
 
+  
 
-  
-  
   return (
     <>
     <div className='main' style={{textAlign:"center",border:"1px solid black",borderRadius:"10px", margin:"1% 30%"}}>
@@ -80,15 +78,6 @@ function AddIntern({setRefresh,refresh}) {
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
         </div>
-        {/* <div className='dropdown mb-3'>
-              <Select
-              isMulti
-              placeholder="Select Traine"
-              options={mappedOptions}
-              value={selectedOptions}
-              onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}
-            />
-        </div>*/}
         <div className="">
           <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
             <option value="">choose</option>t
@@ -102,9 +91,6 @@ function AddIntern({setRefresh,refresh}) {
           </select>
         </div>
         <div className='batch-input mb-3' > 
-          {/* <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Batch'
-          value={batch}
-          onChange={(e) => setBatch(e.target.value)} /> */}
           <select name="" id="" onChange={(e)=>setBatch(e.target.value)}>
           <option value="">choose</option>t
 
