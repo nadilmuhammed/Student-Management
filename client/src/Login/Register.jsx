@@ -19,10 +19,9 @@ export default function Example() {
 
     console.log(username,  email, password);
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/admin/register",
+      const response = await axios.post( "http://localhost:4000/api/admin/register",
         { username, email, password }
-      );
+        );
       console.log(response, "ress");
       if (response.data) {
         successToast("success");

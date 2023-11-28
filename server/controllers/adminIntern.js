@@ -71,7 +71,6 @@ export const getIntern = async(req,res)=>{
       const { ...batchOther } = batch
 
       console.log(batch,'batch');
-      // return true
 
       return {...other._doc,trainerData:trainerOther._doc,batchData:batchOther._doc}
 

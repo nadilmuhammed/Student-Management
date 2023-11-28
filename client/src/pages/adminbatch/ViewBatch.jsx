@@ -48,9 +48,9 @@ export default function App() {
         
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">   
-          <div className="overflow-hidden" style={{margin:"0% 10% 0% 10%"}}>
-
+        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+          <p className='viewformheading'>Batch Details</p>  
+          <div className="overflow-hidden viewAllform">
           <Link to="/admin/batches">
             <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button>
           </Link>

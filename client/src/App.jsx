@@ -4,8 +4,6 @@ import "./charts/ChartjsConfig";
 // Import pages
 import Dashboard from "./pages/Dashboard";
 import Login from "./Login/Login";
-
-import DashboardCard12 from "./partials/dashboard/DashboardCard12";
 import Addtrainee from "./pages/Addtrainee";
 import Viewtraine from "./pages/Viewtraine";
 import Updatetraine from "./pages/Updatetraine";

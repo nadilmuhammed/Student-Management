@@ -31,18 +31,18 @@ function AddBatch() {
 
   return (
     <>
-    <div className='main' style={{textAlign:"center",border:"1px solid black",borderRadius:"10px", margin:"5% 30%"}}>
+    <div className='main' style={{textAlign:"center",border:"1px solid black",borderRadius:"10px", margin:"1% 30%"}}>
         <div>
           <h3 style={{padding: "20px",fontSize: "25px", fontWeight: "bolder",fontFamily: "cursive", color:"white"}}>ADD TRAINE</h3>
           
         </div>
       <form onSubmit={handleSubmit}>
-      <div className='batch-input' style={{padding:"2rem"}} >
+      <div className='batch-input mt-3 mb-3' >
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Name'
           value={name}
           onChange={(e) => setName(e.target.value)} />
         </div>
-        <div className='batch-input2 mb-3' >
+        <div className='batch-input mb-3' >
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)} />

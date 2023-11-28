@@ -62,7 +62,7 @@ function AddIntern({setRefresh,refresh}) {
 
   return (
     <>
-    <div className='main' style={{textAlign:"center",border:"1px solid black",borderRadius:"10px", margin:"1% 30%"}}>
+    <div className='main' style={{textAlign:"center",border:"none",borderRadius:"10px", margin:"0% 30% 0% 30%"}}>
         <div>
           <h3 style={{padding: "20px",fontSize: "25px", fontWeight: "bolder",fontFamily: "cursive", color:"white"}}>ADD INTERN</h3>
           
@@ -79,8 +79,8 @@ function AddIntern({setRefresh,refresh}) {
           onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="">
-          <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
-            <option value="">choose</option>t
+          <select className='selectbox mb-3' onChange={(e)=>handleClickTrainer(e.target.value)}>
+            <option value="">Select Traine</option>t
             {
               getTrainers.map((item)=>{
                 return(
@@ -91,8 +91,8 @@ function AddIntern({setRefresh,refresh}) {
           </select>
         </div>
         <div className='batch-input mb-3' > 
-          <select name="" id="" onChange={(e)=>setBatch(e.target.value)}>
-          <option value="">choose</option>t
+          <select className=' selectbox ' onChange={(e)=>setBatch(e.target.value)}>
+          <option value="">Select Batch</option>t
 
             {
               getBranches.map((item)=>{

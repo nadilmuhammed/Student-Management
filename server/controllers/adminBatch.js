@@ -61,14 +61,11 @@ export const getBatch = async(req,res)=>{
     try {
       const result = await Batch.find(); 
 
-
       let getBatchall =  result.map(async(inter)=>{
         const { ...other } = inter;
-      const trainer = await Trainer.findById(inter.trainerReference); 
-      const { ...trainerOther } = trainer
-      console.log(trainer,"trainer");
-
-      // return true
+        const trainer = await Trainer.findById(inter.trainerReference); 
+        const { ...trainerOther } = trainer
+        console.log(trainer,"trainer");
 
       return {...other._doc,trainerData:trainerOther._doc}
 
@@ -77,7 +74,7 @@ export const getBatch = async(req,res)=>{
       const getTrainers = await Promise.all(getBatchall)
       console.log(getTrainers,'ffff');
 
-      console.log(result);
+      // console.log(result);
       res.status(200).json(getTrainers);
     } catch (error) {
       res.json(error.message);

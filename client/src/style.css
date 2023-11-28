@@ -16,30 +16,73 @@
     margin-left: 6rem;
 }
 
+.viewAllform{
+    width: 100%;
+    padding: 1rem;
+}
+
+.viewformheading{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bolder;
+
+}
+
+.selectbox{
+    width: 55%;
+    background-color: #DAF7A6;
+    border-radius: 10px;
+    color: #546555;
+}
 
 
-@media (max-width : 320px) {
-    .main{
-        position: relative;
-        inline-size: 90%;
-        inset-inline-start: -4rem;
-    } 
 
-    .batch-input{
-        
+@media (max-width : 320px) { 
+
+    .buttonspace{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
     }
 
-    .dropdown{
-        margin-left: 0.5rem;
+    .selectbox{
+        width: 95%;
     }
 
 
 }
+
+
+@media (max-width : 375px){
+    .buttonspace{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+
 
 @media (max-width: 425px){
     .main{
         position: relative;
         inline-size: 80%;
         inset-inline-start: -5rem;
+    }
+
+    .buttonspace{
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px){
+    .buttonspace{
+        gap: 20px;
+    }
+}
+
+@media (max-width: 1024px){
+    .buttonspace{
+        gap: 20px;
     }
 }

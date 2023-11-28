@@ -67,7 +67,7 @@ const fetchData = async()=>{
           onChange={(e) => setBatch(e.target.value)} />
         </div>
         <div className='dropdown mb-3'>
-        <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
+        <select className='selectbox' onChange={(e)=>handleClickTrainer(e.target.value)}>
             <option value="">choose</option>t
             {
               getTrainers.map((item)=>{
