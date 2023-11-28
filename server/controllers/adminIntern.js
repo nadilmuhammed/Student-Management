@@ -70,14 +70,13 @@ export const getIntern = async(req,res)=>{
       const batch = await BatcheForAdmin.findById(inter.batch); 
       const { ...batchOther } = batch
 
-      // console.log(other._doc,'batch');
+      console.log(batch,'batch');
       // return true
 
       return {...other._doc,trainerData:trainerOther._doc,batchData:batchOther._doc}
 
       })
 
-      
       const getTrainers = await Promise.all(getIntern)
       console.log(getTrainers,'ffff');
 

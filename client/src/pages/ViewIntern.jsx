@@ -12,8 +12,8 @@ export default function App() {
     const fetchData = async () => {
         try {
           const response = await axios.get("http://localhost:4000/api/admin/adminintern");
-    
           setData(response.data);
+          console.log(response.data);
         } catch (error) {
           errorToast(error.message);
         }
@@ -66,7 +66,6 @@ export default function App() {
                   console.log(user,"jnsdjsdn");
                     return(
                         <>
-
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>

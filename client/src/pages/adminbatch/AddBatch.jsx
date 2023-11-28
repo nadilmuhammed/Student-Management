@@ -6,14 +6,15 @@ import Select from 'react-select';
 
 function AddBatch() {
   const [batch, setBatch] = useState(null);
-  const [viewBatch, setViewBatch] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [getBranches, setGetBranches] = useState([]);
+    const [getTrainers, setGetTrainers] = useState([]); 
+    const [trainerId, setTrainerId] = useState();
 
 
 const fetchData = async()=>{
     try {
       const response = await axios.get("http://localhost:4000/api/admin/admintraine");
-      setViewBatch(response.data);
+      setGetTrainers(response.data);
     } catch (error) {
       errorToast(error.message);
     }
@@ -26,35 +27,31 @@ const fetchData = async()=>{
 
 
     const handleSubmit = async (e) => {
-      e.preventDefault();
-
-      const mappedOptions = selectedOptions.map(item => (
-        item.value
-      ) );
+      e.preventDefault();  
   
-  
-      console.log({trainerReference:mappedOptions},'selected user')
       try {
           const response = await axios.post(`http://localhost:4000/api/admin/createBatch`,{
             batch:batch,
-            trainerReference:mappedOptions
+            trainerReference:trainerId
           });
-          console.log(response.data,"response");
           if(response.data.result){
             successToast('Created.')
             setRefresh(!refresh)
           }
         } catch (error) {
           errorToast(error.response.data.message);
-          // console.log(error.message);
         }
     };
 
-
-    const mappedOptions = viewBatch.map(item => ({
-      value: item._id,
-      label: item.name
-    }));
+    const handleClickTrainer = async(id)=>{
+      try {
+        setTrainerId(id)
+        const response = await axios.get(`http://localhost:4000/api/admin/getTrainebatch/${id}`);
+        setGetBranches(response.data)
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
 
   return (
     <>
@@ -70,13 +67,16 @@ const fetchData = async()=>{
           onChange={(e) => setBatch(e.target.value)} />
         </div>
         <div className='dropdown mb-3'>
-              <Select
-              isMulti
-              placeholder="Select Traine"
-              options={mappedOptions}
-              value={selectedOptions}
-              onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}
-            />
+        <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
+            <option value="">choose</option>t
+            {
+              getTrainers.map((item)=>{
+                return(
+                    <option value={item._id}>{item.name}</option>
+                  )
+              })
+            }
+          </select>
         </div>
         <div>
         <button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>Add</button>
