@@ -6,10 +6,10 @@ const UserSchema = new Schema({
         required:true,
         unique:true 
     },
-    trainerReference : [{
+    trainerReference : {
         type: String,
         required : true
-    }]
+    }
  
 },{timestamps : true})
 

@@ -11,10 +11,10 @@
     border-radius: 5px;
 }
 
-.dropdown{
+/* .dropdown{
     width: 15rem;
     margin-left: 6rem;
-}
+} */
 
 .viewAllform{
     width: 100%;
@@ -37,7 +37,7 @@
 
 
 
-@media (max-width : 320px) { 
+@media (max-width : 320px) {     
 
     .buttonspace{
         display: flex;

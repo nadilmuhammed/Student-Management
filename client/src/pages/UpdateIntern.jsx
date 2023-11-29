@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import { successToast } from '../Toastify/Toast';
+import { errorToast, successToast } from '../Toastify/Toast';
 import Select from 'react-select';
 
 function UpdateIntern() {
@@ -52,7 +52,7 @@ function UpdateIntern() {
         }
       } catch (error) {
         console.log(error);
-        console.log(error.response.data.message);
+        errorToast(error.response.data.message);
       }
 
     };
@@ -124,7 +124,7 @@ function UpdateIntern() {
               onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}
             /> */}
              <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
-               <option value="">choose</option>t
+               <option value="">choose</option>
                   {
                     getTrainers.map((item)=>{
                       return(

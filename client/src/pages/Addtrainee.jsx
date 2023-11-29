@@ -8,26 +8,38 @@ function AddBatch() {
 
     const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [image, setImage] = useState(null);
+  const [id_no, setIDno] = useState(null);
 
+ 
 
   const handleSubmit = async (e) => {
-        e.preventDefault();
-    
-        try {
-            const response = await axios.post(`http://localhost:4000/api/admin/createtraine`,{
-              name:name,
-              email:email
-            });
-            console.log(response.data,"response");
-            if(response.data.result){
-              successToast('Created.')
-              setRefresh(!refresh)
-            }
-          } catch (error) {
-            errorToast(error.response.data.message);
-            // console.log(error.message);
-          }
-      };
+    e.preventDefault();
+
+    try {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('username', username);
+      formData.append('password', password);
+      formData.append('image', image); // Append the file directly
+
+      formData.append('id_no', id_no);
+
+      const response = await axios.post('http://localhost:4000/api/admin/createtraine', formData  );
+
+      console.log(response.data, 'response');
+      if (response.data.result) {
+        successToast('Created.');
+        // setRefresh(!refresh)
+        // Additional logic if needed
+      }
+    } catch (error) {
+      errorToast(error.response.data.message);
+    }
+  };
 
   return (
     <>
@@ -47,9 +59,36 @@ function AddBatch() {
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
         </div>
+        <div className='batch-input mb-3' >
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter username'
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} />
+        </div>
+        <div className='batch-input mb-3' >
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="password" placeholder='Enter password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} />
+        </div>
+        <div className='batch-input mb-3' >
+        <input
+              accept='image/*' // Specify the accepted file types
+              className='input-id'
+              style={{ borderRadius: '10px', background: '#DAF7A6', color: 'black', border: 'none' }}
+              type='file'
+              placeholder='Enter image'
+              onChange={(e) => setImage(e.target.files[0])} // Use e.target.files to access the FileList
+            />
+        </div>
+        <div className='batch-input mb-3' >
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter ID'
+          value={id_no}
+          onChange={(e) => setIDno(e.target.value)} />
+        </div>
+
         <div>
         <button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>Add</button>
         </div>
+
       </form>
     </div>
     </>

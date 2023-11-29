@@ -57,7 +57,7 @@ export default function App() {
 
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr>
+                <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Batch</th>
                   <th scope="col" className="px-6 py-4">Traine</th>
@@ -69,7 +69,7 @@ export default function App() {
                     return(
                         <>
 
-                            <tr className="border-b dark:border-neutral-500" key={index}>
+                            <tr style={{textAlign:"center"}} className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.trainerData.name}</td>

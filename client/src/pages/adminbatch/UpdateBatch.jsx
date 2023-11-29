@@ -7,27 +7,30 @@ import { errorToast, successToast } from '../../Toastify/Toast';
 
 function UpdateBatch() {
   const [batch, setBatch] = useState('');
-  const [viewBatch, setViewBatch] = useState([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [ trainer, setTrainer] = useState('');
+  const [getBranches, setGetBranches] = useState([]);
+  const [getTrainers, setGetTrainers] = useState([]); 
+  const [trainerId, setTrainerId] = useState();
 
 
   const fetchDatatraine = async()=>{
     try {
       const response = await axios.get("http://localhost:4000/api/admin/admintraine");
-
-      setViewBatch(response.data);
+      setGetTrainers(response.data);
     } catch (error) {
       errorToast(error.message);
     }
 }
 
 
+
   const fetchData= async(id)=>{
     try {
         let response = await axios.get(`http://localhost:4000/api/admin/getbatchID/${id}`);
-        
-        // console.log(setName,'nsnfknsd');
         setBatch(response.data.batch);
+        setTrainer(response.data.trainerName)
+        console.log(response.data);
+
     } catch (error) {
         console.log(error.message);
     }
@@ -40,38 +43,32 @@ useEffect(()=>{
 
 
 
-
-
   const {id} = useParams();
     const onSubmitAll = async(e) => {
       e.preventDefault();
-
-      const mappedOptions = selectedOptions.map(item => (
-        item.value
-      ) );
-
-      console.log({trainerReference:mappedOptions},'selected user');
     try {
       const response  = await axios.put(`http://localhost:4000/api/admin/updatebatch/${id}`,{
           batch:batch,
-          trainerReference:mappedOptions
+          trainerReference:trainerId
       })
       if(response.data){
         successToast('created.');
       }
-
     } catch (error) {
-      // console.log(error);
       errorToast(error.response.data.message);
     }
 
   };
 
-
-    const mappedOptions = viewBatch.map(item => ({
-      value: item.name,
-      label: item.name
-    }));
+  const handleClickTrainer = async(id)=>{
+    try {
+      setTrainerId(id)
+      const response = await axios.get(`http://localhost:4000/api/admin/getTrainebatch/${id}`);
+      setGetBranches(response.data)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
 
 
@@ -88,15 +85,21 @@ useEffect(()=>{
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
           value={batch}
           onChange={(e) => setBatch(e.target.value)} />
+          <input disabled className='input-id mt-4' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
+          value={trainer}
+          onChange={(e) => setTrainer(e.target.value)} />
         </div>
         <div className='dropdown'>
-              <Select
-              isMulti
-              placeholder="Select Traine"
-              options={mappedOptions}
-              value={selectedOptions}
-              onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}
-            />
+        <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
+               <option value="">choose</option>
+                  {
+                    getTrainers.map((item)=>{
+                      return(
+                          <option value={item._id}>{item.name}</option>
+                        )
+                    })
+                  }
+        </select>
         </div>
         <div>
         <button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>Add</button>
