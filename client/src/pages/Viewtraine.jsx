@@ -12,8 +12,7 @@ export default function App() {
 
     const fetchData = async () => {
         try {
-          const response = await axios.get("http://localhost:4000/api/admin/admintraine",);
-    
+          const response = await axios.get("http://localhost:4000/api/admin/admintraine");
           setData(response.data);
         } catch (error) {
           errorToast(error.message);
@@ -36,7 +35,7 @@ export default function App() {
         fetchData();
       },[refresh]);
 
-
+console.log(data);
 
 
   return (
@@ -56,7 +55,7 @@ export default function App() {
           <Link to="/admin/addtrainee"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>+ Add</button></Link>
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr>
+                <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Email</th>
@@ -66,8 +65,9 @@ export default function App() {
                   <th scope="col" className="px-6 py-4">ID</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{textAlign:"center"}}>
                 {data.map((user,index)=>{
+                  console.log(user);
                     return(
                         <>
 
@@ -77,9 +77,10 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4">{user.email}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.username}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.password}</td>
-                            <td className="whitespace-nowrap px-6 py-4"><img src={user.image}/></td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                            <img src={`http://localhost:4000/uploads/${user.image}`} alt="no image"/></td>
                             <td className="whitespace-nowrap px-6 py-4">{user.id_no}</td>
-                            <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around"}}>
+                            <div className='whitespace-nowrap px-6 py-4 buttonspace'>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
                                 <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}><Link to={`/admin/update/${user._id}`}>Edit</Link></button>
                                 

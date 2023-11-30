@@ -6,6 +6,15 @@ import morgan from "morgan";
 import cors from "cors";
 import adminRoute from "./routes/admin.js";
 
+
+
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+
 const app = express();
 
 app.use(cors());
@@ -18,6 +27,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api/admin", adminRoute);
+
+// app.use('/uploads', express.static( 'uploads'));
+app.use('/uploads', express.static(join(__dirname, 'uploads')));
+// 
+
+
+// console.log(__dirname);
+
 
 dotenv.config();
 

@@ -29,8 +29,9 @@ export const createtraine = async(req,res)=>{
       return res.status(400).json({message:"id_no is required"})
     }
 
-    const imagePath = req.file.path;
-
+    // console.log(req.file.filename);
+    // return true
+    const imagePath = req.file.filename;
 
     let product = await UUser({name,email,username,password,image:imagePath,id_no})
     console.log(req.body, "req.body");
@@ -69,7 +70,7 @@ export const updatetraine= async(req,res)=>{
     return res.status(400).json({message:"id_no is required"})
   }
 
-  const imagePath = req.file.path;
+  const imagePath = req.file.filename;
 
   try {
       const updatedUser = await UUser.findByIdAndUpdate(id,{$set:{name, email,username,password,image:imagePath,id_no  }},{new:true});

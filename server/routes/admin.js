@@ -16,8 +16,10 @@ const storage = multer.diskStorage({
       cb(null, Date.now() + path.extname(file.originalname)); // Use the current timestamp as a unique filename
     },
   });
+
   
-  const upload = multer({ storage: storage });
+  
+  const upload = multer({ storage:storage });
 
 // admin login register
 router.post("/register", register);
@@ -29,7 +31,7 @@ router.get("/getadmin", getadmin)
 // admintraine
 router.post("/createtraine",upload.single('image'), createtraine)
 router.put("/updatetraine/:id",upload.single('image'), updatetraine)
-router.delete("/deletetraine/:id", deletetraine)
+router.delete("/deletetraine/:id",upload.single('image'), deletetraine)
 router.get("/admintraineID/:id", getByID)
 router.get("/getTrainebatch/:id" , getTraineBatch)
 router.get("/admintraine", getraine)

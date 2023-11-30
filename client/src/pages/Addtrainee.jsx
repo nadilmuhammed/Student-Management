@@ -1,17 +1,16 @@
 
-
 import axios from 'axios';
 import React, { useState } from 'react'
 import { errorToast, successToast } from '../Toastify/Toast';
 
 function AddBatch() {
 
-    const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [image, setImage] = useState(null);
-  const [id_no, setIDno] = useState(null);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [image, setImage] = useState('');
+    const [id_no, setIDno] = useState('');
 
  
 
@@ -33,8 +32,6 @@ function AddBatch() {
       console.log(response.data, 'response');
       if (response.data.result) {
         successToast('Created.');
-        // setRefresh(!refresh)
-        // Additional logic if needed
       }
     } catch (error) {
       errorToast(error.response.data.message);
@@ -75,7 +72,7 @@ function AddBatch() {
               className='input-id'
               style={{ borderRadius: '10px', background: '#DAF7A6', color: 'black', border: 'none' }}
               type='file'
-              placeholder='Enter image'
+              placeholder='upload an image'
               onChange={(e) => setImage(e.target.files[0])} // Use e.target.files to access the FileList
             />
         </div>
