@@ -2,6 +2,7 @@
 import { unlink } from "fs";
 import UUser from "../models/Admintraine.js";
 import Batch from "../models/adminBatch.js";
+import Intern from "../models/admIntern.js";
 
 
 export const createtraine = async(req,res)=>{
@@ -88,22 +89,36 @@ export const updatetraine= async(req,res)=>{
 export const deletetraine = async(req,res)=>{
   const { id } = req.params; 
   try {
+
+    const getbatch = await  Batch.find({trainerReference:id})
+
+    if(getbatch.length > 0){
+      return res.status(409).send({message: "trainer exists in batch"});
+    }
+
+    const getStudent = await Intern.find({trainerReference:id});
+    
+    if(getStudent.length> 0 ){
+      return res.status(404).json({message: "student allready exist!"});
+    }
+  
     const imageid = await UUser.findById(id);
     
-    const result = await UUser.findByIdAndDelete(id);
 
-    if (!result){
+    if (!imageid){
       return res.status(404).json({error: "Image not found"});
     }
 
-    unlink(  `uploads/${imageid.image}`, function (err) {
+    unlink(  `uploads/${imageid.image}`,async function (err) {
       if (err) {
           console.error('Error deleting file:', err);
       } else {
           console.log('File is deleted!');
+          const result = await UUser.findByIdAndDelete(id);
+
       }
   });
-    res.status(200).json(result)
+    res.status(200).json({ message: 'trainer has been deleted!', status: true })
   } catch (error) {
     res.json({ message: error.message, status: false });
   }

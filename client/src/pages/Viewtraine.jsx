@@ -30,7 +30,8 @@ export default function App() {
           successToast('Deleted.')
           setRefresh(!refresh)
         } catch (error) {
-          errorToast(error.message);
+          console.log('err',error);
+          errorToast(error.response.data.message);
         }
       };
 
@@ -58,7 +59,7 @@ console.log(data);
           <Link to="/admin/addtrainee"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>+ Add</button></Link>
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr style={{textAlign:"center",color:"white"}}>
+                <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Email</th>

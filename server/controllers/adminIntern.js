@@ -2,6 +2,7 @@ import { unlink } from "fs";
 import BatcheForAdmin from "../models/adminBatch.js";
 import Intern from "../models/admIntern.js";
 import Trainer from "../models/Admintraine.js";
+import UUser from "../models/Admintraine.js";
 
  export const createIntern = async(req,res)=>{
     const { name,email,trainerReference,batch } = req.body;
@@ -75,12 +76,14 @@ export const deleteintern = async(req,res)=>{
     try {
 
       const imageid = await Intern.findById(id);
-      const result = await Intern.findByIdAndDelete(id);
-        
-      if(!result){
-          return res.status(404).json({error: "Image not found"});
-      }
 
+      
+      const result = await Intern.findByIdAndDelete(id);
+      
+      if(!result){
+        return res.status(404).json({error: "Image not found"});
+      }
+      
       unlink(`uploads/${imageid.image}`, function (err) {
         if (err) {
             console.error('Error deleting file:', err);
@@ -88,6 +91,9 @@ export const deleteintern = async(req,res)=>{
             console.log('File is deleted!');
         }
     });
+
+    const trainerid = await UUser.findById(id); 
+      console.log(trainerid.name,"trainerid");
 
   
       res.status(200).json(result)

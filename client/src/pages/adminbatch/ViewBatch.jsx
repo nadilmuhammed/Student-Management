@@ -27,7 +27,7 @@ export default function App() {
           successToast('Deleted.')
           setRefresh(!refresh)
         } catch (error) {
-          errorToast(error.message);
+          errorToast(error.response.data.message);
         }
       };
 
@@ -57,7 +57,7 @@ export default function App() {
 
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr style={{textAlign:"center",color:"white"}}>
+                <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Batch</th>
                   <th scope="col" className="px-6 py-4">Traine</th>

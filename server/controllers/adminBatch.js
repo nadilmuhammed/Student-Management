@@ -1,4 +1,5 @@
 import Trainer from "../models/Admintraine.js";
+import Intern from "../models/admIntern.js";
 import Batch from "../models/adminBatch.js";
 
 export const createBatch = async (req, res) => {
@@ -48,6 +49,14 @@ export const deletebatch = async (req, res) => {
   console.log("delte", req.params);
   const { id } = req.params;
   try {
+
+    const getIntern = await Intern.find({batch:id});
+
+    if(getIntern.length > 0){
+      return res.status(400).json({ message:"This batch has interns assigned to it."})
+    }
+
+    
     const result = await Batch.findByIdAndDelete(id);
     res.status(200).json(result);
   } catch (error) {
