@@ -24,10 +24,14 @@ function AddBatch() {
       formData.append('username', username);
       formData.append('password', password);
       formData.append('image', image); // Append the file directly
-
       formData.append('id_no', id_no);
 
-      const response = await axios.post('http://localhost:4000/api/admin/createtraine', formData  );
+      // const response = await axios.post('http://localhost:4000/api/admin/createtraine', formData, {headers:{
+      //   'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      //   'Content-Type': 'application/json',
+      // }}  );
+      const response = await axios.post('http://localhost:4000/api/admin/createtraine', formData);
+
 
       console.log(response.data, 'response');
       if (response.data.result) {
@@ -40,12 +44,12 @@ function AddBatch() {
 
   return (
     <>
-    <div className='main' style={{textAlign:"center",border:"1px solid black",borderRadius:"10px", margin:"1% 30%"}}>
+    <div className='main' style={{textAlign:"center",border:"none",borderRadius:"10px", margin:"1% 30%"}}>
         <div>
           <h3 style={{padding: "20px",fontSize: "25px", fontWeight: "bolder",fontFamily: "cursive", color:"white"}}>ADD TRAINE</h3>
           
         </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
       <div className='batch-input mt-3 mb-3' >
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Name'
           value={name}

@@ -21,13 +21,11 @@ export const register = async (req, res, next) => {
 export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-
-    // Validate email
+   
     if (!email) {
       return res.status(400).json({ message: "Email is required" });
     }
-
-    // Validate password
+    
     if (!password) {
       return res.status(400).json({ message: "Password is required" });
     } else if (password.length < 8 || password.length > 16) {
@@ -36,9 +34,6 @@ export const login = async (req, res, next) => {
 
     const user = await Admin.findOne({ email: email });
 
-    // { } - single user
-    console.log(user);
-
     if (!user) {
       return res.status(404).json({ message: "User not found!" });
     }
@@ -46,10 +41,7 @@ export const login = async (req, res, next) => {
     const isPassword = await bcrypt.compare(req.body.password, user.password);
 
     if (isPassword) {
-
       const token = jwt.sign({ userId: user._id, username: user.username }, 'your-secret-key', { expiresIn: '1 days' });
-
-
       res.json({result:user,token:token});
     } else {
       res.status(404).json({ message: "Incorrect password" });

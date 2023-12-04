@@ -18,19 +18,14 @@ export default function Example() {
 
     console.log(email, password);
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/admin/login",
+      const response = await axios.post("http://localhost:4000/api/admin/login",
         { email, password }
       );
       // console.log(response, "ress");
       if (response.data) {
 
         const {  result,token } = response.data
- 
-        // { 
-        //   result:''
-        //   token:''
-        // }
+       
         localStorage.setItem('token', token);
         localStorage.setItem('username', result.username);
         localStorage.setItem('id', result._id);
@@ -44,14 +39,6 @@ export default function Example() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img

@@ -8,13 +8,11 @@ import Select from 'react-select';
 function UpdateIntern() {
       const [name, setName] = useState('');
       const [email, setEmail] = useState('');
+      const [image,setImage] = useState('');
       const [batch, setBatch] = useState('');
       const [getBranches, setGetBranches] = useState([]);
       const [getTrainers, setGetTrainers] = useState([]); 
       const [trainerId, setTrainerId] = useState();
-
-      const [viewBatch, setViewBatch] = useState([]);
-      const [selectedOptions, setSelectedOptions] = useState([]);
 
 
       const fetchDatatraine = async()=>{
@@ -32,19 +30,16 @@ function UpdateIntern() {
       const onSubmitAll = async(e) => {
         e.preventDefault();
 
-        // const mappedOptions = selectedOptions.map(item => (
-        //   item.value
-        // ) );
-  
-        // console.log({trainerReference:mappedOptions},'selected user')
-
       try {
-        const response  = await axios.put(`http://localhost:4000/api/admin/updateintern/${id}`,{
-            name:name,
-            email:email,
-            batch:batch,
-            trainerReference:trainerId,
-        })
+
+        const formData = new FormData()
+        formData.append('name',name);
+        formData.append('email',email);
+        formData.append('image',image);
+        formData.append('trainerReference',trainerId);
+        formData.append('batch',batch);        
+
+        const response  = await axios.put(`http://localhost:4000/api/admin/updateintern/${id}`,formData)
         console.log(response.data,'lll');
         console.log(response.data.result);
         if(response.data){
@@ -115,14 +110,17 @@ function UpdateIntern() {
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
         </div>
+        <div className='mb-3'>
+          <input
+                accept='image/*' // Specify the accepted file types
+                className='input-id p-1'
+                style={{ borderRadius: '10px', background: '#DAF7A6', color: 'black', border: 'none' }}
+                type='file'
+                placeholder='upload an image'
+                onChange={(e) => setImage(e.target.files[0])} // Use e.target.files to access the FileList
+              />
+        </div>
         <div className='dropdown mb-3'>
-              {/* <Select
-              isMulti
-              placeholder="Select Traine"
-              options={mappedOptions}
-              value={selectedOptions}
-              onChange={(selectedOptions) => setSelectedOptions(selectedOptions )}
-            /> */}
              <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
                <option value="">choose</option>
                   {

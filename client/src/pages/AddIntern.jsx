@@ -8,6 +8,7 @@ function AddIntern({setRefresh,refresh}) {
    
     const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
+    const [image,setImage] = useState(null)
     const [getBranches, setGetBranches] = useState([]);
     const [getTrainers, setGetTrainers] = useState([]); 
     const [batch, setBatch] = useState([]);
@@ -32,12 +33,14 @@ function AddIntern({setRefresh,refresh}) {
       e.preventDefault();
 
       try {
-          const response = await axios.post(`http://localhost:4000/api/admin/createintern`,{
-            name:name,
-            email:email,
-            trainerReference:trainerId,
-            batch:batch,
-          });
+        const formData = new FormData()
+        formData.append('name',name);
+        formData.append('email',email);
+        formData.append('image',image);
+        formData.append('trainerReference',trainerId);
+        formData.append('batch',batch);        
+
+          const response = await axios.post(`http://localhost:4000/api/admin/createintern`, formData);
           if(response.data.result){
             successToast('Created.')
             setRefresh(!refresh)
@@ -78,6 +81,16 @@ function AddIntern({setRefresh,refresh}) {
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
         </div>
+        <div className='mb-3'>
+          <input
+                accept='image/*' // Specify the accepted file types
+                className='input-id p-1'
+                style={{ borderRadius: '10px', background: '#DAF7A6', color: 'black', border: 'none' }}
+                type='file'
+                placeholder='upload an image'
+                onChange={(e) => setImage(e.target.files[0])} // Use e.target.files to access the FileList
+              />
+        </div>
         <div className="">
           <select className='selectbox mb-3' onChange={(e)=>handleClickTrainer(e.target.value)}>
             <option value="">Select Traine</option>t
@@ -104,6 +117,7 @@ function AddIntern({setRefresh,refresh}) {
             }
           </select>
         </div>
+        
         <div>
         <button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>Add</button>
         </div>

@@ -5,9 +5,6 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
 import adminRoute from "./routes/admin.js";
-
-
-
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 

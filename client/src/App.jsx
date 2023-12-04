@@ -39,7 +39,6 @@ function App() {
           <Route exact path="/admin/batches"element={<AddBatch />} />
           <Route exact path="/admin/viewbatches"element={<ViewBatch />} />
           <Route exact path="/admin/updatebatch/:id"element={<UpdateBatch />} />
-
         </Route>
         <Route exact path="/" element={<Login/>} />
         <Route exact path="user/register" element= {<Register/>}/>       
