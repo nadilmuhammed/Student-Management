@@ -1,23 +1,48 @@
+
+import { unlink } from "fs";
 import UUser from "../models/Admintraine.js";
-// import User from "../models/admIntern.js";
 import Batch from "../models/adminBatch.js";
-// import Batch from "../models/adminBatch.js";
+import Intern from "../models/admIntern.js";
+
 
 export const createtraine = async(req,res)=>{
-    const { name,email } = req.body;
-    console.log(req.body);
+
+    const { name,email,username,password,id_no } = req.body;
+// return true;
+    console.log(req.body,"create trainer api");
     if(!name) {
       return res.status(400).json({message:"Name is required"})
     }
     if(!email) {
       return res.status(400).json({message:"Email is required"})
     }
-    let product = await UUser({name,email})
+    if(!username) {
+      return res.status(400).json({message:"Username is required"})
+    }
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
+    } else if (password.length < 8 || password.length > 16) {
+      return res.status(400).json({ message: "Password must be between 8 and 16 characters" });
+    }
+    if(!req.file) {
+      return res.status(400).json({message:"Upload an image"})
+    }
+    if (!id_no) {
+      return res.status(400).json({ message: "ID is required" });
+    }else if(!id_no || isNaN(id_no)){
+      return res.status(400).json({message:"ID must be valid number"})
+    } else if (id_no.length < 4 || id_no.length > 8){
+      return res.status(400).json({message:"ID number should have at least 4 digits and maximum of 8 digits."})
+    }
+
+    const imagePath = req.file.filename
+    console.log(imagePath,"imagepath");
+
+    let product = await UUser({name,email,username,password,image:imagePath,id_no})
     console.log(req.body, "req.body");
 
   try {
     const result = await product.save();
-    console.log(result);
     res.json({ result: result, status: true });
   } catch (error) {
     res.json({ message: error.message, status: false });
@@ -28,15 +53,34 @@ export const createtraine = async(req,res)=>{
 export const updatetraine= async(req,res)=>{
   const {id} = req.params;
   console.log(id)
-  const {name, email} = req.body;
+  const {name, email,username,password,id_no } = req.body;
   if(!name) {
     return res.status(400).json({message:"Name is required"})
   }
   if(!email) {
     return res.status(400).json({message:"Email is required"})
   }
+  if(!username) {
+    return res.status(400).json({message:"Username is required"})
+  }
+  if (!password) {
+    return res.status(400).json({ message: "Password is required" });
+  } else if (password.length < 8 || password.length > 16) {
+    return res.status(400).json({ message: "Password must be between 8 and 16 characters" });
+  }
+  if(!req.file) {
+    return res.status(400).json({message:"Upload an image"})
+  }
+  if(!id_no) {
+    return res.status(400).json({message:"id_no is required"})
+  }else if(id_no.length < 4 || id_no.length > 8){
+    return res.status(400).json({message:"Id no should be atleast 4 digits long"});
+  }
+
+  const imagePath = req.file.filename;
+
   try {
-      const updatedUser = await UUser.findByIdAndUpdate(id,{$set:{name, email}},{new:true});
+      const updatedUser = await UUser.findByIdAndUpdate(id,{$set:{name, email,username,password,image:imagePath,id_no  }},{new:true});
       res.status(201).json(updatedUser);
   } catch (error) {
     console.log('errr',error);
@@ -45,12 +89,37 @@ export const updatetraine= async(req,res)=>{
 }
 
 export const deletetraine = async(req,res)=>{
-  console.log("delte", req.params);
-  const { id } = req.params;
+  const { id } = req.params; 
   try {
 
-    const result = await UUser.findByIdAndDelete(id);
-    res.status(200).json(result)
+    const getbatch = await  Batch.find({trainerReference:id})
+
+    if(getbatch.length > 0){
+      return res.status(409).send({message: "Trainer exists in batch"});
+    }
+
+    const getStudent = await Intern.find({trainerReference:id});
+    
+    if(getStudent.length > 0 ){
+      return res.status(404).json({message: "Student allready exist!"});
+    }
+  
+    const imageid = await UUser.findById(id);
+
+    if (!imageid){
+      return res.status(404).json({error: "Image not found"});
+    }
+
+    unlink(  `uploads/${imageid.image}`,async function (err) {
+      if (err) {
+          console.error('Error deleting file:', err);
+      } else {
+          console.log('File is deleted!');
+          const result = await UUser.findByIdAndDelete(id);
+
+      }
+  });
+    res.status(200).json({ message: 'trainer has been deleted!', status: true })
   } catch (error) {
     res.json({ message: error.message, status: false });
   }
@@ -68,12 +137,13 @@ export const getByID = async(req,res)=>{
   }
 }
 
+
 export const getTraineBatch = async(req,res)=>{
   const {id} = req.params;
   console.log(id);
   try {
-    const result = await Batch.find({trainerReference: id });
-    res.json(result)
+    const result = await Batch.find({trainerReference:id});
+    res.json(result);
     console.log(result);
   } catch (error) {
     res.json({message : error.message})

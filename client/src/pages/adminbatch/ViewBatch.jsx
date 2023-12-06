@@ -27,7 +27,7 @@ export default function App() {
           successToast('Deleted.')
           setRefresh(!refresh)
         } catch (error) {
-          errorToast(error.message);
+          errorToast(error.response.data.message);
         }
       };
 
@@ -48,12 +48,16 @@ export default function App() {
         
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">   
-          <div className="overflow-hidden" style={{margin:"0% 10% 0% 10%"}}>
-          <Link to="/admin/batches"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
+        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+          <p className='viewformheading'>Batch Details</p>  
+          <div className="overflow-hidden viewAllform">
+          <Link to="/admin/batches">
+            <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button>
+          </Link>
+
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr>
+                <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Batch</th>
                   <th scope="col" className="px-6 py-4">Traine</th>
@@ -61,18 +65,19 @@ export default function App() {
               </thead>
               <tbody>
                 {data.map((user,index)=>{
+                  console.log(user,"user");
                     return(
                         <>
 
-                            <tr className="border-b dark:border-neutral-500" key={index}>
+                            <tr style={{textAlign:"center"}} className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{user.trainerReference}</td>
-                            <div className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
+                            <td className="whitespace-nowrap px-6 py-4">{user.trainerData.name}</td>
+                            <td className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
                                 <Link to={`/admin/updatebatch/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
                                 {/* <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button> */}
-                            </div>
+                            </td>
                             </tr>
                         </>
                     )

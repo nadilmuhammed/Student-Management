@@ -18,19 +18,14 @@ export default function Example() {
 
     console.log(email, password);
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/admin/login",
+      const response = await axios.post("http://localhost:4000/api/admin/login",
         { email, password }
       );
-      // console.log(response, "ress");
+      console.log(response, "ress");
       if (response.data) {
 
         const {  result,token } = response.data
- 
-        // { 
-        //   result:''
-        //   token:''
-        // }
+       
         localStorage.setItem('token', token);
         localStorage.setItem('username', result.username);
         localStorage.setItem('id', result._id);
@@ -44,14 +39,6 @@ export default function Example() {
 
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
@@ -60,7 +47,7 @@ export default function Example() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-black-900">
-            Sign in to your account
+            Login 
           </h2>
         </div>
 
@@ -121,7 +108,7 @@ export default function Example() {
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign in
+                Login
               </button>
               
             </div>
@@ -131,7 +118,15 @@ export default function Example() {
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Register Now
-              </button></Link>
+              </button>
+            </Link>
+            <Link to ="/"><button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-3"
+              >
+                User
+              </button>
+            </Link>
             </div>
           </form>
         </div>

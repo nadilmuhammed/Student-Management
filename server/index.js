@@ -5,6 +5,13 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import cors from "cors";
 import adminRoute from "./routes/admin.js";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import routerTraine from "./routes/traine.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 const app = express();
 
@@ -18,6 +25,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use("/api/admin", adminRoute);
+app.use("/api/trainer", routerTraine);
+
+
+// app.use('/uploads', express.static( 'uploads'));
+app.use('/uploads', express.static(join(__dirname, 'uploads')));
+// 
+
+
+// console.log(__dirname);
+
 
 dotenv.config();
 
