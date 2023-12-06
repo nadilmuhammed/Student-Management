@@ -75,8 +75,7 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </svg>
           </button>
           {/* Logo */}
-          <NavLink end to="/admin" className="block" style={{display:"flex",alignItems:"center",gap:"10px"}}>
-            
+          <NavLink end to="/admin" className="block">
             <svg width="32" height="32" viewBox="0 0 32 32">
               <defs>
                 <linearGradient x1="28.538%" y1="20.229%" x2="100%" y2="108.156%" id="logo-a">
@@ -99,7 +98,6 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                 fill="url(#logo-b)"
               />
             </svg>
-            <h1 style={{fontSize:"20px",fontWeight:"bolder",fontFamily:"auto"}}>ADMIN</h1>
           </NavLink>
         </div>
 

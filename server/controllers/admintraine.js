@@ -27,10 +27,12 @@ export const createtraine = async(req,res)=>{
     if(!req.file) {
       return res.status(400).json({message:"Upload an image"})
     }
-    if(!id_no) {
-      return res.status(400).json({message:"id_no is required"})
-    }else if(id_no.length < 4 || id_no.length > 8){
-      return res.status(400).json({message:"Id no should be atleast 4 digits long"});
+    if (!id_no) {
+      return res.status(400).json({ message: "ID is required" });
+    }else if(!id_no || isNaN(id_no)){
+      return res.status(400).json({message:"ID must be valid number"})
+    } else if (id_no.length < 4 || id_no.length > 8){
+      return res.status(400).json({message:"ID number should have at least 4 digits and maximum of 8 digits."})
     }
 
     const imagePath = req.file.filename
@@ -93,17 +95,16 @@ export const deletetraine = async(req,res)=>{
     const getbatch = await  Batch.find({trainerReference:id})
 
     if(getbatch.length > 0){
-      return res.status(409).send({message: "trainer exists in batch"});
+      return res.status(409).send({message: "Trainer exists in batch"});
     }
 
     const getStudent = await Intern.find({trainerReference:id});
     
-    if(getStudent.length> 0 ){
-      return res.status(404).json({message: "student allready exist!"});
+    if(getStudent.length > 0 ){
+      return res.status(404).json({message: "Student allready exist!"});
     }
   
     const imageid = await UUser.findById(id);
-    
 
     if (!imageid){
       return res.status(404).json({error: "Image not found"});

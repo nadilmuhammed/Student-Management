@@ -74,7 +74,7 @@ function AddBatch() {
         <input
               accept='image/*' // Specify the accepted file types
               className='input-id'
-              style={{ borderRadius: '10px', background: '#DAF7A6', color: 'black', border: 'none' }}
+              style={{ borderRadius: '10px', background: '#DAF7A6', color: 'black', border: 'none',padding:".3rem" }}
               type='file'
               placeholder='upload an image'
               onChange={(e) => setImage(e.target.files[0])} // Use e.target.files to access the FileList

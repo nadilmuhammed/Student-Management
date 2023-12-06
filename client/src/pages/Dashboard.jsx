@@ -57,6 +57,7 @@ function Dashboard() {
       <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
         {/*  Site header */}
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        
 
         <main>
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
@@ -73,9 +74,9 @@ function Dashboard() {
                 {/* Filter button */}
                 {/* <FilterButton /> */}
                 {/* Datepicker built with flatpickr */}
-                <Datepicker />
+                {/* <Datepicker /> */}
                 {/* Add view button */}
-                <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
+                {/* <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white">
                   <svg
                     className="w-4 h-4 fill-current opacity-50 shrink-0"
                     viewBox="0 0 16 16"
@@ -83,18 +84,18 @@ function Dashboard() {
                     <path d="M15 7H9V1c0-.6-.4-1-1-1S7 .4 7 1v6H1c-.6 0-1 .4-1 1s.4 1 1 1h6v6c0 .6.4 1 1 1s1-.4 1-1V9h6c.6 0 1-.4 1-1s-.4-1-1-1z" />
                   </svg>
                   <span className="hidden xs:block ml-2">Add view</span>
-                </button>
+                </button> */}
               </div>
             </div>
 
             {/* Cards */}
             <div className="grid grid-cols-12 gap-6">
               {/* Line chart (Acme Plus) */}
-              {/* <DashboardCard01 /> */}
+              <DashboardCard01 />
               {/* Line chart (Acme Advanced) */}
-              {/* <DashboardCard02 /> */}
+              <DashboardCard02 />
               {/* Line chart (Acme Professional) */}
-              {/* <DashboardCard03 /> */}
+              <DashboardCard03 />
               {/* Bar chart (Direct vs Indirect) */}
               {/* <DashboardCard04 /> */}
               {/* Line chart (Real Time Value) */}
@@ -108,7 +109,7 @@ function Dashboard() {
               {/* Stacked bar chart (Sales VS Refunds) */}
               {/* <DashboardCard09 /> */}
               {/* Card (Customers) */}
-              {/* <DashboardCard10 /> */}
+              <DashboardCard10 />
               {/* Card (Reasons for Refunds) */}
               {/* <DashboardCard11 /> */}
               {/* Card (Recent Activity) */}
@@ -118,9 +119,8 @@ function Dashboard() {
             </div>
           </div>
         </main>
-      { isLogged ? <Outlet /> : navigate("/")}
-      
-        <Banner />
+        { isLogged ? <Outlet /> : navigate("/adminlogin")}
+        {/* <Banner /> */}
       </div>
     </div>
 

@@ -5,6 +5,19 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
+    if (!username) {
+      return res.status(400).json({ message: "username is required" });
+    }
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
+    } else if (password.length < 8 || password.length > 16) {
+      return res.status(400).json({ message: "Password must be between 8 and 16 characters" });
+    }
+
+
     const saltRounds = 10;
 
     const salt = bcrypt.genSaltSync(saltRounds);

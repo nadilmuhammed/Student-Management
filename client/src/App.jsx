@@ -14,8 +14,11 @@ import Register from "./Login/Register";
 import AddBatch from "./pages/adminbatch/AddBatch";
 import ViewBatch from "./pages/adminbatch/ViewBatch";
 import UpdateBatch from "./pages/adminbatch/UpdateBatch";
+import DashboardTrainer from "./TrainerDashboard/pages/DashboardTrainer"
+import LoginTrainer from "./TrainerDashboard/trainer/LoginTrainer"
 
 import "./style.css"
+import Firstview from "./pages/Firstview";
 
 function App() {
   const location = useLocation();
@@ -29,6 +32,8 @@ function App() {
   return (
     <>
       <Routes>
+
+        {/* ADMIN */}
         <Route exact path="/admin" element={<Dashboard />}>
           <Route exact path="/admin/addtrainee"element={<Addtrainee />} />
           <Route exact path="/admin/viewtrainee"element={<Viewtraine />} />
@@ -38,10 +43,19 @@ function App() {
           <Route exact path="/admin/updateintern/:id"element={<UpdateIntern />} />
           <Route exact path="/admin/batches"element={<AddBatch />} />
           <Route exact path="/admin/viewbatches"element={<ViewBatch />} />
-          <Route exact path="/admin/updatebatch/:id"element={<UpdateBatch />} />
+          <Route exact path="/admin/updatebatch/:id"element={<UpdateBatch />}/>
         </Route>
-        <Route exact path="/" element={<Login/>} />
-        <Route exact path="user/register" element= {<Register/>}/>       
+        <Route exact path="/adminlogin" element={<Login/>} />
+        <Route exact path="user/register" element= {<Register/>}/> 
+
+
+        
+        {/* TRAINER */}
+        <Route exact path="/trainer" element={<DashboardTrainer />}></Route>
+        <Route exact path="/trainerlogin" element={<LoginTrainer/>}/>
+
+
+        <Route exact path="/" element= {<Firstview/>}/>
       </Routes>
     </>
   );
