@@ -17,7 +17,7 @@ function DropdownProfile({
     localStorage.removeItem("token")
     localStorage.removeItem("id")
     localStorage.removeItem("username")
-    navigate("/")
+    navigate("/trainerlogin")
   }
 
 
