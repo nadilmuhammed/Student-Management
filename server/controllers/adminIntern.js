@@ -14,7 +14,7 @@ import UUser from "../models/Admintraine.js";
       return res.status(400).json({message:"Email is required"})
     }
     if(!req.file){
-      return res.ststus(400).json({message: " Upload an image"})
+      return res.status(400).json({message: " Upload an image"})
     }
     if(!trainerReference) {
         return res.status(400).json({message:"Traine is required"})

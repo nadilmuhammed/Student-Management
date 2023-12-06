@@ -16,6 +16,7 @@ import ViewBatch from "./pages/adminbatch/ViewBatch";
 import UpdateBatch from "./pages/adminbatch/UpdateBatch";
 import DashboardTrainer from "./TrainerDashboard/pages/DashboardTrainer"
 import LoginTrainer from "./TrainerDashboard/trainer/LoginTrainer"
+import Addintern from "./TrainerDashboard/pages/intern/Addintern"
 
 import "./style.css"
 import Firstview from "./pages/Firstview";
@@ -51,10 +52,16 @@ function App() {
 
         
         {/* TRAINER */}
-        <Route exact path="/trainer" element={<DashboardTrainer />}></Route>
+        <Route exact path="/trainer" element={<DashboardTrainer />}>
+        <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 
+        </Route>
         <Route exact path="/trainerlogin" element={<LoginTrainer/>}/>
 
 
+
+        
+
+        {/* starting page */}
         <Route exact path="/" element= {<Firstview/>}/>
       </Routes>
     </>
