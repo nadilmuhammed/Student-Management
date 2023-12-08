@@ -2,7 +2,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
-import Select from 'react-select';
 import { errorToast, successToast } from '../../Toastify/Toast';
 
 function UpdateBatch() {

@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+// moudle
 app.use("/api/admin", adminRoute);
 app.use("/api/trainer", routerTraine);
 

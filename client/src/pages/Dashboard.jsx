@@ -122,6 +122,7 @@ function Dashboard() {
         </main>
         {/* <Banner /> */}
       { isLogged ? <Outlet /> : navigate("/adminlogin")}
+      {console.log(isLogged,"loggin")}
       </div>
 
     </div>

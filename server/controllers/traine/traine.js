@@ -1,5 +1,4 @@
 import Traine from "../../models/traine/traine.js";
-import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import UUser from "../../models/Admintraine.js";
 

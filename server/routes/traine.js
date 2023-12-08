@@ -1,15 +1,16 @@
 import express from "express"
 import { getData, login, updatetraine, deletetraine } from "../controllers/traine/traine.js";
-import { createtrainerIntern } from "../controllers/traine/intern.js";
+import { Trainerupdateintern, getInternofTrainer} from "../controllers/traine/intern.js";
 import multer from "multer";
 import path from "path";
+import { createAssignment, deleteassignment, getAssignment, getTrainerIntern, updateassignment } from "../controllers/traine/assignment.js";
 
 const routerTraine = express.Router();
 
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'traineruploads/'); // Specify the destination folder for uploaded files
+      cb(null, 'uploads/'); // Specify the destination folder for uploaded files
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + path.extname(file.originalname)); // Use the current timestamp as a unique filename
@@ -25,7 +26,17 @@ routerTraine.put("/updatetraine/:id", updatetraine);
 routerTraine.delete("/deletetraine/:id", deletetraine)
 
 // intern
-routerTraine.post("/trainerintern", upload.single('image'), createtrainerIntern);
+routerTraine.put("/trainerupdateintern", upload.single('image'), Trainerupdateintern);
+routerTraine.get("/allinterns/:id", getTrainerIntern);
+routerTraine.get("/getinternoftrainer/:id", getInternofTrainer);
+
+
+// Assignment
+routerTraine.post("/createassignment", createAssignment);
+routerTraine.get("/getassignment", getAssignment);
+routerTraine.put("/updateassignment/:id", updateassignment);
+routerTraine.delete("/deleteassignment/:id", deleteassignment);
+
 
 
 
