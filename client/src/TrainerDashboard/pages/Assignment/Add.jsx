@@ -2,6 +2,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { errorToast, successToast } from '../../../Toastify/Toast';
+import "./assignment.css"
+
 
 function Add() {
   
@@ -57,20 +59,19 @@ function Add() {
 
 
   return (
-    <div style={{textAlign:"center", border:"1px solid black",margin:"5% 30% 5% 30%"}}>
+    <div className='mb-3' style={{border:"2px solid gray",padding:"2rem",textAlign:"center",margin:"auto"}}>
       <h1>Add Assignment</h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div style={{display:"flex",justifyContent:"space-evenly",gap:"2rem"}}>
           <input type="text" placeholder='Topic Name'
           value={name}
           onChange={(e) => setName(e.target.value)} />
-        </div>
-        <div>
-          <textarea type="text" placeholder='Description'
-          value={description}
-          onChange={(e) => setDescription(e.target.value)} />
-        </div>
-        <div>
+          <div>
+            <textarea type="text" placeholder='Description'
+            value={description}
+            onChange={(e) => setDescription(e.target.value)} />
+          </div>
+          <div>
           <select className='w-40 text-slate-900' onChange={(e)=>setGetintern(e.target.value)}>
           <option disabled value="" > select intern</option>
             {
@@ -82,13 +83,15 @@ function Add() {
             }
           </select>
         </div>
+        </div>
+        
         <div>
-          <input type="date" placeholder='valid from' 
+          ValidFrom<input type="date" placeholder='valid from' 
           value={validfrom}
           onChange={(e)=>setValidfrom(e.target.value)}/>
         </div>
         <div>
-         <input type="date" placeholder='valid to' 
+        Validto <input type="date" placeholder='valid to' 
          value={validto}
          onChange={(e)=>setValidTo(e.target.value)}/>
         </div>

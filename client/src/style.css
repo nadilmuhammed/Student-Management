@@ -35,6 +35,33 @@
     color: #546555;
 }
 
+.landing{   
+    display: flex;
+    padding: 2rem;
+    margin-top: 3%;
+}
+
+.imglanding{
+    width: 100%;
+}
+
+.landing button{
+    border: none;
+    padding: 1rem;
+    font-size: 1.3rem;
+    margin-left: 3rem;
+    background-color: #1e81b0;
+    border-radius: 5px;
+    color: black;
+    font-family: cursive;
+
+}
+
+.landing button:hover{
+    background-color: orange;
+    color: white;
+    transition: .5s;
+}
 
 
 @media (max-width : 320px) {     

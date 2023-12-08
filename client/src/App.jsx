@@ -70,7 +70,7 @@ function App() {
 
         
 
-        {/* starting page */}
+        {/* landing page */}
         <Route exact path="/" element= {<Firstview/>}/>
       </Routes>
     </>

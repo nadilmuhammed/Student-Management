@@ -40,7 +40,7 @@ export const getInternofTrainer = async (req,res) => {
   try {
     let response = await Intern.find({trainerReference:id});
     res.status(200).json(response); 
-    console.log(response,"response");
+    console.log(response,"response"); 
   } catch (error) {
     console.log(error.message);
   } 
