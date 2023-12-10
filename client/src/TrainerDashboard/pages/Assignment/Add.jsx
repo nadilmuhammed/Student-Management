@@ -21,7 +21,6 @@ function Add() {
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
       setGetintern(response.data);
-      console.log(response,"response");
     } catch (error) {
       console.log(error.message);
     }
@@ -43,9 +42,14 @@ function Add() {
         validfrom:validfrom,
         validto:validto,
       });
-      console.log(response.data,"response ");
       if(response.data){
-        successToast("created")
+        successToast("created");
+
+        setName('');
+        setDescription('');
+        setGetintern([]);
+        setValidfrom('');
+        setValidTo('');
       }
     } catch (error) {
       errorToast(error.message);
@@ -63,9 +67,11 @@ function Add() {
       <h1>Add Assignment</h1>
       <form onSubmit={handleSubmit}>
         <div style={{display:"flex",justifyContent:"space-evenly",gap:"2rem"}}>
-          <input type="text" placeholder='Topic Name'
-          value={name}
-          onChange={(e) => setName(e.target.value)} />
+          <div>
+            <input type="text" placeholder='Topic Name'
+            value={name}
+            onChange={(e) => setName(e.target.value)} />
+          </div>
           <div>
             <textarea type="text" placeholder='Description'
             value={description}
@@ -73,25 +79,25 @@ function Add() {
           </div>
           <div>
           <select className='w-40 text-slate-900' onChange={(e)=>setGetintern(e.target.value)}>
-          <option disabled value="" > select intern</option>
-            {
-              getintern.map((item)=>{
-                return(
-                  <option value={item._id}>{item.name}</option>   
-                )
-              })
-            }
+            <option disabled value="" >select intern</option>
+              {
+                getintern.map((item)=>{
+                  return(
+                    <option value={item._id}>{item.name}</option>   
+                  )
+                })
+              }
           </select>
         </div>
         </div>
         
         <div>
-          ValidFrom<input type="date" placeholder='valid from' 
+        <span>Validfrom:</span><input type="date" placeholder='valid from' 
           value={validfrom}
           onChange={(e)=>setValidfrom(e.target.value)}/>
         </div>
         <div>
-        Validto <input type="date" placeholder='valid to' 
+        <span>Validto:</span><input type="date" placeholder='valid to' 
          value={validto}
          onChange={(e)=>setValidTo(e.target.value)}/>
         </div>

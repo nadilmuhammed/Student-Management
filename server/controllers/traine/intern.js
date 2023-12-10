@@ -1,6 +1,5 @@
 // import UUser from "../../models/Admintraine.js";
 import Intern from "../../models/admIntern.js";
-import TrainerIntern from "../../models/traine/intern.js";
 
 
 
@@ -16,17 +15,12 @@ export const Trainerupdateintern= async(req,res)=>{
   if(!req.file){
     return res.ststus(400).json({message: " Upload an image"})
   }
-  if(!trainerReference) {
-      return res.status(400).json({message:"Traine is required"})
-    }
-  if(!batch) {
-    return res.status(400).json({message:"Batch is required"})
-  }
 
   const ImagePath = req.file.filename
 
   try {
-      const updatedUser = await TrainerIntern.findByIdAndUpdate(id,{$set:{name, email,image:ImagePath,trainerReference,batch}},{new:true});
+      const updatedUser = await Intern.findByIdAndUpdate(id,{$set:{name, email,image:ImagePath}},{new:true});
+      console.log(updatedUser,"user");
       res.status(201).json(updatedUser);
   } catch (error) {
     console.log('errr',error);

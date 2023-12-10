@@ -22,18 +22,18 @@ export default function App() {
 
 
 
-      // const handleDelete = async (id) => {
-      //   try {
-      //     const response = await axios.delete(`http://localhost:4000/api/admin/deleteintern/${id}`,{headers:{
-      //       'Authorization': `Bearer ${localStorage.getItem('token')}` ,
-      //       'Content-Type': 'application/json',
-      //     }});
-      //     successToast('Deleted.')
-      //     setRefresh(!refresh)
-      //   } catch (error) {
-      //     errorToast(error.message);
-      //   }
-      // };
+      const handleDelete = async (id) => {
+        try {
+          const response = await axios.delete(`http://localhost:4000/api/admin/deleteintern/${id}`,{headers:{
+            'Authorization': `Bearer ${localStorage.getItem('token')}` ,
+            'Content-Type': 'application/json',
+          }});
+          successToast('Deleted.')
+          setRefresh(!refresh)
+        } catch (error) {
+          errorToast(error.message);
+        }
+      };
 
       useEffect(()=>{
         fetchData();
@@ -79,7 +79,7 @@ export default function App() {
                             </td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
-                                <Link to={`/admin/updateintern/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
+                                <Link to={`/trainer/updateintern/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
                             </div>
                             </tr>
                         </>

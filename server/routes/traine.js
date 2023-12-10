@@ -26,7 +26,7 @@ routerTraine.put("/updatetraine/:id", updatetraine);
 routerTraine.delete("/deletetraine/:id", deletetraine)
 
 // intern
-routerTraine.put("/trainerupdateintern", upload.single('image'), Trainerupdateintern);
+routerTraine.put("/trainerupdateintern/:id", upload.single('image'), Trainerupdateintern);
 routerTraine.get("/allinterns/:id", getTrainerIntern);
 routerTraine.get("/getinternoftrainer/:id", getInternofTrainer);
 

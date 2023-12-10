@@ -43,7 +43,13 @@ function AddIntern({setRefresh,refresh}) {
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`, formData);
           if(response.data.result){
             successToast('Created.')
-            setRefresh(!refresh)
+
+            setName('');
+            setEmail('');
+            setImage('');
+            setTrainerId('');
+            setBatch('');
+
           }
         } catch (error) {
           errorToast(error.response.data.message);
@@ -65,7 +71,7 @@ function AddIntern({setRefresh,refresh}) {
 
   return (
     <>
-    <div className='main' style={{textAlign:"center",border:"none",borderRadius:"10px", margin:"0% 30% 0% 30%"}}>
+    <div className='main mb-3' style={{textAlign:"center",border:"none",borderRadius:"10px", margin:"0% 30% 0% 30%"}}>
         <div>
           <h3 style={{padding: "20px",fontSize: "25px", fontWeight: "bolder",fontFamily: "cursive", color:"white"}}>ADD INTERN</h3>
           

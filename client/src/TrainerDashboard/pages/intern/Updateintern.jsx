@@ -8,16 +8,14 @@ function UpdateIntern() {
       const [name, setName] = useState('');
       const [email, setEmail] = useState('');
       const [image,setImage] = useState('');
-      const [batch, setBatch] = useState('');
-      const [getBranches, setGetBranches] = useState([]);
-      const [getTrainers, setGetTrainers] = useState([]); 
-      const [trainerId, setTrainerId] = useState();
+      const [getInterns, setGetInterns] = useState([]);   
 
 
       const fetchDatatraine = async()=>{
         try {
-          const response = await axios.get("http://localhost:4000/api/admin/admintraine");
-          setGetTrainers(response.data);
+          const response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
+          setGetInterns(response.data);
+          console.log(response.data);
         } catch (error) {
           errorToast(error.message);
         }
@@ -29,43 +27,33 @@ function UpdateIntern() {
       const onSubmitAll = async(e) => {
         e.preventDefault();
 
-      try {
+            try {
+            const formData = new FormData()
+            formData.append('name',name);
+            formData.append('email',email);
+            formData.append('image',image);       
 
-        const formData = new FormData()
-        formData.append('name',name);
-        formData.append('email',email);
-        formData.append('image',image);
-        formData.append('trainerReference',trainerId);
-        formData.append('batch',batch);        
-
-        const response  = await axios.put(`http://localhost:4000/api/admin/updateintern/${id}`,formData)
-        console.log(response.data,'lll');
-        console.log(response.data.result);
-        if(response.data){
-          successToast("updated")
-        }
-      } catch (error) {
-        console.log(error);
-        errorToast(error.response.data.message);
-      }
-
+            const response  = await axios.put(`http://localhost:4000/api/trainer/trainerupdateintern/${id}`,formData)
+            console.log(response.data,'lll');
+            console.log(response.data.result);
+            if(response.data){
+              successToast("updated")
+            }
+          } catch (error) {
+            console.log(error);
+            errorToast(error.response.data.message);
+          }
     };
 
-    // const mappedOptions = viewBatch.map(item => ({
-    //   value: item.name,
-    //   label: item.name
-    // }));
 
-
-    const fetchData= async(id)=>{
+    const fetchData= async()=>{
         try {
-            let response = await axios.get(`http://localhost:4000/api/admin/adminintern/${id}`);
+            let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
             console.log(response.data);
             setName(response.data.name);
-            console.log(setName,'nsnfknsd');
+            console.log(response.data.name,'nsnfknsd');
             setEmail(response.data.email);
-            // setTraine(response.data.traine);
-            setBatch(response.data.batch);
+            console.log(response.data.email,"email");
         } catch (error) {
             console.log(error.message);
         }
@@ -75,17 +63,6 @@ function UpdateIntern() {
         fetchData(id);
         fetchDatatraine();
     },[])
-
-
-    const handleClickTrainer = async(id)=>{
-      try {
-        setTrainerId(id)
-        const response = await axios.get(`http://localhost:4000/api/admin/getTrainebatch/${id}`);
-        setGetBranches(response.data)
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
    
 
 
@@ -100,7 +77,7 @@ function UpdateIntern() {
         </div>
       <form onSubmit={onSubmitAll}>
         <div className='batch-input mt-4 mb-3' >
-          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter name'
           value={name}
           onChange={(e) => setName(e.target.value)} />
         </div>
@@ -111,7 +88,7 @@ function UpdateIntern() {
         </div>
         <div className='mb-3'>
           <input
-                accept='image/*' // Specify the accepted file types
+                accept='image/jpg/png/jpeg' // Specify the accepted file types
                 className='input-id p-1'
                 style={{ borderRadius: '10px', background: '#DAF7A6', color: 'black', border: 'none' }}
                 type='file'
@@ -119,40 +96,9 @@ function UpdateIntern() {
                 onChange={(e) => setImage(e.target.files[0])} // Use e.target.files to access the FileList
               />
         </div>
-        <div className='dropdown mb-3'>
-             <select name="" id="" onChange={(e)=>handleClickTrainer(e.target.value)}>
-               <option value="">choose</option>
-                  {
-                    getTrainers.map((item)=>{
-                      return(
-                          <option value={item._id}>{item.name}</option>
-                        )
-                    })
-                  }
-            </select>
-        </div>
-        <div className='batch-input mt-4 mb-3'>
-          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter the batch'
-          value={batch}
-          onChange={(e) => setBatch(e.target.value)} />
-          <select name="" id="" onChange={(e)=>setBatch(e.target.value)}>
-            <option value="">choose</option>t
-
-              {
-                getBranches.map((item)=>{
-                  return(
-                    <option value={item._id}>{item.batch}</option>
-                  )
-                })
-
-              }
-          </select>
-        </div>
-        
-        
         <div>
         <button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>Add</button>
-       <Link to="/admin/viewIntern"><button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>View</button></Link> 
+       <Link to="/trainer/viewintern"><button type='submit' className='batch-btn' style={{ background: "darkkhaki"}}>View</button></Link> 
         </div>
       </form>
     </div>

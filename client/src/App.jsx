@@ -59,7 +59,7 @@ function App() {
         <Route exact path="/trainer" element={<DashboardTrainer />}>
         <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 
         <Route exact path="/trainer/viewintern" element= {<Viewintern/>}/> 
-        <Route exact path="/trainer/updateintern" element= {<Updateintern/>}/> 
+        <Route exact path="/trainer/updateintern/:id" element= {<Updateintern/>}/> 
         <Route exact path="/trainer/addassignment" element= {<Add/>}/> 
         <Route exact path="/trainer/viewassignment" element= {<View/>}/> 
         <Route exact path="/trainer/internsubmitted" element= {<InternSubmitted/>}/> 

@@ -43,7 +43,12 @@ function AddIntern({setRefresh,refresh}) {
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`, formData);
           if(response.data.result){
             successToast('Created.')
-            setRefresh(!refresh)
+
+            setName('');
+            setEmail('');
+            setImage('');
+            setTrainerId('');
+            setBatch('');
           }
         } catch (error) {
           errorToast(error.response.data.message);

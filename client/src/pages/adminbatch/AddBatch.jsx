@@ -36,7 +36,9 @@ const fetchData = async()=>{
           });
           if(response.data.result){
             successToast('Created.')
-            setRefresh(!refresh)
+
+            setBatch('');
+            setTrainerId('');
           }
         } catch (error) {
           errorToast(error.response.data.message);
