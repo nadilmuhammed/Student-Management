@@ -107,7 +107,6 @@ export const getIntern = async(req,res)=>{
     try {
       const result = await Intern.find(); 
 
-
      let getIntern =  result.map(async(inter)=>{
         const { ...other } = inter;
       const trainer = await Trainer.findById(inter.trainerReference); 

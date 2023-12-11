@@ -10,7 +10,7 @@ const UserSchema = new Schema({
         required:true,
     },
     interns:{
-        type: Array,
+        type: String,
         required:true,
     },
     validfrom : {

@@ -1,4 +1,5 @@
 
+import UUser from "../../models/Admintraine.js";
 import Intern from "../../models/admIntern.js";
 import Assignment from "../../models/traine/assignment.js";
 
@@ -17,7 +18,10 @@ export const getTrainerIntern = async(req,res)=>{
   }
 
 
+
+
   export const createAssignment = async(req,res)=>{
+    
     const { name,description,interns,validfrom,validto  } = req.body;
 
     if (!name) {
@@ -39,10 +43,13 @@ export const getTrainerIntern = async(req,res)=>{
     let product = await Assignment({name,description,interns,validfrom,validto});
 
     try {
+   
       let response = await product.save();
       res.json({response : response , status :true});
     } catch (error) {
       console.log({message: error.message, status:false});
+      res.json({response : error.message , status :false});
+
     }
 
   }
@@ -93,8 +100,21 @@ export const getTrainerIntern = async(req,res)=>{
     console.log('llls');
       try {
         let response = await Assignment.find();
-        console.log(response,"response");
-        res.json(response);
+
+        let getIntern = response.map(async(intern) =>{
+          const {...other} = intern;
+          const internall = await Intern.findById(intern.interns);
+          const {...internOther} = internall;
+          console.log(internall,"intern");
+          
+          return { ...other._doc,internData:internOther._doc };
+        })
+
+        const getintern = await Promise.all(getIntern);
+
+
+        console.log(getintern,"iiiii");
+        res.status(200).json(getintern);
 
       } catch (error) {
           res.json(error.message);

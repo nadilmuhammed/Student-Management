@@ -12,6 +12,7 @@ function Add() {
   const [ getintern,setGetintern ] = useState([]);
   const [ validfrom,setValidfrom ] = useState('');
   const [ validto,setValidTo ] = useState('');
+  const [ iddd,setiddd ] = useState('')
 
 
 
@@ -21,6 +22,7 @@ function Add() {
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
       setGetintern(response.data);
+
     } catch (error) {
       console.log(error.message);
     }
@@ -28,6 +30,7 @@ function Add() {
 
   useEffect(()=>{
     getallIntern()
+    handleClickIntern();
   },[])
 
 
@@ -38,16 +41,15 @@ function Add() {
       const response = await axios.post("http://localhost:4000/api/trainer/createassignment",{
         name:name,
         description:description,
-        interns:getintern,
         validfrom:validfrom,
         validto:validto,
+        interns:iddd,
       });
       if(response.data){
         successToast("created");
 
         setName('');
         setDescription('');
-        setGetintern([]);
         setValidfrom('');
         setValidTo('');
       }
@@ -55,6 +57,18 @@ function Add() {
       errorToast(error.message);
     }
 
+  }
+
+  const handleClickTrainer = async(id)=>{
+    console.log(id,"id");
+    setiddd(id);
+  }
+
+  const handleClickIntern = async(e)=>{
+    setGetintern(e.target.value);
+
+    console.log(id,"id");
+    
   }
 
 
@@ -78,17 +92,17 @@ function Add() {
             onChange={(e) => setDescription(e.target.value)} />
           </div>
           <div>
-          <select className='w-40 text-slate-900' onChange={(e)=>setGetintern(e.target.value)}>
-            <option disabled value="" >select intern</option>
-              {
-                getintern.map((item)=>{
-                  return(
-                    <option value={item._id}>{item.name}</option>   
-                  )
-                })
-              }
-          </select>
-        </div>
+            <select className='w-40 text-slate-900' onChange={(e)=>handleClickTrainer(e.target.value)}>
+              <option disabled value="" >select intern</option>
+                {
+                  getintern.map((item)=>{
+                    return(
+                      <option value={item._id}>{item.name}</option>   
+                    )
+                  })
+                }
+            </select>
+          </div>
         </div>
         
         <div>
