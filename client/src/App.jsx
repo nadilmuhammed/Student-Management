@@ -16,9 +16,15 @@ import ViewBatch from "./pages/adminbatch/ViewBatch";
 import UpdateBatch from "./pages/adminbatch/UpdateBatch";
 import DashboardTrainer from "./TrainerDashboard/pages/DashboardTrainer"
 import LoginTrainer from "./TrainerDashboard/trainer/LoginTrainer"
-
+import Addintern from "./TrainerDashboard/pages/intern/Addintern"
 import "./style.css"
 import Firstview from "./pages/Firstview";
+import Viewintern from "./TrainerDashboard/pages/intern/Viewintern";
+import Updateintern from "./TrainerDashboard/pages/intern/Updateintern";
+import Add from "./TrainerDashboard/pages/Assignment/Add";
+import View from "./TrainerDashboard/pages/Assignment/View";
+import InternSubmitted from "./TrainerDashboard/pages/Assignment/InternSubmitted";
+import UpdateAssign from "./TrainerDashboard/pages/Assignment/UpdateAssign";
 
 function App() {
   const location = useLocation();
@@ -51,10 +57,22 @@ function App() {
 
         
         {/* TRAINER */}
-        <Route exact path="/trainer" element={<DashboardTrainer />}></Route>
+        <Route exact path="/trainer" element={<DashboardTrainer />}>
+        <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 
+        <Route exact path="/trainer/viewintern" element= {<Viewintern/>}/> 
+        <Route exact path="/trainer/updateintern/:id" element= {<Updateintern/>}/> 
+        <Route exact path="/trainer/addassignment" element= {<Add/>}/> 
+        <Route exact path="/trainer/viewassignment" element= {<View/>}/> 
+        <Route exact path="/trainer/updateassignment/:id" element= {<UpdateAssign/>}/> 
+        <Route exact path="/trainer/internsubmitted" element= {<InternSubmitted/>}/> 
+        </Route>
         <Route exact path="/trainerlogin" element={<LoginTrainer/>}/>
 
 
+
+        
+
+        {/* landing page */}
         <Route exact path="/" element= {<Firstview/>}/>
       </Routes>
     </>

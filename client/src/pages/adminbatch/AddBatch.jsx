@@ -15,6 +15,7 @@ const fetchData = async()=>{
     try {
       const response = await axios.get("http://localhost:4000/api/admin/admintraine");
       setGetTrainers(response.data);
+      console.log(response.data,"data");
     } catch (error) {
       errorToast(error.message);
     }
@@ -36,7 +37,9 @@ const fetchData = async()=>{
           });
           if(response.data.result){
             successToast('Created.')
-            setRefresh(!refresh)
+
+            setBatch('');
+            setTrainerId('');
           }
         } catch (error) {
           errorToast(error.response.data.message);
@@ -68,7 +71,7 @@ const fetchData = async()=>{
         </div>
         <div className='dropdown mb-3'>
         <select className='selectbox' onChange={(e)=>handleClickTrainer(e.target.value)}>
-            <option value="">choose</option>t
+            <option disabled value="">choose</option>t
             {
               getTrainers.map((item)=>{
                 return(

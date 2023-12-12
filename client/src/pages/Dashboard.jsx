@@ -60,6 +60,7 @@ function Dashboard() {
         
 
         <main>
+
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* Welcome banner */}
             {/* <WelcomeBanner /> */}
@@ -119,9 +120,11 @@ function Dashboard() {
             </div>
           </div>
         </main>
-        { isLogged ? <Outlet /> : navigate("/adminlogin")}
         {/* <Banner /> */}
+      { isLogged ? <Outlet /> : navigate("/adminlogin")}
+      {console.log(isLogged,"loggin")}
       </div>
+
     </div>
 
   );

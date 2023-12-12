@@ -14,7 +14,7 @@ import UUser from "../models/Admintraine.js";
       return res.status(400).json({message:"Email is required"})
     }
     if(!req.file){
-      return res.ststus(400).json({message: " Upload an image"})
+      return res.status(400).json({message: " Upload an image"})
     }
     if(!trainerReference) {
         return res.status(400).json({message:"Traine is required"})
@@ -106,7 +106,6 @@ export const deleteintern = async(req,res)=>{
 export const getIntern = async(req,res)=>{
     try {
       const result = await Intern.find(); 
-
 
      let getIntern =  result.map(async(inter)=>{
         const { ...other } = inter;

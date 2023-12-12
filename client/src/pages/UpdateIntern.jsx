@@ -61,7 +61,7 @@ function UpdateIntern() {
     const fetchData= async(id)=>{
         try {
             let response = await axios.get(`http://localhost:4000/api/admin/adminintern/${id}`);
-            console.log(response.data);
+            console.log(response.data,"data");
             setName(response.data.name);
             console.log(setName,'nsnfknsd');
             setEmail(response.data.email);

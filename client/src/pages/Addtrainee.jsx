@@ -36,6 +36,13 @@ function AddBatch() {
       console.log(response.data, 'response');
       if (response.data.result) {
         successToast('Created.');
+
+        setName('');
+        setEmail('');
+        setUsername('');
+        setPassword('');
+        setImage('');
+        setIDno('');
       }
     } catch (error) {
       errorToast(error.response.data.message);

@@ -110,7 +110,7 @@ export const deletetraine = async(req,res)=>{
       return res.status(404).json({error: "Image not found"});
     }
 
-    unlink(  `uploads/${imageid.image}`,async function (err) {
+    unlink(`uploads/${imageid.image}`,async function (err) {
       if (err) {
           console.error('Error deleting file:', err);
       } else {
