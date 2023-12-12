@@ -25,6 +25,7 @@ import Add from "./TrainerDashboard/pages/Assignment/Add";
 import View from "./TrainerDashboard/pages/Assignment/View";
 import InternSubmitted from "./TrainerDashboard/pages/Assignment/InternSubmitted";
 import UpdateAssign from "./TrainerDashboard/pages/Assignment/UpdateAssign";
+import AddAttendace from "./TrainerDashboard/pages/Attendance/Add"
 
 function App() {
   const location = useLocation();
@@ -65,6 +66,9 @@ function App() {
         <Route exact path="/trainer/viewassignment" element= {<View/>}/> 
         <Route exact path="/trainer/updateassignment/:id" element= {<UpdateAssign/>}/> 
         <Route exact path="/trainer/internsubmitted" element= {<InternSubmitted/>}/> 
+
+        <Route exact path="/trainer/addattendance" element= {<AddAttendace/>}/> 
+
         </Route>
         <Route exact path="/trainerlogin" element={<LoginTrainer/>}/>
 
