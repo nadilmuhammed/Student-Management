@@ -3,7 +3,7 @@ import React from 'react'
 function UpdateAssign() {
   return (
     <div>
-        update
+        <h1>njncds</h1>
     </div>
   )
 }
