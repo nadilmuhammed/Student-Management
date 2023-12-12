@@ -23,10 +23,11 @@ export default function App() {
 
       const handleDelete = async (id) => {
         try {
-          const response = await axios.delete(`http://localhost:4000/api/admin/deletetraine/${id}`,{headers:{
-            'Authorization': `Bearer ${localStorage.getItem('token')}` ,
-            'Content-Type': 'application/json',
-          }});
+          // const response = await axios.delete(`http://localhost:4000/api/admin/deletetraine/${id}`,{headers:{
+          //   'Authorization': `Bearer ${localStorage.getItem('token')}` ,
+          //   'Content-Type': 'application/json',
+          // }});
+          const response = await axios.delete(`http://localhost:4000/api/admin/deletetraine/${id}`);
           successToast('Deleted.')
           setRefresh(!refresh)
         } catch (error) {

@@ -60,7 +60,7 @@ function UpdateIntern() {
     }
 
     useEffect(()=>{
-        fetchData(id);
+        fetchData();
         fetchDatatraine();
     },[])
    

@@ -54,7 +54,7 @@ router.get("/getadmin", getadmin)
 // admintraine
 router.post("/createtraine",upload.single('image'), createtraine)
 router.put("/updatetraine/:id",upload.single('image'), updatetraine)
-router.delete("/deletetraine/:id",adminAuth, deletetraine)
+router.delete("/deletetraine/:id", deletetraine)
 router.get("/admintraineID/:id", getByID)
 router.get("/getTrainebatch/:id" , getTraineBatch)
 router.get("/admintraine", getraine)

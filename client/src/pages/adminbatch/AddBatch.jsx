@@ -71,7 +71,7 @@ const fetchData = async()=>{
         </div>
         <div className='dropdown mb-3'>
         <select className='selectbox' onChange={(e)=>handleClickTrainer(e.target.value)}>
-            <option value="">choose</option>t
+            <option disabled value="">choose</option>t
             {
               getTrainers.map((item)=>{
                 return(
