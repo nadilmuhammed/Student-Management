@@ -28,13 +28,18 @@ export const Trainerupdateintern= async(req,res)=>{
   }
 }
 
+
+export const CreateIntern = ()=>{
+  
+}
+
+
 export const getInternofTrainer = async (req,res) => {
   const { id }  =req.params;
-  console.log(id);
+  console.log(id,"intern");
   try {
     let response = await Intern.find({trainerReference:id});
     res.status(200).json(response); 
-    console.log(response,"response"); 
   } catch (error) {
     console.log(error.message);
   } 

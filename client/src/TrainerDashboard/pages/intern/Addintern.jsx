@@ -8,7 +8,8 @@ function AddIntern({setRefresh,refresh}) {
    
     const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
-    const [image,setImage] = useState(null)
+    const [image,setImage] = useState(null);
+    const [ batchNo, setbatchNo ] = useState(null)
     const [getBranches, setGetBranches] = useState([]);
     const [getTrainers, setGetTrainers] = useState([]); 
     const [batch, setBatch] = useState([]);
@@ -38,6 +39,8 @@ function AddIntern({setRefresh,refresh}) {
         formData.append('email',email);
         formData.append('image',image);
         formData.append('trainerReference',trainerId);
+        formData.append('Assignedby',localStorage.getItem("id"));
+        formData.append('batchnumber',batchNo);
         formData.append('batch',batch);        
 
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`, formData);
@@ -49,6 +52,7 @@ function AddIntern({setRefresh,refresh}) {
             setImage('');
             setTrainerId('');
             setBatch('');
+            setbatchNo('')
 
           }
         } catch (error) {
@@ -97,6 +101,11 @@ function AddIntern({setRefresh,refresh}) {
                 onChange={(e) => setImage(e.target.files[0])} // Use e.target.files to access the FileList
               />
         </div>
+        <div className='batch-input mt-3 mb-3' >
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter batch name'
+          value={batchNo}
+          onChange={(e) => setbatchNo(e.target.value)} />
+        </div>
         <div className="">
           <select className='selectbox mb-3' onChange={(e)=>handleClickTrainer(e.target.value)}>
             <option value="">Select Traine</option>t
@@ -111,7 +120,7 @@ function AddIntern({setRefresh,refresh}) {
         </div>
         <div className='batch-input mb-3' > 
           <select className=' selectbox ' onChange={(e)=>setBatch(e.target.value)}>
-          <option value="">Select Batch</option>t
+          <option value="">Select Domain</option>t
 
             {
               getBranches.map((item)=>{

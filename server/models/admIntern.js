@@ -1,6 +1,12 @@
 import mongoose, { Schema, model } from "mongoose";
 
 const UserSchema = new Schema({
+    Assignedby:{
+        type: String,
+    },
+
+    // ASS:
+    // AASS:['ADMIN'TRAINER]
     name: {
         type: String,
         required:true
@@ -22,6 +28,9 @@ const UserSchema = new Schema({
     batch: {
         type: String,
         required:true
+    },
+    batchnumber:{
+        type: String,
     }
 },{timestamps : true})
 

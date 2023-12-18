@@ -50,18 +50,19 @@ export default function App() {
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
+        <Link to="/trainer/addassignment"><button className='rounded' style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
         <p className='viewformheading'>Assignment Details</p>   
           <div className="overflow-hidden viewAllform">
-          <Link to="/trainer/addassignment"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
-            <table className="min-w-full text-left text-sm font-light">
-              <thead className="border-b font-medium dark:border-neutral-500">
-                <tr style={{textAlign:"center"}}>
+            <table className="min-w-full text-left text-sm font-light mt-3">
+              <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white ">
+                <tr className='text-center'>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Question</th>
                   <th scope="col" className="px-6 py-4">Students</th>
                   <th scope="col" className="px-6 py-4">From</th>
-                <th scope="col" className="px-6 py-4">To</th>
+                  <th scope="col" className="px-6 py-4">To</th>
+                  <th scope="col" className="px-6 py-4"></th>
                 </tr>
               </thead>
               <tbody style={{textAlign:"center"}}>
@@ -72,13 +73,13 @@ export default function App() {
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{user.description}</td>
+                            <td style={{maxWidth:"200px",overflow:"scroll"}} className="whitespace-nowrap px-6 py-4">{user.description}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.internData.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{ new Date(user.validfrom ).getDay()}-{new Date(user.validfrom ).getMonth()}-{new Date(user.validfrom ).getFullYear()}</td>
                             <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:".5rem"}}>
-                                <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
-                                <Link to={`/trainer/updateassignment/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
+                                <button className='rounded' style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
+                                <Link to={`/trainer/updateassignment/${user._id}`}><button className='rounded' style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
                             </div>
                             </tr>
                         </>

@@ -59,6 +59,7 @@ export const getTrainerIntern = async(req,res)=>{
     const {id} = req.params;
     console.log(id)
     const {name,description,interns,validfrom,validto } = req.body;
+    console.log(req.body,"body");
     if(!name) {
       return res.status(400).json({message:"Name is required"})
     }
@@ -77,6 +78,7 @@ export const getTrainerIntern = async(req,res)=>{
   
     try {
         const updatedUser = await Assignment.findByIdAndUpdate(id,{$set:{ name,description,interns,validfrom,validto }},{new:true});
+        console.log(updatedUser,"updated");
         res.status(201).json(updatedUser);
     } catch (error) {
         res.json(error.message);
@@ -97,7 +99,6 @@ export const getTrainerIntern = async(req,res)=>{
   
   
   export const getAssignment = async(req,res) => {
-    console.log('llls');
       try {
         let response = await Assignment.find();
 
@@ -105,19 +106,29 @@ export const getTrainerIntern = async(req,res)=>{
           const {...other} = intern;
           const internall = await Intern.findById(intern.interns);
           const {...internOther} = internall;
-          console.log(internall,"intern");
           
           return { ...other._doc,internData:internOther._doc };
         })
 
         const getintern = await Promise.all(getIntern);
-
-
-        console.log(getintern,"iiiii");
         res.status(200).json(getintern);
 
       } catch (error) {
           res.json(error.message);
       }
   }
+
+
+  export const getAssignID = async(req,res)=>{
+    const {id} = req.params;
+    console.log(id,"assign");
+   try {
+    const result = await Assignment.findById(id)
+    console.log(result,"data");
+    res.json({result , status:true} );
+    return true
+  } catch (error) {
+    res.json({ message: error.message, status: false });
+  }
+}
   

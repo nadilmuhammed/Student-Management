@@ -47,12 +47,12 @@ export default function App() {
         </>        
     ): (
         
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
         <p className='viewformheading'>Assignment Details</p>   
           <div className="overflow-hidden viewAllform">
-          <Link to="/trainer/addassignment"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
+          {/* <Link to="/trainer/addassignment"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link> */}
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
                 <tr style={{textAlign:"center"}}>
@@ -60,6 +60,7 @@ export default function App() {
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Topic</th>
                   <th scope="col" className="px-6 py-4">Assignment</th>
+                  <th scope="col" className="px-6 py-4">Submition Date</th>
                   <th scope="col" className="px-6 py-4">Submitted Date</th>
                 
                 </tr>
@@ -77,8 +78,8 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4">{ new Date(user.validfrom ).getDay()}-{new Date(user.validfrom ).getMonth()}-{new Date(user.validfrom ).getFullYear()}</td>
                             <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:"2rem"}}>
-                                <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
-                                <Link to={`/trainer/updateassignment/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
+                                <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Approve</button>
+                                <Link to={`/trainer/updateassignment/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Reject</button></Link>
                             </div>
                             </tr>
                         </>

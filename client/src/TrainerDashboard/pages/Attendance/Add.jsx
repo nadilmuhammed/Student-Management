@@ -2,7 +2,13 @@ import React from 'react'
 
 function AddAttendace() {
   return (
-    <div>Add</div>
+    <>
+      <div>
+        <form>
+          
+        </form>
+      </div>
+    </>
   )
 }
 

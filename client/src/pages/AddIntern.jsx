@@ -38,7 +38,9 @@ function AddIntern({setRefresh,refresh}) {
         formData.append('email',email);
         formData.append('image',image);
         formData.append('trainerReference',trainerId);
+        formData.append('Assignedby',localStorage.getItem('id'));
         formData.append('batch',batch);        
+        console.log(formData,"dta");
 
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`, formData);
           if(response.data.result){

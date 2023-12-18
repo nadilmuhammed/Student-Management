@@ -5,7 +5,7 @@ import Trainer from "../models/Admintraine.js";
 import UUser from "../models/Admintraine.js";
 
  export const createIntern = async(req,res)=>{
-    const { name,email,trainerReference,batch } = req.body;
+    const { name,email,trainerReference,batch,Assignedby,batchnumber } = req.body;
     console.log(req.body);
     if(!name) {
       return res.status(400).json({message:"Name is required"})
@@ -25,7 +25,7 @@ import UUser from "../models/Admintraine.js";
 
     const ImagePath = req.file.filename
 
-    let product = await Intern({name,email,trainerReference,image:ImagePath,batch})
+    let product = await Intern({name,email,trainerReference,image:ImagePath,batch,Assignedby,batchnumber})
     console.log(req.body, "req.body");
 
   try {
@@ -113,10 +113,12 @@ export const getIntern = async(req,res)=>{
       const { ...trainerOther } = trainer
       const batch = await BatcheForAdmin.findById(inter.batch); 
       const { ...batchOther } = batch
+      const batchnumber = Intern.findById(inter.batchnumber);
+      const { ...batchnoOther } = batchnumber;
 
       console.log(batch,'batch');
 
-      return {...other._doc,trainerData:trainerOther._doc,batchData:batchOther._doc}
+      return {...other._doc,trainerData:trainerOther._doc,batchData:batchOther._doc,batchNumber:batchnoOther._doc}
 
       })
 

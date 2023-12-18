@@ -28,13 +28,7 @@ app.use(bodyParser.json());
 app.use("/api/admin", adminRoute);
 app.use("/api/trainer", routerTraine);
 
-
-// app.use('/uploads', express.static( 'uploads'));
 app.use('/uploads', express.static(join(__dirname, 'uploads')));
-// 
-
-
-// console.log(__dirname);
 
 
 dotenv.config();

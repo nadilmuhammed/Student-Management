@@ -52,11 +52,6 @@ function UpdateIntern() {
 
     };
 
-    // const mappedOptions = viewBatch.map(item => ({
-    //   value: item.name,
-    //   label: item.name
-    // }));
-
 
     const fetchData= async(id)=>{
         try {

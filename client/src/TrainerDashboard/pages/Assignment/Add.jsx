@@ -77,23 +77,24 @@ function Add() {
 
 
   return (
-    <div className='mb-3' style={{border:"2px solid gray",padding:"2rem",textAlign:"center",margin:"auto"}}>
-      <h1>Add Assignment</h1>
+    <div className='mb-3 rounded bg-slate-700' style={{border:"2px solid gray",padding:"2rem",textAlign:"center",margin:"auto"}}>
+      <h1 className='text-3xl text-white font-bold'>Add Assignment</h1>
       <form onSubmit={handleSubmit}>
-        <div style={{display:"flex",justifyContent:"space-evenly",gap:"2rem"}}>
+        <div className='main_data' style={{display:"flex",justifyContent:"center",flexDirection:"column",gap:"1rem"}}>
           <div>
-            <input type="text" placeholder='Topic Name'
+            <input className='w-full' type="text" placeholder='Topic Name'
             value={name}
             onChange={(e) => setName(e.target.value)} />
           </div>
           <div>
-            <textarea type="text" placeholder='Description'
+            <textarea className='w-full h-28' type="text" placeholder='Description'
             value={description}
             onChange={(e) => setDescription(e.target.value)} />
           </div>
           <div>
-            <select className='w-40 text-slate-900' onChange={(e)=>handleClickTrainer(e.target.value)}>
+            <select className='w-full text-slate-900' onChange={(e)=>handleClickTrainer(e.target.value)}>
               <option disabled value="" >select intern</option>
+              <option value="">All</option>
                 {
                   getintern.map((item)=>{
                     return(
@@ -105,18 +106,19 @@ function Add() {
           </div>
         </div>
         
+        <div className='mt-3'>
+          <p className='text-white'>Validfrom:</p>
+          <input type="date" placeholder='valid from' 
+            value={validfrom}
+            onChange={(e)=>setValidfrom(e.target.value)}/>
+          </div>
+        <div className='mt-3'>
+          <p className='text-white'>Validto:</p><input type="date" placeholder='valid to' 
+          value={validto}
+          onChange={(e)=>setValidTo(e.target.value)}/>
+          </div>
         <div>
-        <span>Validfrom:</span><input type="date" placeholder='valid from' 
-          value={validfrom}
-          onChange={(e)=>setValidfrom(e.target.value)}/>
-        </div>
-        <div>
-        <span>Validto:</span><input type="date" placeholder='valid to' 
-         value={validto}
-         onChange={(e)=>setValidTo(e.target.value)}/>
-        </div>
-        <div>
-          <button type='submit'> Add</button>
+          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" type='submit'> Add</button>
         </div>
       </form>
     </div>
