@@ -14,7 +14,6 @@ export default function App() {
         try {
           const response = await axios.get(`http://localhost:4000/api/trainer/getinternoftrainer/${localStorage.getItem('id')}`);
           setData(response.data);
-          console.log(response.data);
         } catch (error) {
           errorToast(error.message);
         }
@@ -55,7 +54,9 @@ export default function App() {
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
         <p className='viewformheading'>Intern Details</p>   
           <div className="overflow-hidden viewAllform">
-          <Link to="/admin/addIntern"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
+          <Link to="/trainer/addIntern">
+            <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button>
+          </Link>
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
                 <tr style={{textAlign:"center"}}>
@@ -67,7 +68,6 @@ export default function App() {
               </thead>
               <tbody style={{textAlign:"center"}}>
                 {data.map((user,index)=>{
-                  console.log(user,"jnsdjsdn");
                     return(
                         <>
                             <tr className="border-b dark:border-neutral-500" key={index}>
@@ -79,7 +79,9 @@ export default function App() {
                             </td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
-                                <Link to={`/trainer/updateintern/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
+                                <Link to={`/trainer/updateintern/${user._id}`}>
+                                  <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button>
+                                </Link>
                             </div>
                             </tr>
                         </>

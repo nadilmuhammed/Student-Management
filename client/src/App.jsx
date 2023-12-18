@@ -27,6 +27,7 @@ import InternSubmitted from "./TrainerDashboard/pages/Assignment/InternSubmitted
 import UpdateAssign from "./TrainerDashboard/pages/Assignment/UpdateAssign";
 import AddAttendace from "./TrainerDashboard/pages/Attendance/Add"
 import ViewAttend from "./TrainerDashboard/pages/Attendance/ViewAttend";
+import Addbatch from "./TrainerDashboard/pages/Batch.jsx/Addbatch";
 
 function App() {
   const location = useLocation();
@@ -60,23 +61,27 @@ function App() {
         
         {/* TRAINER */}
         <Route exact path="/trainer" element={<DashboardTrainer />}>
-        <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 
-        <Route exact path="/trainer/viewintern" element= {<Viewintern/>}/> 
-        <Route exact path="/trainer/updateintern/:id" element= {<Updateintern/>}/> 
-        <Route exact path="/trainer/addassignment" element= {<Add/>}/> 
-        <Route exact path="/trainer/viewassignment" element= {<View/>}/> 
-        <Route exact path="/trainer/updateassignment/:id" element= {<UpdateAssign/>}/> 
-        <Route exact path="/trainer/internsubmitted" element= {<InternSubmitted/>}/> 
+          <Route exact path="/trainer/addbatch" element= {<Addbatch/>}/> 
 
-        <Route exact path="/trainer/addattendance" element= {<AddAttendace/>}/> 
-        <Route exact path="/trainer/viewattendance" element= {<ViewAttend/>}/> 
+      
+          <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 
+          <Route exact path="/trainer/viewintern" element= {<Viewintern/>}/> 
+          <Route exact path="/trainer/updateintern/:id" element= {<Updateintern/>}/> 
+
+          <Route exact path="/trainer/addassignment" element= {<Add/>}/> 
+          <Route exact path="/trainer/viewassignment" element= {<View/>}/> 
+          <Route exact path="/trainer/updateassignment/:id" element= {<UpdateAssign/>}/> 
+          <Route exact path="/trainer/internsubmitted" element= {<InternSubmitted/>}/> 
+
+          <Route exact path="/trainer/addattendance" element= {<AddAttendace/>}/> 
+          <Route exact path="/trainer/viewattendance" element= {<ViewAttend/>}/> 
 
         </Route>
+
+
+        {/* login page */}
         <Route exact path="/trainerlogin" element={<LoginTrainer/>}/>
 
-
-
-        
 
         {/* landing page */}
         <Route exact path="/" element= {<Firstview/>}/>

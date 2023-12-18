@@ -13,6 +13,7 @@ function Add() {
   const [ validfrom,setValidfrom ] = useState('');
   const [ validto,setValidTo ] = useState('');
   const [ iddd,setiddd ] = useState('')
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
 
 
@@ -73,6 +74,16 @@ function Add() {
 
 
 
+  const handleCheckboxChange = (option) => {
+    if (selectedOptions.includes(option)) {
+      setSelectedOptions(selectedOptions.filter(item => item !== option));
+    } else {
+      setSelectedOptions([...selectedOptions, option]);
+    }
+  };
+
+
+
 
 
 
@@ -103,6 +114,17 @@ function Add() {
                   })
                 }
             </select>
+                  {/* {getintern.map(option => (
+                    <label key={option}>
+                      <input
+                        type="checkbox"
+                        checked={selectedOptions.includes(option)}
+                        onChange={() => handleCheckboxChange(option)}
+                      />
+                      {option}
+                    </label>
+                  ))} */}
+
           </div>
         </div>
         
