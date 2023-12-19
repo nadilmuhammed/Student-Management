@@ -29,6 +29,7 @@ import AddAttendace from "./TrainerDashboard/pages/Attendance/Add"
 import ViewAttend from "./TrainerDashboard/pages/Attendance/ViewAttend";
 import Addbatch from "./TrainerDashboard/pages/Batch/Addbatch";
 import Viewbatch from "./TrainerDashboard/pages/Batch/Viewbatch";
+import Updatebatch from "./TrainerDashboard/pages/Batch/Updatebatch";
 
 function App() {
   const location = useLocation();
@@ -64,6 +65,7 @@ function App() {
         <Route exact path="/trainer" element={<DashboardTrainer />}>
           <Route exact path="/trainer/addbatch" element= {<Addbatch/>}/> 
           <Route exact path="/trainer/viewbatch" element= {<Viewbatch/>}/> 
+          <Route exact path="/trainer/updatebatch/:id" element= {<Updatebatch/>}/> 
 
       
           <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 

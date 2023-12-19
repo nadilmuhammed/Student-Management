@@ -28,9 +28,6 @@ const UserSchema = new Schema({
     batch: {
         type: String,
         required:true
-    },
-    batchnumber:{
-        type: String,
     }
 },{timestamps : true})
 

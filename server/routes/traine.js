@@ -4,7 +4,7 @@ import { Trainerupdateintern, getInternofTrainer} from "../controllers/traine/in
 import multer from "multer";
 import path from "path";
 import { createAssignment, deleteassignment, getAssignID, getAssignment, getTrainerIntern, updateassignment } from "../controllers/traine/assignment.js";
-import { createBatchTrainer, deleteTrainerBatch, getTrainerBatch, getTrainerBatchID } from "../controllers/traine/trainerBatch.js";
+import { createBatchTrainer, deleteTrainerBatch, getTrainerBatch, getTrainerBatchID, updateTrainerBatch } from "../controllers/traine/trainerBatch.js";
 
 const routerTraine = express.Router();
 
@@ -44,6 +44,7 @@ routerTraine.post("/createBatchtrainer", createBatchTrainer);
 routerTraine.delete("/deletetrainerbatch/:id", deleteTrainerBatch);
 routerTraine.get("/getbatchtrainer", getTrainerBatch);
 routerTraine.get("/getbatchtrainerID/:id", getTrainerBatchID);
+routerTraine.put("/updatetrainerbatch/:id", updateTrainerBatch);
 
 
 

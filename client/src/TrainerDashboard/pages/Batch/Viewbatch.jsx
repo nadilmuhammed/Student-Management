@@ -6,6 +6,7 @@ import axios from 'axios';
 function ViewBatch() {
   
   const [data,setData] =useState([]);
+  const [ refresh, setRefresh] = useState(false)
 
 
   const getBatchdata = async() =>{
@@ -20,11 +21,12 @@ function ViewBatch() {
 
   useEffect(()=>{
     getBatchdata()
-  },[])
+  },[refresh])
 
   return (
     <>
-      <div className='flex justify-center gap-3'>
+    {/* className='flex justify-center flex-wrap- gap-3' */}
+      <div className='flex justify-center gap-3 flex-wrap'>
         {
           data.map((items,key)=>{
             console.log(items,"items");
