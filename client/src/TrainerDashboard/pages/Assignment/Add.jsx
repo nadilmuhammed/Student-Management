@@ -23,10 +23,16 @@ function Add() {
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
       setGetintern(response.data);
-
     } catch (error) {
       console.log(error.message);
     }
+  }
+
+  const handleClickIntern = async(e)=>{
+    setGetintern(e.target.value);
+
+    console.log(id,"id");
+    
   }
 
   useEffect(()=>{
@@ -65,22 +71,17 @@ function Add() {
     setiddd(id);
   }
 
-  const handleClickIntern = async(e)=>{
-    setGetintern(e.target.value);
-
-    console.log(id,"id");
-    
-  }
+  
 
 
 
-  const handleCheckboxChange = (option) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter(item => item !== option));
-    } else {
-      setSelectedOptions([...selectedOptions, option]);
-    }
-  };
+  // const handleCheckboxChange = (option) => {
+  //   if (selectedOptions.includes(option)) {
+  //     setSelectedOptions(selectedOptions.filter(item => item !== option));
+  //   } else {
+  //     setSelectedOptions([...selectedOptions, option]);
+  //   }
+  // };
 
 
 

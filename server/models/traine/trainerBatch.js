@@ -2,12 +2,13 @@ import { model,Schema } from "mongoose";
 
 const traineSchema = new Schema({
     name:{
-        type:String,
+        type:Number,
+        required:true,
         unique:true
     },
     interns:{
-        type: String,
-        required:true
+        type:Array,
+        required:true,
     }
 },{ timestamps: true })
 

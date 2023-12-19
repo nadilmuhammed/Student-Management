@@ -1,3 +1,4 @@
+import Intern from "../../models/admIntern.js";
 import TrainerBatch from "../../models/traine/trainerBatch.js";
 
 
@@ -6,8 +7,11 @@ export const createBatchTrainer = async(req,res)=>{
     const { name,interns  } = req.body;
 
     if (!name) {
-      return res.status(400).json({ message: "name is required" });
+      return res.status(400).json({ message: "Enter a batch number" });
+    }else if(!name || isNaN(name)){
+      return res.status(400).json({message:" Enter be valid number"})
     }
+
     if (!interns) {
       return res.status(400).json({ message: "interns required" });
     }
@@ -26,11 +30,32 @@ export const createBatchTrainer = async(req,res)=>{
 
   }
 
+  export const deleteTrainerBatch = async(req,res)=>{
+    let { id } = req.params;
+    try {
+     let response = await TrainerBatch.findByIdAndDelete(id);
+     res.json({message:response , status:true})
+     console.log("deleted");
+    } catch (error) {
+      console.log({message:error.message, status:false});
+    }
+  }
+
 
   export const getTrainerBatch = async(req,res)=>{
     try {
         let response = await TrainerBatch.find();
-        res.json({message: response, status:true});
+
+        let getIntern = response.map(async(intern) =>{
+          const {...other} = intern;
+          const internall = await Intern.findById(intern.interns);
+          const {...internOther} = internall;
+          
+          return { ...other._doc,internData:internOther._doc };
+        })
+
+        const getintern = await Promise.all(getIntern);
+        res.status(200).json(getintern);
     } catch (error) {
         console.log({message: error.message, status:false});
     }

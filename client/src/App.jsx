@@ -27,7 +27,8 @@ import InternSubmitted from "./TrainerDashboard/pages/Assignment/InternSubmitted
 import UpdateAssign from "./TrainerDashboard/pages/Assignment/UpdateAssign";
 import AddAttendace from "./TrainerDashboard/pages/Attendance/Add"
 import ViewAttend from "./TrainerDashboard/pages/Attendance/ViewAttend";
-import Addbatch from "./TrainerDashboard/pages/Batch.jsx/Addbatch";
+import Addbatch from "./TrainerDashboard/pages/Batch/Addbatch";
+import Viewbatch from "./TrainerDashboard/pages/Batch/Viewbatch";
 
 function App() {
   const location = useLocation();
@@ -62,6 +63,7 @@ function App() {
         {/* TRAINER */}
         <Route exact path="/trainer" element={<DashboardTrainer />}>
           <Route exact path="/trainer/addbatch" element= {<Addbatch/>}/> 
+          <Route exact path="/trainer/viewbatch" element= {<Viewbatch/>}/> 
 
       
           <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 
