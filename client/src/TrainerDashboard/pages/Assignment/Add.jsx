@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { errorToast, successToast } from '../../../Toastify/Toast';
 import "./assignment.css"
+import Select from 'react-select';
 
 
 function Add() {
@@ -12,9 +13,12 @@ function Add() {
   const [ getintern,setGetintern ] = useState([]);
   const [ validfrom,setValidfrom ] = useState('');
   const [ validto,setValidTo ] = useState('');
-  const [ iddd,setiddd ] = useState('')
+  const [ iddd,setiddd ] = useState('');
+  const [ getBatch, setGetBatch ] = useState([]);
+  const [batchID, setBatchID] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
-
+  const [ options,setOptions ] = useState({})
+  const [ data,setData ] = useState([])
 
 
 
@@ -22,7 +26,30 @@ function Add() {
   const getallIntern = async()=>{
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
-      setGetintern(response.data);
+      setSelectedOptions(response.data);
+
+      /* to get intern id and name from response bescuse 
+      it has to append to value as _id and label as name*/
+      // setData(response.data)
+       let result = response.data.map((items)=>{
+        return{
+          label:items.name,value:items._id
+        }
+      })  
+      /*declaring a state to store the data and
+       get globally (have to assign state in html code) */
+      setOptions(result)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  const  getBatchDetails = async()=>{
+    try {
+      let response = await axios.get("http://localhost:4000/api/trainer/getbatchtrainer");
+      console.log(response.data,"batch");
+      setGetBatch(response.data);
+
     } catch (error) {
       console.log(error.message);
     }
@@ -30,13 +57,12 @@ function Add() {
 
   const handleClickIntern = async(e)=>{
     setGetintern(e.target.value);
-
-    console.log(id,"id");
     
   }
 
   useEffect(()=>{
     getallIntern()
+    getBatchDetails();
     handleClickIntern();
   },[])
 
@@ -44,14 +70,20 @@ function Add() {
   const handleSubmit = async(e) => {
     e.preventDefault();
 
+    let result= selectedOptions.map((items)=>{
+      return items.value
+    })
+
     try {
       const response = await axios.post("http://localhost:4000/api/trainer/createassignment",{
         name:name,
         description:description,
+        batch:getBatch,
         validfrom:validfrom,
         validto:validto,
-        interns:iddd,
+        interns:result,
       });
+      console.log(response.data,"data");
       if(response.data){
         successToast("created");
 
@@ -61,16 +93,30 @@ function Add() {
         setValidTo('');
       }
     } catch (error) {
-      errorToast(error.message);
+      errorToast(error.response.data.message);
     }
 
   }
 
-  const handleClickTrainer = async(id)=>{
-    console.log(id,"id");
-    setiddd(id);
+  const handleClickBtach = async(id)=>{
+    console.log(id,'ddddd');
+    console.log(getBatch,'ddddd');
+    let dataOne = getBatch.find((item)=> item._id == id)
+    console.log(dataOne,"iddddd");
+    let result = dataOne.studentsData.map((items)=>{
+      return{
+        label:items.name,value:items._id
+      }
+    })
+
+    setData(result)
+    
   }
 
+
+  const handleSelectChange = (selectedValues) => {
+    setSelectedOptions(selectedValues);
+  };
   
 
 
@@ -104,6 +150,36 @@ function Add() {
             onChange={(e) => setDescription(e.target.value)} />
           </div>
           <div>
+            <select className='w-full text-slate-900' onChange={(e)=>handleClickBtach(e.target.value)}>
+              <option disabled value="" >select Btach</option>
+              <option value="">All</option>
+                {
+                  getBatch.map((item)=>{
+                    return(
+                      <option value={item._id}>{item.name}</option>   
+                    )
+                  })
+                }
+            </select>
+          </div>
+          <div>
+            <Select
+              isMulti
+              options={data}
+              value={selectedOptions}
+              onChange={handleSelectChange}
+            />
+            <div>
+            {/* {selectedOptions.map((items) =>
+            (
+              <div>
+                <div key={items.value}>{items.label}</div>
+              </div>
+
+              ))} */}
+            </div>
+        </div>
+          {/* <div>
             <select className='w-full text-slate-900' onChange={(e)=>handleClickTrainer(e.target.value)}>
               <option disabled value="" >select intern</option>
               <option value="">All</option>
@@ -115,18 +191,7 @@ function Add() {
                   })
                 }
             </select>
-                  {/* {getintern.map(option => (
-                    <label key={option}>
-                      <input
-                        type="checkbox"
-                        checked={selectedOptions.includes(option)}
-                        onChange={() => handleCheckboxChange(option)}
-                      />
-                      {option}
-                    </label>
-                  ))} */}
-
-          </div>
+          </div> */}
         </div>
         
         <div className='mt-3'>

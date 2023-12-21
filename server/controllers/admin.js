@@ -79,6 +79,17 @@ export const updateadmin= async(req,res)=>{
   }
 }
 
+export const getadminID = async(req,res)=>{
+  let { id } = req.params;
+  try {
+    let response = await Admin.findById(id);
+    res.status(202).json(response);
+  } catch (error) {
+    console.log(error.message);
+  }
+
+}
+
 
 export const getadmin = async(req,res)=>{
   try {

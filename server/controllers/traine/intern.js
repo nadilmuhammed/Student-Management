@@ -29,11 +29,6 @@ export const Trainerupdateintern= async(req,res)=>{
 }
 
 
-export const CreateIntern = ()=>{
-  
-}
-
-
 export const getInternofTrainer = async (req,res) => {
   const { id }  =req.params;
   console.log(id,"intern");

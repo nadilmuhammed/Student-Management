@@ -9,8 +9,12 @@ const UserSchema = new Schema({
         type: String,
         required:true,
     },
+    batch:{
+        type:Array,
+        required:true
+    },
     interns:{
-        type: String,
+        type: Array,
         required:true,
     },
     validfrom : {

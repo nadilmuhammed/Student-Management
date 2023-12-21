@@ -2,7 +2,7 @@ import { model,Schema } from "mongoose";
 
 const traineSchema = new Schema({
     name:{
-        type:Number,
+        type:String,
         required:true,
         unique:true
     },

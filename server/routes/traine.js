@@ -3,7 +3,7 @@ import { getData, login, updatetraine, deletetraine } from "../controllers/train
 import { Trainerupdateintern, getInternofTrainer} from "../controllers/traine/intern.js";
 import multer from "multer";
 import path from "path";
-import { createAssignment, deleteassignment, getAssignID, getAssignment, getTrainerIntern, updateassignment } from "../controllers/traine/assignment.js";
+import { createAssignment, deleteassignment, getAssignID, getAssignment, getTrainerIntern, trainerBatchName, updateassignment } from "../controllers/traine/assignment.js";
 import { createBatchTrainer, deleteTrainerBatch, getTrainerBatch, getTrainerBatchID, updateTrainerBatch } from "../controllers/traine/trainerBatch.js";
 
 const routerTraine = express.Router();
@@ -38,6 +38,7 @@ routerTraine.get("/getassignment", getAssignment);
 routerTraine.get("/getassignmentid/:id", getAssignID);
 routerTraine.put("/updateassignment/:id", updateassignment);
 routerTraine.delete("/deleteassignment/:id", deleteassignment);
+routerTraine.get("/getbatchid/:id", trainerBatchName);
 
 // batch
 routerTraine.post("/createBatchtrainer", createBatchTrainer);

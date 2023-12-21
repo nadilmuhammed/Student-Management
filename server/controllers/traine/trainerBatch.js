@@ -7,9 +7,7 @@ export const createBatchTrainer = async(req,res)=>{
     const { name,interns  } = req.body;
 
     if (!name) {
-      return res.status(400).json({ message: "Enter a batch number" });
-    }else if(!name || isNaN(name)){
-      return res.status(400).json({message:" Enter be valid number"})
+      return res.status(400).json({ message: "Batch name required" });
     }
 
     if (!interns) {
@@ -18,8 +16,7 @@ export const createBatchTrainer = async(req,res)=>{
 
     let product = await TrainerBatch({name,interns});
 
-    try {
-   
+    try { 
       let response = await product.save();
       res.json({response : response , status :true});
     } catch (error) {
@@ -37,9 +34,7 @@ export const createBatchTrainer = async(req,res)=>{
 
     const { name,interns  } = req.body;
     if (!name) {
-      return res.status(400).json({ message: "Enter a batch number" });
-    }else if(!name || isNaN(name)){
-      return res.status(400).json({message:" Enter be valid number"})
+      return res.status(400).json({ message: "Batch name required" });
     }
 
     if (!interns) {
@@ -76,8 +71,10 @@ export const createBatchTrainer = async(req,res)=>{
           const {...other} = intern;
           const internall = await Intern.find({ _id: { $in: intern.interns } });
           const {...internOther} = internall;
+          const data = await Intern.find({_id: { $in: intern.interns } });
+          const {...dataOther} = data;
           
-          return { ...other._doc,internData:internall };
+          return { ...other._doc,internData:internall,studentsData:data };
         })
         
         const getintern = await Promise.all(getIntern);

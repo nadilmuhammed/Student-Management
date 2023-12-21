@@ -30,7 +30,7 @@ export default function App() {
           successToast('Deleted.')
           setRefresh(!refresh)
         } catch (error) {
-          errorToast(error.message);
+          errorToast(error.response.data.message);
         }
       };
 

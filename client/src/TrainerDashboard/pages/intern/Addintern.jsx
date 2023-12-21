@@ -20,6 +20,7 @@ function AddIntern({setRefresh,refresh}) {
     try {
       const response = await axios.get("http://localhost:4000/api/admin/admintraine");
       setGetTrainers(response.data);
+      console.log(response.data,"data");
     } catch (error) {
       errorToast(error.message);
     }
@@ -64,6 +65,7 @@ function AddIntern({setRefresh,refresh}) {
         setTrainerId(id)
         const response = await axios.get(`http://localhost:4000/api/admin/getTrainebatch/${id}`);
         setGetBranches(response.data)
+        console.log(response.data,"hhhhhhx");
       } catch (error) {
         console.log(error.message);
       }

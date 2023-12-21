@@ -82,15 +82,14 @@ function DropdownProfile({
             <div className="text-xs text-slate-500 dark:text-slate-400 italic">Admin</div>
           </div>
           <ul>
-            {/* <li>
+            <li>
               <Link
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3"
-                to="/settings"
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                to={`/admin/profile/${localStorage.getItem('id')}`}
               >
-                Settings
+                profile
               </Link>
-            </li> */}
+            </li>
             <li>
               <p
                 className="font-medium text-sm text-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 flex items-center py-1 px-3"

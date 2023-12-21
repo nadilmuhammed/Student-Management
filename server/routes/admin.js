@@ -1,5 +1,5 @@
 import express from "express";
-import { getadmin, login, register, updateadmin } from "../controllers/admin.js";
+import { getadmin, getadminID, login, register, updateadmin } from "../controllers/admin.js";
 import { createtraine, deletetraine, getByID, getTraineBatch, getraine, updatetraine } from "../controllers/admintraine.js";
 import { createIntern, deleteintern, getIntern, getInternID, updateintern } from "../controllers/adminIntern.js";
 import { createBatch, deletebatch, getBatch, getBatchID, updatebatch } from "../controllers/adminBatch.js";
@@ -50,6 +50,7 @@ router.post("/login", login);
 
 router.put("/updateadmin/:id", updateadmin)
 router.get("/getadmin", getadmin)
+router.get("/getadminID/:id", getadminID)
 
 // admintraine
 router.post("/createtraine",upload.single('image'), createtraine)

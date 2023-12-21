@@ -59,6 +59,7 @@ export default function App() {
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Question</th>
+                  <th scope="col" className="px-6 py-4">Batch</th>
                   <th scope="col" className="px-6 py-4">Students</th>
                   <th scope="col" className="px-6 py-4">From</th>
                   <th scope="col" className="px-6 py-4">To</th>
@@ -67,13 +68,13 @@ export default function App() {
               </thead>
               <tbody style={{textAlign:"center"}}>
                 {data.map((user,index)=>{
-                  console.log(user,"jnsdjsdn");
                     return(
                         <>
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
                             <td style={{maxWidth:"200px",overflow:"scroll"}} className="whitespace-nowrap px-6 py-4">{user.description}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.batchData.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.internData.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{ new Date(user.validfrom ).getDay()}-{new Date(user.validfrom ).getMonth()}-{new Date(user.validfrom ).getFullYear()}</td>
                             <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>

@@ -14,7 +14,8 @@ import { NavLink } from "react-router-dom";
  
 export default function SimpleCard({data}) {
 
-  const {_id, name, internData } = data
+  const {_id, name, internData, studentsData } = data
+  console.log(studentsData,"hiii");
 
   const [ refresh,setRefresh ] = useState(false)
   
@@ -41,8 +42,8 @@ export default function SimpleCard({data}) {
   return (
     <Card className="mt-6 w-96 bg-gradient-to-r from-blue-300  to-blue-900 rounded-2xl">
       <CardBody>
-        <Typography variant="h5" color="blue-gray" className="mb-2 text-2xl">
-          <span>Batch </span><span>{name}</span>
+        <Typography variant="h5" color="blue-gray" className="mb-2 text-3xl">
+          <span>{name}</span>
         </Typography>
         <Typography>
           <ul style={{listStyleType:"number",padding:"1rem"}}>

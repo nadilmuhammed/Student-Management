@@ -21,6 +21,7 @@ import DashboardCard12 from "../partials/dashboard/DashboardCard12";
 import DashboardCard13 from "../partials/dashboard/DashboardCard13";
 import Banner from "../partials/Banner";
 import { Outlet, useNavigate } from "react-router-dom";
+import Profile from "../Login/Profile";
 
 function Dashboard() {
   const [isLogged,setIsLogged] = useState(false);
@@ -63,7 +64,10 @@ function Dashboard() {
 
           <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
             {/* Welcome banner */}
-            {/* <WelcomeBanner /> */}
+            <WelcomeBanner />
+
+      { isLogged ? <Outlet /> : navigate("/adminlogin")}
+
 
             {/* Dashboard actions */}
             <div className="sm:flex sm:justify-between sm:items-center mb-8">
@@ -121,8 +125,6 @@ function Dashboard() {
           </div>
         </main>
         {/* <Banner /> */}
-      { isLogged ? <Outlet /> : navigate("/adminlogin")}
-      {console.log(isLogged,"loggin")}
       </div>
 
     </div>

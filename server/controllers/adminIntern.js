@@ -3,6 +3,7 @@ import BatcheForAdmin from "../models/adminBatch.js";
 import Intern from "../models/admIntern.js";
 import Trainer from "../models/Admintraine.js";
 import UUser from "../models/Admintraine.js";
+import TrainerBatch from "../models/traine/trainerBatch.js";
 
  export const createIntern = async(req,res)=>{
     const { name,email,trainerReference,batch,Assignedby,batchnumber } = req.body;
@@ -74,6 +75,12 @@ export const deleteintern = async(req,res)=>{
     console.log("delte", req.params);
     const { id } = req.params;
     try {
+
+      const getBatchtrainer = await TrainerBatch.find({interns:id});
+      
+      if(getBatchtrainer.length > 0){
+        return res.status(409).json({message:'This intern is assigned to a batch'});
+      }
 
       const imageid = await Intern.findById(id);
 

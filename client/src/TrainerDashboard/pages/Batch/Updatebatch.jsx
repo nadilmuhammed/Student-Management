@@ -84,7 +84,7 @@ function Updatebatch() {
         </div>
       <form onSubmit={handleSubmit}>
       <div className='batch-input mt-3 mb-3' >
-          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="number" placeholder='Enter Batch number'
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Batch name'
           value={name}
           onChange={(e) => setName(e.target.value)} />
         </div>
