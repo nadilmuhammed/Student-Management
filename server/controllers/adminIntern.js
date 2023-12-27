@@ -4,14 +4,18 @@ import Intern from "../models/admIntern.js";
 import Trainer from "../models/Admintraine.js";
 import UUser from "../models/Admintraine.js";
 import TrainerBatch from "../models/traine/trainerBatch.js";
+import Assignment from "../models/traine/assignment.js";
 
  export const createIntern = async(req,res)=>{
-    const { name,email,trainerReference,batch,Assignedby,batchnumber } = req.body;
+    const { name,email,password,trainerReference,batch,Assignedby,batchnumber } = req.body;
     console.log(req.body);
     if(!name) {
       return res.status(400).json({message:"Name is required"})
     }
     if(!email) {
+      return res.status(400).json({message:"Email is required"})
+    }  
+    if(!password) {
       return res.status(400).json({message:"Email is required"})
     }
     if(!req.file){
@@ -26,7 +30,7 @@ import TrainerBatch from "../models/traine/trainerBatch.js";
 
     const ImagePath = req.file.filename
 
-    let product = await Intern({name,email,trainerReference,image:ImagePath,batch,Assignedby,batchnumber})
+    let product = await Intern({name,email,password,trainerReference,image:ImagePath,batch,Assignedby,batchnumber})
     console.log(req.body, "req.body");
 
   try {
@@ -42,11 +46,14 @@ import TrainerBatch from "../models/traine/trainerBatch.js";
 export const updateintern= async(req,res)=>{
     const {id} = req.params;
     console.log(id)
-    const {name, email,trainerReference, batch} = req.body;
+    const {name,password, email,trainerReference, batch,Assignedby} = req.body;
     if(!name) {
       return res.status(400).json({message:"Name is required"})
     }
     if(!email) {
+      return res.status(400).json({message:"Email is required"})
+    }
+    if(!password) {
       return res.status(400).json({message:"Email is required"})
     }
     if(!req.file){
@@ -62,7 +69,7 @@ export const updateintern= async(req,res)=>{
     const ImagePath = req.file.filename
 
     try {
-        const updatedUser = await Intern.findByIdAndUpdate(id,{$set:{name, email,image:ImagePath,trainerReference,batch}},{new:true});
+        const updatedUser = await Intern.findByIdAndUpdate(id,{$set:{name, email,password,image:ImagePath,trainerReference,batch,Assignedby}},{new:true});
         res.status(201).json(updatedUser);
     } catch (error) {
       console.log('errr',error);
@@ -76,13 +83,13 @@ export const deleteintern = async(req,res)=>{
     const { id } = req.params;
     try {
 
-      const getBatchtrainer = await TrainerBatch.find({interns:id});
-      
-      if(getBatchtrainer.length > 0){
-        return res.status(409).json({message:'This intern is assigned to a batch'});
-      }
-
       const imageid = await Intern.findById(id);
+
+      const DuplicateTrainerIntern = await Assignment({interns:id})
+
+      if(DuplicateTrainerIntern.length > 0){
+        return res.status(404).json({message : "Interns exist in assignment"})
+      }
 
       
       const result = await Intern.findByIdAndDelete(id);
@@ -113,6 +120,8 @@ export const deleteintern = async(req,res)=>{
 export const getIntern = async(req,res)=>{
     try {
       const result = await Intern.find(); 
+
+      // console.log(result,'result')
 
      let getIntern =  result.map(async(inter)=>{
         const { ...other } = inter;

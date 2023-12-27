@@ -7,6 +7,7 @@ import { errorToast,successToast } from '../../../Toastify/Toast';
 function UpdateIntern() {
       const [name, setName] = useState('');
       const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
       const [image,setImage] = useState('');
       const [getInterns, setGetInterns] = useState([]);   
 
@@ -31,6 +32,8 @@ function UpdateIntern() {
             const formData = new FormData()
             formData.append('name',name);
             formData.append('email',email);
+            formData.append('password',password);
+            formData.append('Assignedby',localStorage.getItem('id'));
             formData.append('image',image);       
 
             const response  = await axios.put(`http://localhost:4000/api/trainer/trainerupdateintern/${id}`,formData)
@@ -49,18 +52,17 @@ function UpdateIntern() {
     const fetchData= async()=>{
         try {
             let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
-            console.log(response.data);
             setName(response.data.name);
-            console.log(response.data.name,'nsnfknsd');
+            console.log(response.data ,"data");
             setEmail(response.data.email);
-            console.log(response.data.email,"email");
+            setPassword(response.data.password);
         } catch (error) {
             console.log(error.message);
         }
     }
 
     useEffect(()=>{
-        fetchData();
+        fetchData(id);
         fetchDatatraine();
     },[])
    
@@ -85,6 +87,11 @@ function UpdateIntern() {
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className='batch-input mt-4 mb-3'>
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className='mb-3'>
           <input

@@ -10,7 +10,7 @@ const UserSchema = new Schema({
         required:true,
     },
     batch:{
-        type:Array,
+        type:String,
         required:true
     },
     interns:{

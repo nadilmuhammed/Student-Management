@@ -4,37 +4,56 @@ import React, { useEffect, useState } from 'react'
 import "./assignment.css"
 import { Link, useParams } from 'react-router-dom';
 import { errorToast, successToast } from '../../../Toastify/Toast';
+import Select from 'react-select';
 
 
 function UpdateAssign() {
   
   const [ name,setName ] = useState('');
   const [ description,setDescription ] = useState('')
-  const [ getintern,setGetintern ] = useState([]);
+  const [ getBatch,setGetBatch ] = useState([]);
+  const [ getIntern,setGetintern ] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [ options,setOptions ] = useState({})
+  const [ data,setData ] = useState([]);
+  const [ oneBatch,setOnebatch ] = useState('');
   const [ validfrom,setValidfrom ] = useState('');
   const [ validto,setValidTo ] = useState('');
-  const [ iddd,setiddd ] = useState('');
 
-
-  const getallIntern = async()=>{
-    try {
-      let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
-      setGetintern(response.data);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
- 
 
   const getDataID = async(id)=>{
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/getassignmentid/${id}`);
       setName(response.data.result.name);
       setDescription(response.data.result.description);
-      setValidfrom(response.data.result.validfrom);
-      setValidTo(response.data.result.validto);
-      setiddd(response.data.result.iddd)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+
+  const getallIntern = async()=>{
+    try {
+      let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
+      setGetintern(response.data);
+
+      let result = response.data.map((items)=>{
+        return{
+          label:items.name,value:items._id
+        }
+      })  
+      console.log(result,"result");
+      setOptions(result)
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  const  getBatchDetails = async()=>{
+    try {
+      let response = await axios.get("http://localhost:4000/api/trainer/getbatchtrainer");
+      setGetBatch(response.data);
+      console.log(response.data,"loggggg");
     } catch (error) {
       console.log(error.message);
     }
@@ -45,8 +64,11 @@ function UpdateAssign() {
     console.log(e.target.value);
   }
 
+ 
+
   useEffect(()=>{
     getDataID(id)
+    getBatchDetails();
     getallIntern()
     handleClickIntern();
   },[])
@@ -57,13 +79,13 @@ function UpdateAssign() {
     e.preventDefault();
 
     try {
-
       const response = await axios.put(`http://localhost:4000/api/trainer/updateassignment/${id}`,{
         name:name,
         description:description,
-        interns:iddd,
+        batch:oneBatch,
         validfrom:validfrom,
-        validto:validto
+        validto:validto,
+        interns:result
       });
       console.log(response.data,"response");
       if(response.data){
@@ -71,16 +93,32 @@ function UpdateAssign() {
       }
 
     } catch (error) {
-      errorToast(error.response.data.message);
+      console.log(error.message);
+      errorToast(error.message);
     }
   }
 
 
-  const handleClickTrainer = async(id)=>{
-    setiddd(id);
-    console.log(id);
+  const handleClickBtach = async(id)=>{
+    console.log(id,'_____');
+    // setBranchId(id)
+    setOnebatch(id);
+
+    let dataOne = getBatch.find((item)=> item._id == id)
+    let result = dataOne.studentsData.map((items)=>{
+      // console.log(items._id,"jvgjvgkv");
+      return{
+        label:items.name,value:items._id
+      }
+    });
+    // console.log(result,"result");
+    setData(result);
+   
   }
 
+  const handleSelectChange = (selectedValues) => {
+    setSelectedOptions(selectedValues);
+  };
   
 
 
@@ -104,10 +142,11 @@ function UpdateAssign() {
             />
           </div>
           <div>
-            <select className='w-full text-slate-900' onChange={(e)=>handleClickTrainer(e.target.value)}>
-              <option disabled value="" >select intern</option>
+            <select className='w-full text-slate-900' onChange={(e)=>handleClickBtach(e.target.value)}>
+              <option disabled value="" >select Batch</option>
+              <option value="">All</option>
                 {
-                  getintern.map((item)=>{
+                  getBatch.map((item)=>{
                     return(
                       <option value={item._id}>{item.name}</option>   
                     )
@@ -115,6 +154,14 @@ function UpdateAssign() {
                 }
             </select>
           </div>
+          <div>
+            <Select
+              isMulti
+              options={data}
+              value={selectedOptions}
+              onChange={handleSelectChange}
+            />
+        </div>
         </div>
         
         <div className='mt-3'>

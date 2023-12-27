@@ -1,4 +1,5 @@
 import Intern from "../../models/admIntern.js";
+import Assignment from "../../models/traine/assignment.js";
 import TrainerBatch from "../../models/traine/trainerBatch.js";
 
 
@@ -54,6 +55,14 @@ export const createBatchTrainer = async(req,res)=>{
   export const deleteTrainerBatch = async(req,res)=>{
     let { id } = req.params;
     try {
+
+      const DuplicateBatch = await Assignment.find({batch:id})
+
+      if(DuplicateBatch.length > 0) {
+        return res.status(402).json({message: "Batch exist in assignment"})
+      }
+
+
      let response = await TrainerBatch.findByIdAndDelete(id);
      res.json({message:response , status:true})
      console.log("deleted");
@@ -71,7 +80,7 @@ export const createBatchTrainer = async(req,res)=>{
           const {...other} = intern;
           const internall = await Intern.find({ _id: { $in: intern.interns } });
           const {...internOther} = internall;
-          const data = await Intern.find({_id: { $in: intern.interns } });
+          const data = await Intern.find({_id: { $in: intern.interns} });
           const {...dataOther} = data;
           
           return { ...other._doc,internData:internall,studentsData:data };

@@ -8,6 +8,7 @@ function AddIntern({setRefresh,refresh}) {
    
     const [name, setName] = useState(null);
     const [email, setEmail] = useState(null);
+    const [password, setPassword] = useState(null);
     const [image,setImage] = useState(null)
     const [getBranches, setGetBranches] = useState([]);
     const [getTrainers, setGetTrainers] = useState([]); 
@@ -36,11 +37,11 @@ function AddIntern({setRefresh,refresh}) {
         const formData = new FormData()
         formData.append('name',name);
         formData.append('email',email);
+        formData.append('password',password);
         formData.append('image',image);
         formData.append('trainerReference',trainerId);
         formData.append('Assignedby',localStorage.getItem('id'));
         formData.append('batch',batch);        
-        console.log(formData,"dta");
 
           const response = await axios.post(`http://localhost:4000/api/admin/createintern`, formData);
           if(response.data.result){
@@ -49,6 +50,7 @@ function AddIntern({setRefresh,refresh}) {
 
             setName('');
             setEmail('');
+            setPassword('');
           }
         } catch (error) {
           errorToast(error.response.data.message);
@@ -85,6 +87,11 @@ function AddIntern({setRefresh,refresh}) {
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className='batch-input mb-3' >
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="password" placeholder='Enter password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className='mb-3'>
           <input

@@ -25,12 +25,13 @@ import Add from "./TrainerDashboard/pages/Assignment/Add";
 import View from "./TrainerDashboard/pages/Assignment/View";
 import InternSubmitted from "./TrainerDashboard/pages/Assignment/InternSubmitted";
 import UpdateAssign from "./TrainerDashboard/pages/Assignment/UpdateAssign";
-import AddAttendace from "./TrainerDashboard/pages/Attendance/Add"
 import ViewAttend from "./TrainerDashboard/pages/Attendance/ViewAttend";
 import Addbatch from "./TrainerDashboard/pages/Batch/Addbatch";
 import Viewbatch from "./TrainerDashboard/pages/Batch/Viewbatch";
 import Updatebatch from "./TrainerDashboard/pages/Batch/Updatebatch";
 import Profile from "./Login/Profile";
+import UpdateProfle from "./TrainerDashboard/trainer/UpdateProfle";
+import AddAttendance from "./TrainerDashboard/pages/Attendance/AddAttendance";
 
 function App() {
   const location = useLocation();
@@ -56,7 +57,7 @@ function App() {
           <Route exact path="/admin/batches"element={<AddBatch />} />
           <Route exact path="/admin/viewbatches"element={<ViewBatch />} />
           <Route exact path="/admin/updatebatch/:id"element={<UpdateBatch />}/>
-        <Route exact path="/admin/profile/:id" element= {<Profile/>}/> 
+        <Route exact path={`/admin/profile/${localStorage.getItem("id")}`} element= {<Profile/>}/> 
         </Route>
         <Route exact path="/adminlogin" element={<Login/>} />
         <Route exact path="/user/register" element= {<Register/>}/> 
@@ -67,8 +68,7 @@ function App() {
         <Route exact path="/trainer" element={<DashboardTrainer />}>
           <Route exact path="/trainer/addbatch" element= {<Addbatch/>}/> 
           <Route exact path="/trainer/viewbatch" element= {<Viewbatch/>}/> 
-          <Route exact path="/trainer/updatebatch/:id" element= {<Updatebatch/>}/> 
-
+          <Route exact path="/trainer/updatebatch/:id" element= {<Updatebatch/>}/>
       
           <Route exact path="/trainer/addintern" element= {<Addintern/>}/> 
           <Route exact path="/trainer/viewintern" element= {<Viewintern/>}/> 
@@ -79,9 +79,10 @@ function App() {
           <Route exact path="/trainer/updateassignment/:id" element= {<UpdateAssign/>}/> 
           <Route exact path="/trainer/internsubmitted" element= {<InternSubmitted/>}/> 
 
-          <Route exact path="/trainer/addattendance" element= {<AddAttendace/>}/> 
+          <Route exact path="/trainer/addattendance" element= {<AddAttendance/>}/> 
           <Route exact path="/trainer/viewattendance" element= {<ViewAttend/>}/> 
-
+            
+          <Route exact path={`/trainer/update/${localStorage.getItem("id")}`} element={<UpdateProfle/>}/>
         </Route>
 
 

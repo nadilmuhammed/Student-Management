@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import Card from "./Card"
 import axios from 'axios';
+import Addbatch from './Addbatch';
 
 function ViewBatch() {
   
   const [data,setData] =useState([]);
   const [ refresh, setRefresh] = useState(false)
+  const [ status, setStatus] = useState(false)
 
 
   const getBatchdata = async() =>{
@@ -25,17 +27,22 @@ function ViewBatch() {
 
   return (
     <>
-    {/* className='flex justify-center flex-wrap- gap-3' */}
+    {status ? (
+        <>
+        <Addbatch setRefresh={setRefresh} refresh={refresh} />
+        </>        
+    ): (
       <div className='flex justify-center gap-3 flex-wrap'>
-        {
-          data.map((items,key)=>{
-            console.log(items,"items");
-            return(
-              <Card key={key} data={items}/>
-            )
-          })
-        }
-      </div>
+           {
+            data.map((items,key)=>{
+              console.log(items,"items");
+              return(
+                <Card key={key} data={items}/>
+              )
+            })
+          }
+        </div>
+    )}
     </>
   )
 }

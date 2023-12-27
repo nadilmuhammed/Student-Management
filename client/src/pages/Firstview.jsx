@@ -16,7 +16,7 @@ function Firstview() {
         <div>
         <p style={{textAlign:'center', fontSize:"20px"}}>Select to Login</p>
         </div>
-        <div>
+        <div className=''>
               <Link to="/adminlogin">
                   
                   <button><RiAdminFill/>ADMIN</button>

@@ -61,6 +61,7 @@ export default function App() {
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Email</th>
+                  <th scope="col" className="px-6 py-4">password</th>
                   <th scope="col" className="px-6 py-4">Image</th>
                   <th scope="col" className="px-6 py-4">Traine</th>
                   <th scope="col" className="px-6 py-4">Batch</th>
@@ -68,13 +69,13 @@ export default function App() {
               </thead>
               <tbody style={{textAlign:"center"}}>
                 {data.map((user,index)=>{
-                  console.log(user,"jnsdjsdn");
                     return(
                         <>
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.email}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.password}</td>
                             <td style={{width:"10%"}} className="whitespace-nowrap px-6 py-4">
                               <img style={{borderRadius:"2rem"}} src={`http://localhost:4000/uploads/${user.image}`} alt="no image" />
                             </td>

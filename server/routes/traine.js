@@ -1,5 +1,5 @@
 import express from "express"
-import { getData, login, updatetraine, deletetraine } from "../controllers/traine/traine.js";
+import { login, updatetraine, deletetraine, getTrainer, getTrainerByID } from "../controllers/traine/traine.js";
 import { Trainerupdateintern, getInternofTrainer} from "../controllers/traine/intern.js";
 import multer from "multer";
 import path from "path";
@@ -22,8 +22,9 @@ const storage = multer.diskStorage({
 
 // traine reg-log
 routerTraine.post("/login", login);
-routerTraine.get("/trainedata", getData);
-routerTraine.put("/updatetraine/:id", updatetraine);
+routerTraine.get("/trainerdata", getTrainer);
+routerTraine.get("/trainerdata/:id", getTrainerByID);
+routerTraine.put("/updatetraine/:id",upload.single('image'), updatetraine);
 routerTraine.delete("/deletetraine/:id", deletetraine)
 
 // intern

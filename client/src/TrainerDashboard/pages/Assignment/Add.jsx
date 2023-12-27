@@ -13,13 +13,11 @@ function Add() {
   const [ getintern,setGetintern ] = useState([]);
   const [ validfrom,setValidfrom ] = useState('');
   const [ validto,setValidTo ] = useState('');
-  const [ iddd,setiddd ] = useState('');
   const [ getBatch, setGetBatch ] = useState([]);
-  const [batchID, setBatchID] = useState('');
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [ options,setOptions ] = useState({})
-  const [ data,setData ] = useState([])
-
+  const [ data,setData ] = useState([]);
+  const [ oneBatch,setOnebatch ] = useState('');
 
 
 
@@ -30,7 +28,6 @@ function Add() {
 
       /* to get intern id and name from response bescuse 
       it has to append to value as _id and label as name*/
-      // setData(response.data)
        let result = response.data.map((items)=>{
         return{
           label:items.name,value:items._id
@@ -47,9 +44,7 @@ function Add() {
   const  getBatchDetails = async()=>{
     try {
       let response = await axios.get("http://localhost:4000/api/trainer/getbatchtrainer");
-      console.log(response.data,"batch");
       setGetBatch(response.data);
-
     } catch (error) {
       console.log(error.message);
     }
@@ -73,15 +68,19 @@ function Add() {
     let result= selectedOptions.map((items)=>{
       return items.value
     })
+// console.log(oneBatch,'oneBatch')
+    // return true
 
     try {
       const response = await axios.post("http://localhost:4000/api/trainer/createassignment",{
         name:name,
         description:description,
-        batch:getBatch,
+        batch:oneBatch,
         validfrom:validfrom,
         validto:validto,
         interns:result,
+        // branchId:oneBatch
+
       });
       console.log(response.data,"data");
       if(response.data){
@@ -98,39 +97,32 @@ function Add() {
 
   }
 
+  // const setBranchId = (branchid)=>{
+  //   console.log(branchid,'setBranchId')
+  // }
+
   const handleClickBtach = async(id)=>{
-    console.log(id,'ddddd');
-    console.log(getBatch,'ddddd');
+    console.log(id,'_____');
+    // setBranchId(id)
+    setOnebatch(id);
+
     let dataOne = getBatch.find((item)=> item._id == id)
-    console.log(dataOne,"iddddd");
     let result = dataOne.studentsData.map((items)=>{
+      // console.log(items._id,"jvgjvgkv");
       return{
         label:items.name,value:items._id
       }
-    })
-
-    setData(result)
+    });
+    // console.log(result,"result");
+    setData(result);
     
+   
   }
 
 
   const handleSelectChange = (selectedValues) => {
     setSelectedOptions(selectedValues);
   };
-  
-
-
-
-  // const handleCheckboxChange = (option) => {
-  //   if (selectedOptions.includes(option)) {
-  //     setSelectedOptions(selectedOptions.filter(item => item !== option));
-  //   } else {
-  //     setSelectedOptions([...selectedOptions, option]);
-  //   }
-  // };
-
-
-
 
 
 
@@ -151,7 +143,7 @@ function Add() {
           </div>
           <div>
             <select className='w-full text-slate-900' onChange={(e)=>handleClickBtach(e.target.value)}>
-              <option disabled value="" >select Btach</option>
+              <option disabled value="" >select Batch</option>
               <option value="">All</option>
                 {
                   getBatch.map((item)=>{
@@ -169,29 +161,7 @@ function Add() {
               value={selectedOptions}
               onChange={handleSelectChange}
             />
-            <div>
-            {/* {selectedOptions.map((items) =>
-            (
-              <div>
-                <div key={items.value}>{items.label}</div>
-              </div>
-
-              ))} */}
-            </div>
         </div>
-          {/* <div>
-            <select className='w-full text-slate-900' onChange={(e)=>handleClickTrainer(e.target.value)}>
-              <option disabled value="" >select intern</option>
-              <option value="">All</option>
-                {
-                  getintern.map((item)=>{
-                    return(
-                      <option value={item._id}>{item.name}</option>   
-                    )
-                  })
-                }
-            </select>
-          </div> */}
         </div>
         
         <div className='mt-3'>

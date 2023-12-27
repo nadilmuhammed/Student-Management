@@ -68,10 +68,29 @@ export const login = async (req, res, next) => {
 export const updateadmin= async(req,res)=>{
   const {id} = req.params;
   console.log(id)
-  const {name, email, password} = req.body;
+
 
   try {
-      const updatedUser = await Admin.findByIdAndUpdate(id,{$set:{name, email, password}},{new:true});
+    console.log(req.body,'ugyfg');
+    const {username, email, password} = req.body;
+    if (!username) {
+      return res.status(400).json({ message: "username is required" });
+    }
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
+    } else if (password.length < 8 || password.length > 16) {
+      return res.status(400).json({ message: "Password must be between 8 and 16 characters" });
+    }
+
+    const saltRounds = 10;
+
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(password, salt);
+      const updatedUser = await Admin.findByIdAndUpdate(id,{$set:{username, email, password:hash}},{new:true});
+
       res.status(201).json(updatedUser);
   } catch (error) {
     console.log('errr',error);

@@ -52,7 +52,7 @@ export default function App() {
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
         <Link to="/trainer/addassignment"><button className='rounded' style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
         <p className='viewformheading'>Assignment Details</p>   
-          <div className="overflow-hidden viewAllform">
+          <div className="overflow-hidden">
             <table className="min-w-full text-left text-sm font-light mt-3">
               <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white ">
                 <tr className='text-center'>
@@ -68,14 +68,15 @@ export default function App() {
               </thead>
               <tbody style={{textAlign:"center"}}>
                 {data.map((user,index)=>{
+                  // console.log(user,"data");
                     return(
                         <>
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
                             <td style={{maxWidth:"200px",overflow:"scroll"}} className="whitespace-nowrap px-6 py-4">{user.description}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{user.batchData.name}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{user.internData.name}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.BatchName && user.BatchName}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.studentData && user.studentData.map((item)=> <div className="">{item.name}</div>  )}</td>
                             <td className="whitespace-nowrap px-6 py-4">{ new Date(user.validfrom ).getDay()}-{new Date(user.validfrom ).getMonth()}-{new Date(user.validfrom ).getFullYear()}</td>
                             <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:".5rem"}}>
@@ -86,6 +87,7 @@ export default function App() {
                         </>
                     )
                 })}
+                {/* {JSON.stringify(data)} */}
               </tbody>
             </table>
           </div>

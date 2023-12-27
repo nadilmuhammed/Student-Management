@@ -8,6 +8,7 @@ import Select from 'react-select';
 function UpdateIntern() {
       const [name, setName] = useState('');
       const [email, setEmail] = useState('');
+      const [password, setPassword] = useState('');
       const [image,setImage] = useState('');
       const [batch, setBatch] = useState('');
       const [getBranches, setGetBranches] = useState([]);
@@ -35,7 +36,9 @@ function UpdateIntern() {
         const formData = new FormData()
         formData.append('name',name);
         formData.append('email',email);
+        formData.append('password',password);
         formData.append('image',image);
+        formData.append('Assignedby',localStorage.getItem('id'));
         formData.append('trainerReference',trainerId);
         formData.append('batch',batch);        
 
@@ -58,8 +61,9 @@ function UpdateIntern() {
             let response = await axios.get(`http://localhost:4000/api/admin/adminintern/${id}`);
             console.log(response.data,"data");
             setName(response.data.name);
-            console.log(setName,'nsnfknsd');
+            console.log(response.data.name,'nsnfknsd');
             setEmail(response.data.email);
+            setPassword(response.data.password);
             // setTraine(response.data.traine);
             setBatch(response.data.batch);
         } catch (error) {
@@ -104,6 +108,11 @@ function UpdateIntern() {
           <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter Email'
           value={email}
           onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className='batch-input mt-4 mb-3'>
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter password'
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} />
         </div>
         <div className='mb-3'>
           <input

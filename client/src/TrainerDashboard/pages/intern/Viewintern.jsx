@@ -63,6 +63,7 @@ export default function App() {
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Email</th>
+                  <th scope="col" className="px-6 py-4">Password</th>
                   <th scope="col" className="px-6 py-4">Image</th>
                 </tr>
               </thead>
@@ -74,6 +75,7 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.email}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{user.password}</td>
                             <td style={{width:"10%"}} className="whitespace-nowrap px-6 py-4">
                               <img style={{borderRadius:"2rem"}} src={`http://localhost:4000/uploads/${user.image}`} alt="no image" />
                             </td>

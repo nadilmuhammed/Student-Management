@@ -12,28 +12,26 @@ import { errorToast, successToast } from "../../../Toastify/Toast";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
  
-export default function SimpleCard({data}) {
+export default function SimpleCard({data,setRefresh,refresh}) {
 
   const {_id, name, internData, studentsData } = data
   console.log(studentsData,"hiii");
 
-  const [ refresh,setRefresh ] = useState(false)
+  // const [ refresh,setRefresh ] = useState(false)
   
 
 
   const handleDelete = async(id)=>{
     // console.log(id,"id");
     try {
-      const response = await axios.delete(`http://localhost:4000/api/trainer/deletetrainerbatch/${id}`)
+      const response = await axios.delete(`http://localhost:4000/api/trainer/deletetrainerbatch/${id}`);
       successToast("Deleted")
       setRefresh(!refresh)
     } catch (error) {
-      errorToast(error.message)
+      errorToast(error.response.data.message)
     }
   }
-
-  useEffect(()=>{
-  },[refresh])
+  
 
   
   
@@ -49,8 +47,9 @@ export default function SimpleCard({data}) {
           <ul style={{listStyleType:"number",padding:"1rem"}}>
             {
               internData.map((item)=>{
-
-               return( <li>{item.name}</li>)
+               return( 
+                 <li>{item.name}</li>
+               )
               })
             }
           </ul>

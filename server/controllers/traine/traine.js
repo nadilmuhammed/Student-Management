@@ -47,13 +47,39 @@ import UUser from "../../models/Admintraine.js";
 
   export const updatetraine = async(req,res) =>{
     const {id} = req.params;
-    console.log(id);
-    const { email,password,id_no } = req.body;
-    try {
-        let updateuser = await Traine.findByIdAndUpdate(id,{$set:{email,password,id_no}},{new:true});
-        res.status(201).json(updateuser);
+  console.log(id)
+  const {name, email,username,password,id_no } = req.body;
+  if(!name) {
+    return res.status(400).json({message:"Name is required"})
+  }
+  if(!email) {
+    return res.status(400).json({message:"Email is required"})
+  }
+  if(!username) {
+    return res.status(400).json({message:"Username is required"})
+  }
+  if (!password) {
+    return res.status(400).json({ message: "Password is required" });
+  } else if (password.length < 8 || password.length > 16) {
+    return res.status(400).json({ message: "Password must be between 8 and 16 characters" });
+  }
+  if(!req.file) {
+    return res.status(400).json({message:"Upload an image"})
+  }
+  if(!id_no) {
+    return res.status(400).json({message:"id_no is required"})
+  }else if(id_no.length < 4 || id_no.length > 8){
+    return res.status(400).json({message:"Id no should be atleast 4 digits long"});
+  }
+
+  const imagePath = req.file.filename;
+
+  try {
+      const updatedUser = await UUser.findByIdAndUpdate(id,{$set:{name, email,username,password,image:imagePath,id_no  }},{new:true});
+      res.status(201).json(updatedUser);
     } catch (error) {
-        res.json(error.message)
+      console.log('errr',error);
+        res.json(error.message);
     }
   }
 
@@ -67,12 +93,24 @@ import UUser from "../../models/Admintraine.js";
     }
   }
 
-
-  export const getData = async(req,res) =>{
+  export const getTrainerByID = async(req,res)=>{
+    const {id} = req.params;
+    console.log(id,"idssss");
     try {
-        let response = await Traine.find();
-        res.status(202).json(response);
+      const result = await UUser.findById(id)
+      res.json(result );
     } catch (error) {
-        res.json(error.message);
+      res.json({ message: error.message, status: false });
     }
   }
+
+
+  export const getTrainer = async(req,res)=>{
+    try {
+      const result = await UUser.find(); 
+      console.log(result);
+      res.status(200).json(result);
+    } catch (error) {
+      res.json(error.message);
+    }
+  } 
