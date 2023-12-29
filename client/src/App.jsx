@@ -32,6 +32,9 @@ import Updatebatch from "./TrainerDashboard/pages/Batch/Updatebatch";
 import Profile from "./Login/Profile";
 import UpdateProfle from "./TrainerDashboard/trainer/UpdateProfle";
 import AddAttendance from "./TrainerDashboard/pages/Attendance/AddAttendance";
+import InternLogin from "./InternDashboard/Login.jsx/InternLogin";
+import DashboardIntern from "./InternDashboard/pages/DashboardIntern";
+import UpdateInternLogin from "./InternDashboard/Login.jsx/UpdateInternLogin"
 
 function App() {
   const location = useLocation();
@@ -62,7 +65,7 @@ function App() {
         <Route exact path="/adminlogin" element={<Login/>} />
         <Route exact path="/user/register" element= {<Register/>}/> 
 
-
+        {/* --------------------------- */}
         
         {/* TRAINER */}
         <Route exact path="/trainer" element={<DashboardTrainer />}>
@@ -81,13 +84,23 @@ function App() {
 
           <Route exact path="/trainer/addattendance" element= {<AddAttendance/>}/> 
           <Route exact path="/trainer/viewattendance" element= {<ViewAttend/>}/> 
-            
-          <Route exact path={`/trainer/update/${localStorage.getItem("id")}`} element={<UpdateProfle/>}/>
+          <Route exact path={`/trainer/profile/${localStorage.getItem("id")}` }element={<UpdateProfle/>}/>
         </Route>
 
 
         {/* login page */}
         <Route exact path="/trainerlogin" element={<LoginTrainer/>}/>
+       {/* ---------------- */}
+
+          {/* intern */}
+          <Route exact path="/intern" element={<DashboardIntern/>}>
+           <Route exact path={`/intern/updateprofile/${localStorage.getItem("id")}`} element={<UpdateInternLogin/>}/>
+
+              
+          </Route>
+        <Route exact path="/internlogin" element={<InternLogin/>}>
+
+        </Route>
 
 
         {/* landing page */}

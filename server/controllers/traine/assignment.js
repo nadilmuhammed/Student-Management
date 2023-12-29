@@ -106,11 +106,9 @@ export const getTrainerIntern = async(req,res)=>{
 
         let getIntern = response.map(async(item) =>{
           const {...other} = item;
-
-          const batch = await TrainerBatch.findById(item.batch);
-
-          if(batch){
-
+           const batch = await TrainerBatch.findById(item.batch);
+           
+           if(batch){
             const { ...batchOther } = batch
 
 
@@ -119,7 +117,7 @@ export const getTrainerIntern = async(req,res)=>{
             const {...others} = internall
             return {...others._doc}
 
-              })    )        
+              }) )        
 
             return {...other._doc,BatchName:batchOther._doc.name,studentData:r }
           }else{

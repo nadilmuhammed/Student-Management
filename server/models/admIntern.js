@@ -4,9 +4,6 @@ const UserSchema = new Schema({
     Assignedby:{
         type: String,
     },
-
-    // ASS:
-    // AASS:['ADMIN'TRAINER]
     name: {
         type: String,
         required:true

@@ -11,6 +11,7 @@ import { successToast,errorToast } from "../../Toastify/Toast.js"
 
 export default function SimpleRegistrationForm() {
 
+  const [ image,setImage ] =useState('');
   const [ store , setStore] = useState({
     name:"",
     email:"",
@@ -21,8 +22,11 @@ export default function SimpleRegistrationForm() {
   })
 
   const handlechange =(e)=>{
-    console.log("Event:", e.target.name, e.target.value);
     setStore({ ...store,[e.target.name]: e.target.value });
+  }
+
+  const handlefilechange = (e) =>{
+    setImage(e.target.files[0])
   }
 
 
@@ -30,7 +34,16 @@ export default function SimpleRegistrationForm() {
     e.preventDefault();
   
     try {
-      let response = await axios.put(`http://localhost:4000/api/trainer/updateadmin/${localStorage.getItem("id")}`, store);
+      const formData = new FormData
+      formData.append('name',store.name);
+      formData.append('email',store.email);
+      formData.append('username',store.username);
+      formData.append('password',store.password);
+      formData.append('image',image);
+      formData.append('id_no',store.id_no);
+
+
+      let response = await axios.put(`http://localhost:4000/api/trainer/updatetraine/${localStorage.getItem("id")}`, formData);
       console.log(response.data,"dtaaa");
       if(response.data){
         successToast("Updated");
@@ -44,9 +57,7 @@ export default function SimpleRegistrationForm() {
   const getTrainerData = async()=>{
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/trainerdata/${localStorage.getItem("id")}`)
-      console.log(response.data);
       setStore(response.data)
-
     } catch (error) {
       console.log(error.message);
     }
@@ -57,7 +68,7 @@ export default function SimpleRegistrationForm() {
   },[])
 
   return (
-    <Card className="flex-col justify-center items-center mb-3" color="transparent" shadow={false}>
+    <Card className="flex-col justify-center items-center  mb-3" color="transparent" shadow={false}>
       <Typography className="text-4xl font-bold text-black text font-serif" variant="h4" color="blue-gray">
         Edit your profile
       </Typography>
@@ -130,12 +141,8 @@ export default function SimpleRegistrationForm() {
             size="lg"
             placeholder="upload image"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
-            // labelProps={{
-            //   className: "before:content-none after:content-none",
-            // }}
-          onChange={handlechange}
+          onChange={handlefilechange}
           name="image"
-          value={store.image}
           />
           <Typography variant="h6" color="blue-gray" className="-mb-3" >
             id_no
@@ -156,11 +163,6 @@ export default function SimpleRegistrationForm() {
         <Button type="submit" className="flex justify-center items-center mt-8 bg-black text-white w-auto ml-32 fullWidth">
           Submit
         </Button>
-        <p>{store.username}</p>
-        <p>{store.email}</p>
-        <p>{store.password}</p>
-        <p>{store.name}</p>
-        <p>{store.image}</p>
       </form>
     </Card>
   );

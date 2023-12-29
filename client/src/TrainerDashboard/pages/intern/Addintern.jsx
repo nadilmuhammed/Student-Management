@@ -95,7 +95,7 @@ function AddIntern({setRefresh,refresh}) {
           onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className='batch-input mb-3' >
-          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="text" placeholder='Enter password'
+          <input className='input-id' style={{borderRadius:"10px", background:"#DAF7A6", color:"black", border:"none"}} type="password" placeholder='Enter password'
           value={password}
           onChange={(e) => setPassword(e.target.value)} />
         </div>

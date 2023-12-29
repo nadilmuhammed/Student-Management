@@ -24,7 +24,7 @@ function Firstview() {
               <Link to="/trainerlogin">
                 <button><LiaChalkboardTeacherSolid/>TRAINER</button>
               </Link>
-              <Link>
+              <Link to="/internlogin">
                 <button><PiStudentFill/>INTERN</button>
               </Link>
         </div>

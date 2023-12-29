@@ -39,7 +39,7 @@ function UpdateTraine() {
       }
     } catch (error) {
       // console.log(error);
-      errorToast(error.response.data.message,"jknfkasn");
+      errorToast(error.response.data.message);
     }
 
   };

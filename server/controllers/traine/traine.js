@@ -72,7 +72,7 @@ import UUser from "../../models/Admintraine.js";
     return res.status(400).json({message:"Id no should be atleast 4 digits long"});
   }
 
-  const imagePath = req.file.filename;
+  const imagePath = req.file.filename
 
   try {
       const updatedUser = await UUser.findByIdAndUpdate(id,{$set:{name, email,username,password,image:imagePath,id_no  }},{new:true});

@@ -8,6 +8,7 @@ import adminRoute from "./routes/admin.js";
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import routerTraine from "./routes/traine.js";
+import routerIntern from "./routes/intern.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 // moudle
 app.use("/api/admin", adminRoute);
 app.use("/api/trainer", routerTraine);
+app.use("/api/intern", routerIntern);
 
 app.use('/uploads', express.static(join(__dirname, 'uploads')));
 
