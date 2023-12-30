@@ -6,24 +6,26 @@ import Image03 from '../../images/user-36-07.jpg';
 import Image04 from '../../images/user-36-08.jpg';
 import Image05 from '../../images/user-36-09.jpg';
 import axios from 'axios';
+import { errorToast } from '../../Toastify/Toast';
 
-function DashboardCard10() {
+function Card10Interns() {
 
-  const [ data,setData ] = useState([])
-
-  const fetchInternData = async () => {
+  const [ data,setData ] = useState([]);
+  
+  const getTrainerData = async()=>{
     try {
-      const response = await axios.get(`http://localhost:4000/api/trainer/getinternoftrainer/${localStorage.getItem('id')}`);
+      let response = await axios.get("http://localhost:4000/api/admin/adminintern");
       setData(response.data);
     } catch (error) {
       errorToast(error.message);
     }
-  };
+  }
 
   useEffect(()=>{
-    fetchInternData()
+    getTrainerData()
   },[])
 
+  
 
   return (
     <div className="col-span-full xl:col-span-6 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
@@ -38,17 +40,23 @@ function DashboardCard10() {
             {/* Table header */}
             <thead className="text-xs font-semibold uppercase text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-700 dark:bg-opacity-50">
               <tr>
-              <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Image</div>
+                <th className="p-2 whitespace-nowrap">
+                  <div className="font-semibold text-left"></div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
                   <div className="font-semibold text-left">Name</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Email</div>
+                  <div className="font-semibold text-left">email</div>
                 </th>
                 <th className="p-2 whitespace-nowrap">
-                  <div className="font-semibold text-left">Password</div>
+                  <div className="font-semibold text-center">password</div>
+                </th>
+                <th className="p-2 whitespace-nowrap">
+                  <div className="font-semibold text-center">Trainer</div>
+                </th>
+                <th className="p-2 whitespace-nowrap">
+                  <div className="font-semibold text-center">Batch</div>
                 </th>
               </tr>
             </thead>
@@ -56,6 +64,7 @@ function DashboardCard10() {
             <tbody className="text-sm divide-y divide-slate-100 dark:divide-slate-700">
               {
                 data.map((items) => {
+                  console.log(items,"jndfjn");
                   return (
                     <tr key={items.id}>
                       <td className="p-2 whitespace-nowrap">
@@ -66,13 +75,19 @@ function DashboardCard10() {
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="font-medium text-slate-800 dark:text-slate-100">{items.name}</div>
+                          <div className="font-medium text-slate-800 dark:text-slate-100">{items.name}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left">{items.email}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left font-medium text-green-500">{items.password}</div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="text-left">{items.trainerData.name}</div>
+                      </td>
+                      <td className="p-2 whitespace-nowrap">
+                        <div className="text-left">{items.batchData.batch}</div>
                       </td>
                     </tr>
                   )
@@ -88,4 +103,4 @@ function DashboardCard10() {
   );
 }
 
-export default DashboardCard10;
+export default Card10Interns;

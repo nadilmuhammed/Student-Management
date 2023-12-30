@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { errorToast, successToast } from '../../../Toastify/Toast';
+import { MdDelete } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
 
 export default function App() {
 
@@ -55,16 +57,17 @@ export default function App() {
         <p className='viewformheading'>Intern Details</p>   
           <div className="overflow-hidden viewAllform">
           <Link to="/trainer/addIntern">
-            <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button>
+            <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px",borderRadius:"10px"}}>Add</button>
           </Link>
-            <table className="min-w-full text-left text-sm font-light">
-              <thead className="border-b font-medium dark:border-neutral-500">
+            <table className="min-w-full text-left text-sm font-light mt-4">
+              <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white">
                 <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Email</th>
                   <th scope="col" className="px-6 py-4">Password</th>
                   <th scope="col" className="px-6 py-4">Image</th>
+                  <th scope="col" className="px-6 py-4"></th>
                 </tr>
               </thead>
               <tbody style={{textAlign:"center"}}>
@@ -80,9 +83,13 @@ export default function App() {
                               <img style={{borderRadius:"2rem"}} src={`http://localhost:4000/uploads/${user.image}`} alt="no image" />
                             </td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around"}}>
-                                <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
+                                <button className='rounded' style={{background:"#BB3628",color:"white",padding:"10px"}} onClick={()=>handleDelete(user._id)}>
+                                <MdDelete className='text-xl' />
+                                </button>
                                 <Link to={`/trainer/updateintern/${user._id}`}>
-                                  <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button>
+                                  <button className='rounded' style={{background:"black",color:"white",padding:"10px"}}>
+                                  <FaEdit className='text-xl flex justify-center items-center' />
+                                  </button>
                                 </Link>
                             </div>
                             </tr>

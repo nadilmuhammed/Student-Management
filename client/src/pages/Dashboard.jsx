@@ -22,6 +22,7 @@ import DashboardCard13 from "../partials/dashboard/DashboardCard13";
 import Banner from "../partials/Banner";
 import { Outlet, useNavigate } from "react-router-dom";
 import Profile from "../Login/Profile";
+import Card10Interns from "../partials/dashboard/Card10Interns";
 
 function Dashboard() {
   const [isLogged,setIsLogged] = useState(false);
@@ -96,25 +97,30 @@ function Dashboard() {
             {/* Cards */}
             <div className="grid grid-cols-12 gap-6">
               {/* Line chart (Acme Plus) */}
-              <DashboardCard01 />
+              {/* <DashboardCard01 /> */}
               {/* Line chart (Acme Advanced) */}
-              <DashboardCard02 />
+              {/* <DashboardCard02 /> */}
               {/* Line chart (Acme Professional) */}
-              <DashboardCard03 />
+              {/* <DashboardCard03 /> */}
               {/* Bar chart (Direct vs Indirect) */}
               {/* <DashboardCard04 /> */}
               {/* Line chart (Real Time Value) */}
               {/* <DashboardCard05 /> */}
               {/* Doughnut chart (Top Countries) */}
-              {/* <DashboardCard06 /> */}
+              <DashboardCard06 />
               {/* Table (Top Channels) */}
               {/* <DashboardCard07 /> */}
               {/* Line chart (Sales Over Time) */}
               {/* <DashboardCard08 /> */}
               {/* Stacked bar chart (Sales VS Refunds) */}
               {/* <DashboardCard09 /> */}
-              {/* Card (Customers) */}
+
+              {/* Card (Trainers) */}
               <DashboardCard10 />
+
+              {/*card(Interns) */}
+              <Card10Interns/>
+
               {/* Card (Reasons for Refunds) */}
               {/* <DashboardCard11 /> */}
               {/* Card (Recent Activity) */}

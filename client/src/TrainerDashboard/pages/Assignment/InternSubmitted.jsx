@@ -6,7 +6,7 @@ import View from "./View"
 
 
 
-export default function App() {
+export default function App({refresh,setRefresh}) {
 
   // const [data, setData] = useState([]);
   const [status, setStatus] = useState(false);
@@ -24,15 +24,6 @@ export default function App() {
 
 
 
-  //   const handleDelete = async (id) => {
-  //     try {
-  //       const response = await axios.delete(`http://localhost:4000/api/trainer/deleteassignment/${id}`);
-  //       successToast('Deleted.')
-  //       setRefresh(!refresh)
-  //     } catch (error) {
-  //       errorToast(error.message);
-  //     }
-  //   };
 
   //   useEffect(()=>{
   //     fetchData();
@@ -47,21 +38,21 @@ export default function App() {
         </>        
     ): (
         
-    <div className="flex flex-col ">
-      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
-        <p className='viewformheading'>Assignment Details</p>   
+    <div className="flex flex-col">
+      <div className="overflow-x-auto sm:-mx-6 lg:-mx-8 ">
+        <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8 "> 
+        <p className='viewformheading'>Submitted Details</p>   
           <div className="overflow-hidden viewAllform">
           {/* <Link to="/trainer/addassignment"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link> */}
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
-                <tr style={{textAlign:"center"}}>
+                <tr className='text-center'>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
                   <th scope="col" className="px-6 py-4">Topic</th>
-                  <th scope="col" className="px-6 py-4">Assignment</th>
                   <th scope="col" className="px-6 py-4">Submition Date</th>
                   <th scope="col" className="px-6 py-4">Submitted Date</th>
+                  <th scope="col" className="px-6 py-4">Assignment</th>
                 
                 </tr>
               </thead>

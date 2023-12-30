@@ -14,6 +14,7 @@ import DashboardCard06 from '../partials/dashboard/DashboardCard06';
 import DashboardCard10 from '../partials/dashboard/DashboardCard10';
 import Banner from '../partials/Banner';
 import { Outlet, useNavigate } from 'react-router-dom';
+import Card10Batch from '../partials/dashboard/Card10Batch';
 
 function  Dashboard() {
   const [isLogged,setIsLogged] = useState(false);
@@ -88,27 +89,28 @@ function  Dashboard() {
             <div className="grid grid-cols-12 gap-6">
 
               {/* Line chart (Acme Plus) */}
-              <DashboardCard01 />
+              {/* <DashboardCard01 /> */}
               {/* Line chart (Acme Advanced) */}
-              <DashboardCard02 />
+              {/* <DashboardCard02 /> */}
               {/* Line chart (Acme Professional) */}
-              <DashboardCard03 />
+              {/* <DashboardCard03 /> */}
               {/* Bar chart (Direct vs Indirect) */}
-              <DashboardCard04 />
+              {/* <DashboardCard04 /> */}
              
               {/* Doughnut chart (Top Countries) */}
               <DashboardCard06 />
               
               {/* Card (Customers) */}
               <DashboardCard10 />
+
+              {/* card (batches) */}
+              <Card10Batch/>
               
               
             </div>
 
           </div>
         </main>
-
-        <Banner />
 
       </div>
     </div>

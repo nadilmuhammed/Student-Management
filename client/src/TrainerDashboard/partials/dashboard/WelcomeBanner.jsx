@@ -1,7 +1,11 @@
 
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+
 function WelcomeBanner() {
+  const [ data, setData ] = useState('')
+
   const [email, setEmail] = useState('');
   useEffect(() => {
     const storedEmail = localStorage.getItem('email');
@@ -9,6 +13,22 @@ function WelcomeBanner() {
       setEmail(storedEmail);
     }
   }, []);
+ 
+
+  const getTrainerDeatils = async()=>{
+    try {
+      let response = await axios.get(`http://localhost:4000/api/trainer/trainerdata/${localStorage.getItem("id")}`);
+      setData(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  useEffect(()=>{
+    getTrainerDeatils()
+  },[])
+
+
   return (
     <div className="relative bg-indigo-200 dark:bg-indigo-500 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
       {/* Background illustration */}
@@ -55,7 +75,7 @@ function WelcomeBanner() {
 
       {/* Content */}
       <div className="relative">
-        <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">Good afternoon, Acme Inc. 👋</h1>
+          <h1 className="text-2xl md:text-3xl text-slate-800 dark:text-slate-100 font-bold mb-1">Hello, <span>{data.name}</span> 👋</h1>
         <p className="dark:text-indigo-200">Here is what’s happening with your projects today:</p>
       </div>
     </div>
