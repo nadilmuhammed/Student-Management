@@ -43,8 +43,9 @@ function Add() {
 
   const  getBatchDetails = async()=>{
     try {
-      let response = await axios.get("http://localhost:4000/api/trainer/getbatchtrainer");
+      let response = await axios.get(`http://localhost:4000/api/trainer/getbatchtrainerID/${localStorage.getItem("id")}`);
       setGetBatch(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error.message);
     }
@@ -79,6 +80,7 @@ function Add() {
         validfrom:validfrom,
         validto:validto,
         interns:result,
+        Assignedby:localStorage.getItem("id")
         // branchId:oneBatch
 
       });

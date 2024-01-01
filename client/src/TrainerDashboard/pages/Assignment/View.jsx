@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Add from './Add';
 import { errorToast, successToast } from '../../../Toastify/Toast';
 import axios from 'axios';
+import { MdDelete } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
 
 
 
@@ -14,9 +16,8 @@ export default function App() {
 
   const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/api/trainer/getassignment");
+        const response = await axios.get(`http://localhost:4000/api/trainer/getassignmentid/${localStorage.getItem("id")}`);
         setData(response.data);
-        console.log(response.data,"data");
       } catch (error) {
         errorToast(error.message);
       }
@@ -79,9 +80,9 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4">{user.studentData && user.studentData.map((item)=> <div className="">{item.name}</div>  )}</td>
                             <td className="whitespace-nowrap px-6 py-4">{ new Date(user.validfrom ).getDay()}-{new Date(user.validfrom ).getMonth()}-{new Date(user.validfrom ).getFullYear()}</td>
                             <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>
-                            <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:".5rem"}}>
-                                <button className='rounded' style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
-                                <Link to={`/trainer/updateassignment/${user._id}`}><button className='rounded' style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
+                            <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:"1rem"}}>
+                                <button className='rounded' style={{background:"#BB3628",color:"white",padding:"10px"}} onClick={()=>handleDelete(user._id)}><MdDelete className='text-xl' /></button>
+                                <Link to={`/trainer/updateassignment/${user._id}`}><button className='rounded' style={{background:"#2891BB",color:"white",padding:"10px"}}><FaEdit className='text-xl flex justify-center items-center' /></button></Link>
                             </div>
                             </tr>
                         </>

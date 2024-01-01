@@ -2,6 +2,7 @@ import express from "express"
 import { Internlogin, getInternDetails, getInternDetailsID, updateInternLogin } from "../controllers/Intern/intern.js";
 import multer from "multer";
 import path from "path";
+import { createInternAssignment, getInternAssignmentID } from "../controllers/Intern/Assignment.js";
 
 
 
@@ -18,12 +19,17 @@ const storage = multer.diskStorage({
 
 
 const routerIntern = express.Router();
-
-
+ 
+// Login
 routerIntern.post("/internlogin", Internlogin);
 routerIntern.get("/getinternDetails", getInternDetails);
 routerIntern.get("/getinternDetailsID/:id", getInternDetailsID);
 routerIntern.put("/updateInternprofile/:id",upload.single('image'), updateInternLogin);
+
+// Assignment
+routerIntern.post("/createassignment/", createInternAssignment);
+routerIntern.get("/getassignment/:id", getInternAssignmentID);
+
 
 
 

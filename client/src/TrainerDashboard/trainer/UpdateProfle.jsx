@@ -7,7 +7,7 @@ import {
 } from "@material-tailwind/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { successToast,errorToast } from "../../Toastify/Toast.js"
+import { errorToast, successToast } from "../../Toastify/Toast";
 
 export default function SimpleRegistrationForm() {
 
@@ -68,7 +68,7 @@ export default function SimpleRegistrationForm() {
   },[])
 
   return (
-    <Card className="flex-col justify-center items-center  mb-3" color="transparent" shadow={false}>
+    <Card className="flex-col justify-center items-center mb-3" color="transparent" shadow={false}>
       <Typography className="text-4xl font-bold text-black text font-serif" variant="h4" color="blue-gray">
         Edit your profile
       </Typography>

@@ -1,6 +1,9 @@
 import { Schema,model } from "mongoose";
 
 const UserSchema = new Schema({
+    Assignedby:{
+        type:String
+    },
     name: {
         type: String,
         required:true

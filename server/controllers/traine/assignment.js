@@ -19,7 +19,7 @@ export const getTrainerIntern = async(req,res)=>{
 
   export const createAssignment = async(req,res)=>{
     
-    const { name,description,batch,interns,validfrom,validto  } = req.body;
+    const { name,description,batch,interns,validfrom,validto,Assignedby  } = req.body;
 
     if (!name) {
       return res.status(400).json({ message: "name is required" });
@@ -42,7 +42,7 @@ export const getTrainerIntern = async(req,res)=>{
 
     // console.log(batch,'batch')
 
-    let product = await Assignment({name,description,batch,interns,validfrom,validto});
+    let product = await Assignment({name,description,batch,interns,validfrom,validto,Assignedby});
 
     try {
    
@@ -59,7 +59,7 @@ export const getTrainerIntern = async(req,res)=>{
 
   export const updateassignment= async(req,res)=>{
     const {id} = req.params;
-    const {name,description,batch,interns,validfrom,validto } = req.body;
+    const {name,description,batch,interns,validfrom,validto,Assignedby } = req.body;
     if(!name) {
       return res.status(400).json({message:"Name is required"})
     }
@@ -80,7 +80,7 @@ export const getTrainerIntern = async(req,res)=>{
     }
   
     try {
-        const updatedUser = await Assignment.findByIdAndUpdate(id,{$set:{ name,description,batch,interns,validfrom,validto }},{new:true});
+        const updatedUser = await Assignment.findByIdAndUpdate(id,{$set:{ name,description,batch,interns,validfrom,validto,Assignedby }},{new:true});
         res.status(201).json(updatedUser);
     } catch (error) {
       res.json({response : error.message , status :false});
@@ -103,31 +103,7 @@ export const getTrainerIntern = async(req,res)=>{
   export const getAssignment = async(req,res) => {
       try {
         let response = await Assignment.find();
-
-        let getIntern = response.map(async(item) =>{
-          const {...other} = item;
-           const batch = await TrainerBatch.findById(item.batch);
-           
-           if(batch){
-            const { ...batchOther } = batch
-
-
-            let r =  await Promise.all( item.interns.map(async(idOfIntern)=>{
-            const internall = await Intern.findById(idOfIntern);  
-            const {...others} = internall
-            return {...others._doc}
-
-              }) )        
-
-            return {...other._doc,BatchName:batchOther._doc.name,studentData:r }
-          }else{
-            return other._doc
-          }
-        })
-
-        const getinternn = await Promise.all(getIntern);
-        // console.log(getinternn,'getIntern');
-        res.status(200).json(getinternn);
+        res.status(200).json(response)
 
       } catch (error) {
         console.log(error,'rrr');
@@ -139,8 +115,31 @@ export const getTrainerIntern = async(req,res)=>{
   export const getAssignID = async(req,res)=>{
     const {id} = req.params;
    try {
-    const result = await Assignment.findById(id)
-    res.json({result , status:true} );
+    const result = await Assignment.find({Assignedby:id})
+    let getIntern = result.map(async(item) =>{
+      const {...other} = item;
+       const batch = await TrainerBatch.findById(item.batch);
+       
+       if(batch){
+        const { ...batchOther } = batch
+
+
+        let r =  await Promise.all( item.interns.map(async(idOfIntern)=>{
+        const internall = await Intern.findById(idOfIntern);  
+        const {...others} = internall
+        return {...others._doc}
+
+          }) )        
+
+        return {...other._doc,BatchName:batchOther._doc.name,studentData:r }
+      }else{
+        return other._doc
+      }
+    })
+
+    const getinternn = await Promise.all(getIntern);
+    // console.log(getinternn,'getIntern');
+    res.status(200).json(getinternn);
     return true
   } catch (error) {
     res.json({ message: error.message, status: false });

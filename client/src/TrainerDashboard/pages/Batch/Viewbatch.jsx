@@ -9,13 +9,11 @@ function ViewBatch() {
   const [data,setData] =useState([]);
   const [ refresh, setRefresh] = useState(false)
   const [ status, setStatus] = useState(false)
-
-
+  
   const getBatchdata = async() =>{
     try {
-      const response = await axios.get("http://localhost:4000/api/trainer/getbatchtrainer");
+      const response = await axios.get(`http://localhost:4000/api/trainer/getbatchtrainerID/${localStorage.getItem("id")}`);
       setData(response.data)
-      console.log(response.data,"dtaa");
     } catch (error) {
       console.log(error.message);
     }
@@ -37,7 +35,7 @@ function ViewBatch() {
             data.map((items,key)=>{
               console.log(items,"items");
               return(
-                <Card key={key} data={items}/>
+                <Card key={key} data={items} setRefresh={setRefresh} refresh={refresh}/>
               )
             })
           }

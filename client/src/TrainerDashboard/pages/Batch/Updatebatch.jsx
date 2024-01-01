@@ -31,9 +31,9 @@ function Updatebatch() {
       }
     }
 
-    const getBatchID = async(id)=>{
+    const getBatchID = async()=>{
         try {
-            let response = await axios.get(`http://localhost/api/trainer/getbatchtrainerID/${id}`);
+            let response = await axios.get(`http://localhost:4000/api/trainer/getbatchtrainerID/${localStorage.getItem("id")}`);
             console.log(response.data,"batch");
             setName(response.data.name);
         } catch (error) {
@@ -43,7 +43,7 @@ function Updatebatch() {
 
     useEffect(()=>{
       getallIntern();
-      getBatchID(id)
+      getBatchID()
     },[])
 
     const {id} = useParams();

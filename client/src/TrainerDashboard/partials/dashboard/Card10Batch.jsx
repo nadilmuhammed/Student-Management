@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { errorToast } from '../../../Toastify/Toast';
 
 function Card10Batch() {
 
   const [ data,setData ] = useState([])
+  const [ refresh,setRefresh ] = useState(false);
 
   const fetchBatchData = async () => {
+    
     try {
-      const response = await axios.get("http://localhost:4000/api/trainer/getbatchtrainer");
-      setData(response.data);
+      const response = await axios.get(`http://localhost:4000/api/trainer/getbatchtrainerID/${localStorage.getItem("id")}`);
+        setData(response.data);
     } catch (error) {
       errorToast(error.message);
     }
@@ -16,7 +19,7 @@ function Card10Batch() {
 
   useEffect(()=>{
     fetchBatchData()
-  },[])
+  },[refresh])
 
 
   return (

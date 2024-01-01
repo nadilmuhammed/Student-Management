@@ -5,7 +5,7 @@ import TrainerBatch from "../../models/traine/trainerBatch.js";
 
 export const createBatchTrainer = async(req,res)=>{
     
-    const { name,interns  } = req.body;
+    const { name,interns,Assignedby  } = req.body;
 
     if (!name) {
       return res.status(400).json({ message: "Batch name required" });
@@ -15,7 +15,7 @@ export const createBatchTrainer = async(req,res)=>{
       return res.status(400).json({ message: "interns required" });
     }
 
-    let product = await TrainerBatch({name,interns});
+    let product = await TrainerBatch({name,interns,Assignedby});
 
     try { 
       let response = await product.save();
@@ -31,9 +31,8 @@ export const createBatchTrainer = async(req,res)=>{
 
   export const updateTrainerBatch = async(req,res) => {
     const {id} = req.params;
-    console.log(id);
 
-    const { name,interns  } = req.body;
+    const { name,interns,Assignedby  } = req.body;
     if (!name) {
       return res.status(400).json({ message: "Batch name required" });
     }
@@ -43,7 +42,7 @@ export const createBatchTrainer = async(req,res)=>{
     }
 
     try {
-      let updateUser = await TrainerBatch.findByIdAndUpdate(id,{$set:{name,interns}});
+      let updateUser = await TrainerBatch.findByIdAndUpdate(id,{$set:{name,interns,Assignedby}});
       res.status(202).json({message: updateUser, status:true});
     } catch (error) {
       console.log({message: error.message, status:false});
@@ -76,6 +75,18 @@ export const createBatchTrainer = async(req,res)=>{
     try {
         let response = await TrainerBatch.find();
 
+        res.status(200).json(response)
+    } catch (error) {
+        console.log({message: error.message, status:false});
+    }
+  }
+
+
+  export const getTrainerBatchID = async(req,res) =>{
+    const {id} =req.params;
+    try {
+        let response = await TrainerBatch.find({Assignedby:id});
+
         let getIntern = response.map(async(intern) =>{
           const {...other} = intern;
           const internall = await Intern.find({ _id: { $in: intern.interns } });
@@ -89,17 +100,6 @@ export const createBatchTrainer = async(req,res)=>{
         const getintern = await Promise.all(getIntern);
         console.log(getIntern,'alll');
         res.status(200).json(getintern);
-    } catch (error) {
-        console.log({message: error.message, status:false});
-    }
-  }
-
-
-  export const getTrainerBatchID = async(req,res) =>{
-    const {id} =req.params;
-    try {
-        let response = await TrainerBatch.findById(id);
-        res.json({message: response, status:true});
     } catch (error) {
         console.log({message: error.message, status:false});
     }

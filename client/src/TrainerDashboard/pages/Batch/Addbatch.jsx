@@ -41,25 +41,22 @@ function Addbatch() {
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
-        console.log(selectedOptions,"select");
         
        let result= selectedOptions.map((items)=>{
-          console.log(items,"items");
           return items.value
         })
-
-       console.log(result,"result");
         try {
             const response = await axios.post("http://localhost:4000/api/trainer/createBatchtrainer",{
               name:name,
-              interns:result
+              interns:result,
+              Assignedby:localStorage.getItem("id")
             })
+            console.log(response.data);
 
             if(response.data.response){
               successToast("Created")
 
               setName('');
-              // setIntern('');
             }
         } catch (error) {
             errorToast(error.response.data.message);
@@ -69,14 +66,6 @@ function Addbatch() {
     const handleSelectChange = (selectedValues) => {
       setSelectedOptions(selectedValues);
     };
-
-    // const handleCheckboxChange = (option) => {
-    //   if (selectedOptions.includes(option)) {
-    //     setSelectedOptions(selectedOptions.filter(item => item !== option));
-    //   } else {
-    //     setSelectedOptions([...selectedOptions, option]);
-    //   }
-    // };
 
   
 

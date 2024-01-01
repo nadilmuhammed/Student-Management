@@ -35,6 +35,8 @@ import AddAttendance from "./TrainerDashboard/pages/Attendance/AddAttendance";
 import InternLogin from "./InternDashboard/Login.jsx/InternLogin";
 import DashboardIntern from "./InternDashboard/pages/DashboardIntern";
 import UpdateInternLogin from "./InternDashboard/Login.jsx/UpdateInternLogin"
+import Assignment from "./InternDashboard/pages/Assignment/Assignment";
+import AssignmentAll from "./InternDashboard/pages/Assignment/AssignmentAll";
 
 function App() {
   const location = useLocation();
@@ -95,6 +97,9 @@ function App() {
           {/* intern */}
           <Route exact path="/intern" element={<DashboardIntern/>}>
            <Route exact path={`/intern/updateprofile/${localStorage.getItem("id")}`} element={<UpdateInternLogin/>}/>
+
+           <Route exact path="/intern/Assignment" element={<Assignment />}/>
+           <Route exact path="/intern/assignmentall" element={<AssignmentAll />}/>
 
               
           </Route>

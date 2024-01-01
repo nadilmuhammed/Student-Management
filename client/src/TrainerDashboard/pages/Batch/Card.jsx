@@ -16,17 +16,14 @@ export default function SimpleCard({data,setRefresh,refresh}) {
 
   const {_id, name, internData, studentsData } = data
   console.log(studentsData,"hiii");
-
-  // const [ refresh,setRefresh ] = useState(false)
   
 
 
   const handleDelete = async(id)=>{
-    // console.log(id,"id");
     try {
       const response = await axios.delete(`http://localhost:4000/api/trainer/deletetrainerbatch/${id}`);
       successToast("Deleted")
-      setRefresh(!refresh)
+     setRefresh(!refresh)
     } catch (error) {
       errorToast(error.response.data.message)
     }
