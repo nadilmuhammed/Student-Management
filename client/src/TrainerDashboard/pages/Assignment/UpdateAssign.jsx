@@ -23,9 +23,10 @@ function UpdateAssign() {
 
   const getDataID = async(id)=>{
     try {
-      let response = await axios.get(`http://localhost:4000/api/trainer/getassignmentid/${id}`);
-      setName(response.data.result.name);
-      setDescription(response.data.result.description);
+      let response = await axios.get(`http://localhost:4000/api/trainer/getassignmentOne/${id}`);
+      console.log(response.data,"dhud");
+      setName(response.data.name);
+      setDescription(response.data.description);
     } catch (error) {
       console.log(error.message);
     }
@@ -51,7 +52,7 @@ function UpdateAssign() {
 
   const  getBatchDetails = async()=>{
     try {
-      let response = await axios.get("http://localhost:4000/api/trainer/getbatchtrainer");
+      let response = await axios.get(`http://localhost:4000/api/trainer/getbatchtrainerID/${localStorage.getItem("id")}`);
       setGetBatch(response.data);
       console.log(response.data,"loggggg");
     } catch (error) {
@@ -77,6 +78,10 @@ function UpdateAssign() {
   const {id} =useParams();
   const handleSubmit = async(e) =>{
     e.preventDefault();
+
+    let result= selectedOptions.map((items)=>{
+      return items.value
+    })
 
     try {
       const response = await axios.put(`http://localhost:4000/api/trainer/updateassignment/${id}`,{
@@ -111,7 +116,7 @@ function UpdateAssign() {
         label:items.name,value:items._id
       }
     });
-    // console.log(result,"result");
+    console.log(result,"result");
     setData(result);
    
   }

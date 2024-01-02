@@ -19,7 +19,7 @@ function Card10Batch() {
 
   useEffect(()=>{
     fetchBatchData()
-  },[refresh])
+  },[])
 
 
   return (

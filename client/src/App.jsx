@@ -99,7 +99,7 @@ function App() {
            <Route exact path={`/intern/updateprofile/${localStorage.getItem("id")}`} element={<UpdateInternLogin/>}/>
 
            <Route exact path="/intern/Assignment" element={<Assignment />}/>
-           <Route exact path="/intern/assignmentall" element={<AssignmentAll />}/>
+           <Route exact path="/intern/assignmentall/:id" element={<AssignmentAll />}/>
 
               
           </Route>

@@ -3,7 +3,7 @@ import { login, updatetraine, deletetraine, getTrainer, getTrainerByID } from ".
 import { Trainerupdateintern, getInternofTrainer} from "../controllers/traine/intern.js";
 import multer from "multer";
 import path from "path";
-import { createAssignment, deleteassignment, getAssignID, getAssignment, getTrainerIntern, trainerBatchName, updateassignment } from "../controllers/traine/assignment.js";
+import { createAssignment, deleteassignment, getAssignID, getAssignOneID, getAssignment, getTrainerIntern, trainerBatchName, updateassignment } from "../controllers/traine/assignment.js";
 import { createBatchTrainer, deleteTrainerBatch, getTrainerBatch, getTrainerBatchID, updateTrainerBatch } from "../controllers/traine/trainerBatch.js";
 
 const routerTraine = express.Router();
@@ -36,6 +36,7 @@ routerTraine.get("/getinternoftrainer/:id", getInternofTrainer);
 // Assignment
 routerTraine.post("/createassignment", createAssignment);
 routerTraine.get("/getassignment", getAssignment);
+routerTraine.get("/getassignmentOne/:id", getAssignOneID);
 routerTraine.get("/getassignmentid/:id", getAssignID);
 routerTraine.put("/updateassignment/:id", updateassignment);
 routerTraine.delete("/deleteassignment/:id", deleteassignment);

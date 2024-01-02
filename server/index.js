@@ -31,6 +31,7 @@ app.use("/api/trainer", routerTraine);
 app.use("/api/intern", routerIntern);
 
 app.use('/uploads', express.static(join(__dirname, 'uploads')));
+app.use('/internfiles', express.static(join(__dirname, 'internfiles')));
 
 
 dotenv.config();

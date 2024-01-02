@@ -5,32 +5,45 @@ import Assignment from "../../models/traine/assignment.js";
 
 export const createInternAssignment = async(req,res)=>{
     
-    const { topic,question,work,duedate  } = req.body;
-
-    if (!topic) {
-      return res.status(400).json({ message: "name is required" });
-    }
-    if (!question) {
-      return res.status(400).json({ message: "Enter your question" });
-    }
-    if (!duedate) {
-      return res.status(400).json({ message: "Batch required" });
-    }
-    if (!work) {
-      return res.status(400).json({ message: "Interns required" });
+    const { topic,question,duedate  } = req.body;
+    
+    if (!req.file) {
+      return res.status(400).json({ message: "uplaod your work" });
     }
 
-    let product = await AssignmentIntern({topic,question,work,duedate});
+    const filePath = req.file.filename
+    console.log(filePath,"file");
+
+    let product = await AssignmentIntern({topic,question,file:filePath,duedate});
 
     try {
       let response = await product.save();
       res.status(200).json(response);
     } catch (error) {
-      console.log({message: error.message, status:false});
-      res.json({message : error.message , status :false});
+      res.status(401).json({message : error.message , status :false});
 
     }
 
+  }
+
+  export const getAssignIntern = async(req,res)=>{
+    try {
+      let response = await Assignment.find()
+      res.status(200).json(response);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  export const getAssignmentOneID = async(req,res)=>{
+    const { id } = req.params
+  
+    try {
+        let response = await Assignment.findById(id);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message);
+    }
   }
 
   export const getInternAssignmentID = async(req,res)=>{

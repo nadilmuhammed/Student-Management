@@ -103,6 +103,7 @@ export const getTrainerIntern = async(req,res)=>{
   export const getAssignment = async(req,res) => {
       try {
         let response = await Assignment.find();
+
         res.status(200).json(response)
 
       } catch (error) {
@@ -111,11 +112,45 @@ export const getTrainerIntern = async(req,res)=>{
       }
   }
 
+  export const getAssignOneID = async(req,res)=>{
+    const {id} = req.params;
+   try {
+    const result = await Assignment.findById(id)
+
+    // let getIntern = result.map(async(item) =>{
+    //   const {...other} = item;
+    //    const batch = await TrainerBatch.findById(item.batch);
+       
+    //    if(batch){
+    //     const { ...batchOther } = batch
+
+
+    //     let r =  await Promise.all( item.interns.map(async(idOfIntern)=>{
+    //     const internall = await Intern.findById(idOfIntern);  
+    //     const {...others} = internall
+    //     return {...others._doc}
+
+    //       }) )        
+
+    //     return {...other._doc,BatchName:batchOther._doc.name,studentData:r }
+    //   }else{
+    //     return other._doc
+    //   }
+    // })
+
+    // const getinternn = await Promise.all(getIntern);
+    // console.log(getinternn,'getIntern');
+    res.status(200).json(result);
+  } catch (error) {
+    res.json({ message: error.message, status: false });
+  }
+}
 
   export const getAssignID = async(req,res)=>{
     const {id} = req.params;
    try {
     const result = await Assignment.find({Assignedby:id})
+
     let getIntern = result.map(async(item) =>{
       const {...other} = item;
        const batch = await TrainerBatch.findById(item.batch);

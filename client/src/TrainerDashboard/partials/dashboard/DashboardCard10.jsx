@@ -10,13 +10,11 @@ import axios from 'axios';
 function DashboardCard10() {
 
   const [ data,setData ] = useState([])
-  const [ refresh,setRefresh ] = useState(false)
 
   const fetchInternData = async () => {
     try {
       const response = await axios.get(`http://localhost:4000/api/trainer/getinternoftrainer/${localStorage.getItem('id')}`);
       setData(response.data);
-      setRefresh(!refresh)
     } catch (error) {
       errorToast(error.message);
     }
@@ -24,7 +22,7 @@ function DashboardCard10() {
 
   useEffect(()=>{
     fetchInternData()
-  },[refresh])
+  },[])
 
 
   return (

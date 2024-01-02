@@ -13,11 +13,12 @@ const UserSchema = new Schema({
         type:Date,
         required:true
     },
-    work : {
+    file : {
         type:String,
-        required:true
-    },
-},{timestamps:true})
+        required:true,
+        unique:true
+    }
+},{timestamps : true})
 
 const AssignmentIntern = model("internAssignment", UserSchema);
 export default AssignmentIntern;

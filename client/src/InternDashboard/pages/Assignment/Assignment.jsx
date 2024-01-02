@@ -57,8 +57,8 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4">{user.description}</td>
                             <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around"}}>
-                                <Link to="/intern/assignmentall">
-                                  <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}}>Add work</button>
+                                <Link to={`/intern/assignmentall/${user._id}`}>
+                                  <button DataOne={user} style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}}>Add work</button>
                                 </Link>
                             </div>
                             </tr>
