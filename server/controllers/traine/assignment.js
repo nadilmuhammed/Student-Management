@@ -149,7 +149,7 @@ export const getTrainerIntern = async(req,res)=>{
   export const getAssignID = async(req,res)=>{
     const {id} = req.params;
    try {
-    const result = await Assignment.find({Assignedby:id})
+    const result = await Assignment.find({Assignedby:id});
 
     let getIntern = result.map(async(item) =>{
       const {...other} = item;
@@ -158,22 +158,22 @@ export const getTrainerIntern = async(req,res)=>{
        if(batch){
         const { ...batchOther } = batch
 
-
         let r =  await Promise.all( item.interns.map(async(idOfIntern)=>{
+          console.log(idOfIntern,"fjfh");
         const internall = await Intern.findById(idOfIntern);  
         const {...others} = internall
         return {...others._doc}
 
-          }) )        
-
-        return {...other._doc,BatchName:batchOther._doc.name,studentData:r }
-      }else{
-        return other._doc
-      }
-    })
-
-    const getinternn = await Promise.all(getIntern);
-    // console.log(getinternn,'getIntern');
+          }) )      
+          
+          return {...other._doc,BatchName:batchOther._doc.name,studentData:r }
+        }else{
+          return other._doc
+        }
+      })
+      
+      const getinternn = await Promise.all(getIntern);
+      // console.log(getinternn,'getIntern');
     res.status(200).json(getinternn);
     return true
   } catch (error) {

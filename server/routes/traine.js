@@ -5,6 +5,7 @@ import multer from "multer";
 import path from "path";
 import { createAssignment, deleteassignment, getAssignID, getAssignOneID, getAssignment, getTrainerIntern, trainerBatchName, updateassignment } from "../controllers/traine/assignment.js";
 import { createBatchTrainer, deleteTrainerBatch, getTrainerBatch, getTrainerBatchID, updateTrainerBatch } from "../controllers/traine/trainerBatch.js";
+import { createTrainerNotes, deleteNotes, getNotes, getTrainernotedID, getallIdnotes, updateNotes } from "../controllers/traine/notes.js";
 
 const routerTraine = express.Router();
 
@@ -19,6 +20,18 @@ const storage = multer.diskStorage({
   });
   
   const upload = multer({ storage });
+
+  const storenotes = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'trainernotes/'); // Specify the destination folder for uploaded files
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now() + path.extname(file.originalname)); // Use the current timestamp as a unique filename
+    },
+  });
+
+  const storenote = multer({ storage:storenotes });
+
 
 // traine reg-log
 routerTraine.post("/login", login);
@@ -48,6 +61,15 @@ routerTraine.delete("/deletetrainerbatch/:id", deleteTrainerBatch);
 routerTraine.get("/getbatchtrainer", getTrainerBatch);
 routerTraine.get("/getbatchtrainerID/:id", getTrainerBatchID);
 routerTraine.put("/updatetrainerbatch/:id", updateTrainerBatch);
+
+// notes
+routerTraine.post("/createnotes",storenote.single('file'), createTrainerNotes);
+routerTraine.get("/getnotes", getNotes);
+routerTraine.get("/getallnotesID/:id", getallIdnotes);
+routerTraine.get("/getnotesofID/:id", getTrainernotedID);
+routerTraine.delete("/deletenotes/:id", deleteNotes);
+routerTraine.put("/updatenotes/:id",storenote.single('file'), updateNotes);
+
 
 
 

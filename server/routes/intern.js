@@ -8,9 +8,11 @@ const routerIntern = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
+      console.log(file,'destination');
       cb(null, 'uploads/'); // Specify the destination folder for uploaded files
     },
     filename: function (req, file, cb) {
+
       cb(null, Date.now() + path.extname(file.originalname)); // Use the current timestamp as a unique filename
     },
   });
@@ -20,6 +22,7 @@ const storage = multer.diskStorage({
 
   const storagefile = multer.diskStorage({
     destination: function (req, file, cb) {
+      console.log(file,'file');
       cb(null, 'internfiles/'); // Specify the destination folder for uploaded files
     },
     filename: function (req, file, cb) {
@@ -27,8 +30,9 @@ const storage = multer.diskStorage({
     },
   });
   
-  const storeFiles = multer({ storagefile });
-  console.log(storeFiles,"all");
+  const storeFiles = multer({ storage:storagefile });
+
+  // console.log(storagefile.getFilename(),'storagefile');
  
 // Login
 routerIntern.post("/internlogin", Internlogin);

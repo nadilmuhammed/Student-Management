@@ -103,7 +103,9 @@ function AssignmentAll() {
           name='file'
           accept='.pdf, .doc, .ppt' 
           placeholder='Uplaod work' 
-          onChange={(e)=>setfile(e.target.files[0])}
+          onChange={(e)=>{
+            setfile(e.target.files[0])
+          }}
           />
           </div>
         <div>

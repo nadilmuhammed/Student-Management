@@ -9,6 +9,7 @@ export default function App() {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [ search,setSearch ] = useState('');
 
     const fetchData = async () => {
         try {
@@ -57,7 +58,19 @@ console.log(data);
         <p className='viewformheading'>Traine Details</p> 
         {/* md:bg-red-700 md:my-10 md:mx-32 lg:my-0 lg:mx-0 */}
           <div className="overflow-hidden viewAllform">
-          <Link to="/admin/addtrainee"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>+ Add</button></Link>
+            <div className='flex lg:flex-row md:flex-col max-sm:flex-col  gap-3'>
+              <div>
+                <Link to="/admin/addtrainee"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>+ Add</button></Link>
+              </div>
+              <div>
+                <input
+                 className='rounded border-none shadow-[0_0px_8px_3px_rgba(0,0,0,0.3)]'
+                 type="search" 
+                 placeholder='Search here....'
+                 onChange={(e)=> setSearch(e.target.value)}
+                  />
+              </div>
+            </div>
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
                 <tr style={{textAlign:"center"}}>
@@ -71,7 +84,10 @@ console.log(data);
                 </tr>
               </thead>
               <tbody style={{textAlign:"center"}}>
-                {data.map((user,index)=>{
+                {data.filter((items)=>{
+                  return search.toLowerCase() === '' ? items : items.name.toLowerCase().includes(search)
+                })
+                .map((user,index)=>{
                   console.log(user);
                     return(
                         <>

@@ -4,6 +4,9 @@ import Assignment from "../../models/traine/assignment.js";
 
 
 export const createInternAssignment = async(req,res)=>{
+
+  // console.log(req.body);
+  // console.log(req.file,'d');
     
     const { topic,question,duedate  } = req.body;
     
@@ -11,8 +14,7 @@ export const createInternAssignment = async(req,res)=>{
       return res.status(400).json({ message: "uplaod your work" });
     }
 
-    const filePath = req.file.filename
-    console.log(filePath,"file");
+    const filePath = req.file.originalname
 
     let product = await AssignmentIntern({topic,question,file:filePath,duedate});
 

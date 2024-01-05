@@ -37,6 +37,10 @@ import DashboardIntern from "./InternDashboard/pages/DashboardIntern";
 import UpdateInternLogin from "./InternDashboard/Login.jsx/UpdateInternLogin"
 import Assignment from "./InternDashboard/pages/Assignment/Assignment";
 import AssignmentAll from "./InternDashboard/pages/Assignment/AssignmentAll";
+import Addnote from "./TrainerDashboard/pages/Notes/Addnote";
+import Viewnote from "./TrainerDashboard/pages/Notes/Viewnote";
+import UpdatNote from "./TrainerDashboard/pages/Notes/UpdatNote";
+import InternNotes from "./InternDashboard/pages/notes/InternNotes";
 
 function App() {
   const location = useLocation();
@@ -87,6 +91,10 @@ function App() {
           <Route exact path="/trainer/addattendance" element= {<AddAttendance/>}/> 
           <Route exact path="/trainer/viewattendance" element= {<ViewAttend/>}/> 
           <Route exact path={`/trainer/profile/${localStorage.getItem("id")}` }element={<UpdateProfle/>}/>
+
+          <Route exact path="/trainer/addnotes" element= {<Addnote/>}/> 
+          <Route exact path="/trainer/viewnotes" element= {<Viewnote/>}/> 
+          <Route exact path="/trainer/updatenotes/:id" element= {<UpdatNote/>}/> 
         </Route>
 
 
@@ -100,6 +108,9 @@ function App() {
 
            <Route exact path="/intern/Assignment" element={<Assignment />}/>
            <Route exact path="/intern/assignmentall/:id" element={<AssignmentAll />}/>
+
+           <Route exact path="/intern/notes" element={<InternNotes />}/>
+
 
               
           </Route>

@@ -19,15 +19,13 @@ export default function Example() {
 
     console.log(username,  email, password);
     try {
-      const response = await axios.post( "http://localhost:4000/api/admin/register",
+      const response = await axios.post("http://localhost:4000/api/admin/register",
         { username, email, password }
         );
       console.log(response, "ress");
       if (response.data) {
         successToast("success");
         navigate("/");
-      } else {
-        errorToast(response.data.message);
       }
     } catch (error) {
       errorToast(error.response.data.message);
@@ -129,7 +127,7 @@ export default function Example() {
               >
                 Sign in
               </button>
-              <Link to="/">
+              <Link to="/adminlogin">
                 <button
                   className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-3"
                 >

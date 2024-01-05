@@ -1,3 +1,13 @@
+// import React from 'react'
+
+// function Card6Copy() {
+//   return (
+//     <div>Card6Copy</div>
+//   )
+// }
+
+// export default Card6Copy
+
 import React, { useEffect, useState } from 'react';
 import DoughnutChart from '../../charts/DoughnutChart';
 
@@ -6,44 +16,30 @@ import { tailwindConfig } from '../../utils/Utils';
 import { errorToast } from '../../Toastify/Toast';
 import axios from 'axios';
 
-function DashboardCard06() {
+function Card6Copy() {
 
   const [ batch,setBatch ] = useState([]);
-  // const [ internData,setInterndata ] = useState([]);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://localhost:4000/api/admin/getbatch");
-      console.log(response.data,"fdnjdfnj");
-      setBatch(response.data);
-    } catch (error) {
-      errorToast(error.message);
-    }
-  };
+//   const fetchData = async () => {
+//     try {
+//       const response = await axios.get("http://localhost:4000/api/admin/getbatch");
+//       console.log(response.data,"datasss");
+//       setBatch(response.data);
+//     } catch (error) {
+//       errorToast(error.message);
+//     }
+//   };
 
-  // const fetchInternData = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:4000/api/admin/adminintern");
-  //     console.log(response.data,"datasss");
-  //     setInterndata(response.data);
-  //   } catch (error) {
-  //     errorToast(error.message);
-  //   }
-  // };
+//   useEffect(()=>{
+//     fetchData();
+//   },[])
 
-  
-
-  useEffect(()=>{
-    fetchData();
-    // fetchInternData();
-  },[])
-
-  const labels = batch.map((items)=> items.batch) ;
-  // const data = internData.map((items)=> items.name.length );
+//   const labels = batch.map((items)=> items.batch) ;
+//   const data = batch.map((items)=> items.trainerData.name.length );
   // const generateChartData = () =>{
 
   //   return {
-      // labels,
+  //     labels,
   //     datasets: [
   //       {
   //         label:'batch data', 
@@ -69,16 +65,16 @@ function DashboardCard06() {
  
   const chartData = {
 
-    // labels: ['United States', 'Italy', 'Other'],
-    labels,
+    labels: ['United States', 'Italy', 'Other'],
+    // labels,
 
     datasets: [
       {
         label: "Trainers",
         // data,
-        // data: [
-        //   90, 30, 35,
-        // ],
+        data: [
+          90, 30, 35,
+        ],
         backgroundColor: [
           tailwindConfig().theme.colors.indigo[500],
           tailwindConfig().theme.colors.blue[400],
@@ -101,13 +97,13 @@ function DashboardCard06() {
       </header>
       {/* Chart built with Chart.js 3 */}
       {/* Change the height attribute to adjust the chart height */}
-      {batch.length > 0 ? (
+      {/* {batch.length > 0 ? ( */}
         <DoughnutChart data={chartData} width={389} height={260} />
-      ):(
+      {/* ):(
         <p>Loading....</p>
-      )}
+      )} */}
     </div>
   );
 }
 
-export default DashboardCard06;
+export default Card6Copy;

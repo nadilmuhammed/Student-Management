@@ -5,16 +5,19 @@ import { Link } from 'react-router-dom';
 import { errorToast, successToast } from '../../../Toastify/Toast';
 import { MdDelete } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
+import Search from './Search';
 
 export default function App() {
 
     const [data, setData] = useState([]);
     const [status, setStatus] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [ search,setSearch ] = useState('');
 
     const fetchData = async () => {
         try {
           const response = await axios.get(`http://localhost:4000/api/trainer/getinternoftrainer/${localStorage.getItem('id')}`);
+          
           setData(response.data);
         } catch (error) {
           errorToast(error.message);
@@ -39,7 +42,7 @@ export default function App() {
       useEffect(()=>{
         fetchData();
       },[refresh]);
-
+    
 
 
 
@@ -56,9 +59,15 @@ export default function App() {
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
         <p className='viewformheading'>Intern Details</p>   
           <div className="overflow-hidden viewAllform">
-          <Link to="/trainer/addIntern">
-            <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px",borderRadius:"10px"}}>Add</button>
-          </Link>
+            <div className='flex gap-3'>
+              <Link to="/trainer/addIntern">
+                <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px",borderRadius:"10px"}}>Add</button>
+              </Link>
+              <div className=''>
+                {/* <input className='rounded' type="search" placeholder='search by name....'/> */}
+                <Search search={search} setSearch={setSearch}/>
+              </div>
+            </div>
             <table className="min-w-full text-left text-sm font-light mt-4">
               <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white">
                 <tr style={{textAlign:"center"}}>
@@ -71,7 +80,10 @@ export default function App() {
                 </tr>
               </thead>
               <tbody style={{textAlign:"center"}}>
-                {data.map((user,index)=>{
+                {data.filter((items)=>{
+                  return search.toLowerCase() === '' ? items : items.name.toLowerCase().includes(search)
+                })
+                .map((user,index)=>{
                     return(
                         <>
                             <tr className="border-b dark:border-neutral-500" key={index}>

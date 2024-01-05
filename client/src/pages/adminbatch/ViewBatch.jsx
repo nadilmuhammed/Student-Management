@@ -8,6 +8,7 @@ export default function App() {
     const [data, setData] = useState([]);
     const [status, setStatus] = useState(false);
     const [refresh, setRefresh] = useState(false);
+    const [ search,setSearch ] = useState('');
 
     const fetchData = async () => {
         try {
@@ -51,9 +52,17 @@ export default function App() {
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <p className='viewformheading'>Batch Details</p>  
           <div className="overflow-hidden viewAllform">
-          <Link to="/admin/batches">
-            <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button>
-          </Link>
+            <div className='flex lg:flex-row md:flex-col max-sm:flex-col  gap-3'>
+              <Link to="/admin/batches">
+                <button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button>
+              </Link>
+              <div>
+                <input type="search"
+                placeholder='Search by batch.....' 
+                className='rounded border-none shadow-[0_0px_8px_3px_rgba(0,0,0,0.3)]'
+                onChange={(e)=> setSearch(e.target.value)}/>
+              </div>
+            </div>
 
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500">
@@ -64,8 +73,10 @@ export default function App() {
                 </tr>
               </thead>
               <tbody>
-                {data.map((user,index)=>{
-                  console.log(user,"user");
+                {data.filter((items)=>{
+                  return search.toLowerCase() === '' ? items : items.batch.toLowerCase().includes(search)
+                })
+                .map((user,index)=>{
                     return(
                         <>
 

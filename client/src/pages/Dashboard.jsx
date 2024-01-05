@@ -23,6 +23,7 @@ import Banner from "../partials/Banner";
 import { Outlet, useNavigate } from "react-router-dom";
 import Profile from "../Login/Profile";
 import Card10Interns from "../partials/dashboard/Card10Interns";
+import Card6Copy from "../partials/dashboard/Card6Copy";
 
 function Dashboard() {
   const [isLogged,setIsLogged] = useState(false);
@@ -108,6 +109,7 @@ function Dashboard() {
               {/* <DashboardCard05 /> */}
               {/* Doughnut chart (Top Countries) */}
               <DashboardCard06 />
+              <Card6Copy/>
               {/* Table (Top Channels) */}
               {/* <DashboardCard07 /> */}
               {/* Line chart (Sales Over Time) */}

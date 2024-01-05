@@ -8,7 +8,6 @@ import Assignment from "../models/traine/assignment.js";
 
  export const createIntern = async(req,res)=>{
     const { name,email,password,trainerReference,batch,Assignedby,batchnumber } = req.body;
-    console.log(req.body);
     if(!name) {
       return res.status(400).json({message:"Name is required"})
     }
@@ -31,11 +30,9 @@ import Assignment from "../models/traine/assignment.js";
     const ImagePath = req.file.filename
 
     let product = await Intern({name,email,password,trainerReference,image:ImagePath,batch,Assignedby,batchnumber})
-    console.log(req.body, "req.body");
 
   try {
     const result = await product.save();
-    console.log(result);
     res.json({ result: result, status: true });
   } catch (error) {
     res.json({ message: error.message, status: false });
@@ -55,6 +52,8 @@ export const updateintern= async(req,res)=>{
     }
     if(!password) {
       return res.status(400).json({message:"Email is required"})
+    }else if(password.length < 8 || password.length > 16){
+      return res.status(400).json({message : "Password must be between 8 and 16 characters"})
     }
     if(!req.file){
       return res.ststus(400).json({message: " Upload an image"})
@@ -79,7 +78,6 @@ export const updateintern= async(req,res)=>{
 
 
 export const deleteintern = async(req,res)=>{
-    console.log("delte", req.params);
     const { id } = req.params;
     try {
 
@@ -132,14 +130,11 @@ export const getIntern = async(req,res)=>{
       const batchnumber = Intern.findById(inter.batchnumber);
       const { ...batchnoOther } = batchnumber;
 
-      console.log(batch,'batch');
-
       return {...other._doc,trainerData:trainerOther._doc,batchData:batchOther._doc,batchNumber:batchnoOther._doc}
 
       })
 
       const getTrainers = await Promise.all(getIntern)
-      console.log(getTrainers,'ffff');
 
       res.status(200).json(getTrainers);
     } catch (error) {
@@ -152,9 +147,11 @@ export const getIntern = async(req,res)=>{
   export const getInternID = async(req,res)=>{
     const {id} = req.params;
     try {
-      const result = await Intern.findById(id)
+      const result = await Intern.findById(id);
+
+      console.log(result,"huhu");
       res.json(result );
-      return true
+      // return true
     } catch (error) {
       res.json({ message: error.message, status: false });
     }
