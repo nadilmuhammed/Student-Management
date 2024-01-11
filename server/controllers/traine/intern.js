@@ -13,7 +13,7 @@ export const Trainerupdateintern= async(req,res)=>{
     return res.status(400).json({message:"Email is required"})
   }
   if(!req.file){
-    return res.ststus(400).json({message: " Upload an image"})
+    return res.status(400).json({message: " Upload an image"})
   }
 
   const ImagePath = req.file.filename

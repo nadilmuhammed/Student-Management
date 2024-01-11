@@ -12,18 +12,6 @@ function UpdateIntern() {
       const [getInterns, setGetInterns] = useState([]);   
 
 
-      const fetchDatatraine = async()=>{
-        try {
-          const response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
-          setGetInterns(response.data);
-          console.log(response.data);
-        } catch (error) {
-          errorToast(error.message);
-        }
-    }
-
-
-
       const {id} = useParams();
       const onSubmitAll = async(e) => {
         e.preventDefault();
@@ -49,21 +37,22 @@ function UpdateIntern() {
     };
 
 
-    const fetchData= async()=>{
-        try {
-            let response = await axios.get(`http://localhost:4000/api/trainer/allinterns/${localStorage.getItem('id')}`);
-            setName(response.data.name);
-            console.log(response.data ,"data");
-            setEmail(response.data.email);
-            setPassword(response.data.password);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
+    const fetchData= async(id)=>{
+      try {
+          let response = await axios.get(`http://localhost:4000/api/admin/adminintern/${id}`);
+          console.log(response.data,"data");
+          setName(response.data.name);
+          console.log(response.data.name,'nsnfknsd');
+          setEmail(response.data.email);
+          setPassword(response.data.password);
+          // setTraine(response.data.traine);
+      } catch (error) {
+          console.log(error.message);
+      }
+  }
 
     useEffect(()=>{
         fetchData(id);
-        fetchDatatraine();
     },[])
    
 

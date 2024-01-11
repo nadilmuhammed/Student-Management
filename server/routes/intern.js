@@ -2,7 +2,7 @@ import express from "express"
 import { Internlogin, getInternDetails, getInternDetailsID, updateInternLogin } from "../controllers/Intern/intern.js";
 import multer from "multer";
 import path from "path";
-import { createInternAssignment, getAssignIntern, getAssignmentOneID, getInternAssignmentID } from "../controllers/Intern/Assignment.js";
+import { createInternAssignment, getAssignIntern, getAssignmentOneID, getInternAssignmentID, likeAssign } from "../controllers/Intern/Assignment.js";
 
 const routerIntern = express.Router();
 
@@ -45,6 +45,11 @@ routerIntern.post("/createassignment",storeFiles.single('file'), createInternAss
 routerIntern.get("/getassignment/:id", getInternAssignmentID);
 routerIntern.get("/getassignment", getAssignIntern);
 routerIntern.get("/getassignmentall/:id", getAssignmentOneID);
+routerIntern.post("/like/:id", likeAssign);
+
+// notes
+routerIntern.get("/getallNotes/:id", getAssignmentOneID);
+
 
 
 

@@ -3,7 +3,7 @@ import { login, updatetraine, deletetraine, getTrainer, getTrainerByID } from ".
 import { Trainerupdateintern, getInternofTrainer} from "../controllers/traine/intern.js";
 import multer from "multer";
 import path from "path";
-import { createAssignment, deleteassignment, getAssignID, getAssignOneID, getAssignment, getTrainerIntern, trainerBatchName, updateassignment } from "../controllers/traine/assignment.js";
+import { ApproveAssign, InternSubmittedData, RejectAssign, createAssignment, deleteassignment, getAssignID, getAssignOneID, getAssignment, getTrainerIntern, trainerBatchName, updateassignment } from "../controllers/traine/assignment.js";
 import { createBatchTrainer, deleteTrainerBatch, getTrainerBatch, getTrainerBatchID, updateTrainerBatch } from "../controllers/traine/trainerBatch.js";
 import { createTrainerNotes, deleteNotes, getNotes, getTrainernotedID, getallIdnotes, updateNotes } from "../controllers/traine/notes.js";
 
@@ -54,6 +54,9 @@ routerTraine.get("/getassignmentid/:id", getAssignID);
 routerTraine.put("/updateassignment/:id", updateassignment);
 routerTraine.delete("/deleteassignment/:id", deleteassignment);
 routerTraine.get("/getbatchid/:id", trainerBatchName);
+routerTraine.get("/getinterndata", InternSubmittedData);
+routerTraine.put("/approvedata/:id", ApproveAssign);
+routerTraine.put("/rejectdata/:id", RejectAssign);
 
 // batch
 routerTraine.post("/createBatchtrainer", createBatchTrainer);

@@ -56,7 +56,7 @@ export const updateintern= async(req,res)=>{
       return res.status(400).json({message : "Password must be between 8 and 16 characters"})
     }
     if(!req.file){
-      return res.ststus(400).json({message: " Upload an image"})
+      return res.status(400).json({message: " Upload an image"})
     }
     if(!trainerReference) {
         return res.status(400).json({message:"Traine is required"})

@@ -15,8 +15,9 @@ export default function App() {
 
   const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/api/trainer/getallnotesID/${localStorage.getItem("id")}`);
-        console.log(response.data,"response");  
+        const response = await axios.get(`http://localhost:4000/api/intern/getallNotes/${localStorage.getItem("id")}`);
+        console.log(response.data,"response");
+          
         setData(response.data);
       } catch (error) {
         errorToast(error.response.data.message);

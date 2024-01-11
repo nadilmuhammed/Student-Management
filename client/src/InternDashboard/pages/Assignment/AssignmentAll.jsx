@@ -29,11 +29,9 @@ function AssignmentAll() {
     e.preventDefault();
     try {
       let formData = new FormData;
-      formData.append("topic", store.name)
-      formData.append("question", store.description)
-      formData.append("duedate", store.validto)
       formData.append("file", file)
-      console.log(formData,"cjdcnj");
+      formData.append("Assignedby", localStorage.getItem("id"))
+      formData.append("assignmentid",store._id)
 
       let response = await axios.post("http://localhost:4000/api/intern/createassignment", formData);
       console.log(response.data,"intern data");
@@ -44,7 +42,6 @@ function AssignmentAll() {
       errorToast(error.response.data.message)
     }
    }
-
 
 
 

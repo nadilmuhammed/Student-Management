@@ -27,6 +27,11 @@ const UserSchema = new Schema({
     validto: {
         type: Date,
         required:true
+    },
+    statusOfSubmit: {
+        type: String,  // Specify that it's an array of strings
+        enum: ['Assigned','Approved', 'Rejected', 'Evaluating','submitted'],  // Specify the allowed values
+        default: 'Assigned'  // Set the default value to 'submit'
     }
 },{timestamps : true})
 

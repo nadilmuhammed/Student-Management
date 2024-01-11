@@ -13,10 +13,8 @@ export default function App() {
     const fetchData = async () => {
         try {
           const response = await axios.get(`http://localhost:4000/api/intern/getassignment/${localStorage.getItem("id")}`);
+          console.log(response.data,"ddatatat");
           setData(response.data);
-          // console.log(response.data.map((items)=>{
-          //   console.log(items) 
-          // }),"dfja ");
         } catch (error) {
           errorToast(error.message);
         }
@@ -27,23 +25,40 @@ export default function App() {
         fetchData();
       },[refresh]);
 
+      // const likePost = async(id)=>{
+      //   try {
+      //     const userid = localStorage.getItem("id");
+
+      //     if(!userid){
+      //       console.error('userid is not found');
+      //       return
+      //     }
+
+      //     const response = await axios.post('http://localhost:4000/api/intern/like',{ userid,id })
+
+      //   } catch (error) {
+      //     errorToast(error.message);
+      //   }
+      // }
+
     
   return (
     <>
     <div className="flex flex-col">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
-        <p className='viewformheading'>Intern Details</p>   
-          <div className="overflow-hidden viewAllform">
-          <Link to="/admin/addIntern"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
+        <p className='flex justify-center p-2 font-bold text-4xl '>Assignment</p>   
+          <div className="overflow-hidden viewAllform p-0">
             <table className="min-w-full text-left text-sm font-light">
-              <thead className="border-b font-medium dark:border-neutral-500">
+              <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white">
                 <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Topic</th>
                   <th scope="col" className="px-6 py-4">Question</th>
                   <th scope="col" className="px-6 py-4">Due Date</th>
-                  <th scope="col" className="px-6 py-4">Upload work</th>
+                  <th scope="col" className="px-6 py-4">Status of work</th>
+                  <th scope="col" className="px-6 py-4"></th>
+                  <th scope="col" className="px-6 py-4"></th>
                 </tr>
               </thead>
               <tbody style={{textAlign:"center"}}>
@@ -57,10 +72,18 @@ export default function App() {
                             <td className="whitespace-nowrap px-6 py-4">{user.description}</td>
                             <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around"}}>
-                                <Link to={`/intern/assignmentall/${user._id}`}>
-                                  <button DataOne={user} style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}}>Add work</button>
-                                </Link>
+                               {!(user.answer?.statusOfSubmit[0]) && <Link to={`/intern/assignmentall/${user._id}`}>
+                                  <button className='rounded' DataOne={user} style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}}>Add work</button>
+                                </Link>}
+                                {user.answer?.statusOfSubmit[0]}
+                                {console.log(user.answer?.statusOfSubmit[0],'aaa')}
                             </div>
+                                  <td className="whitespace-nowrap px-6 py-4">{!(user.answer?.statusOfSubmit[0]) && user.statusOfSubmit}</td>
+                           
+                            <td className="whitespace-nowrap px-6 py-4">
+                              <button 
+                              onClick={() => likePost(user._id)}>like</button>
+                            </td>
                             </tr>
                         </>
                     )

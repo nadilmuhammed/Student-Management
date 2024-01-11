@@ -43,7 +43,7 @@ export const createTrainerNotes = async(req,res)=>{
 export const getallIdnotes = async(req,res) =>{
     let { id } = req.params;
     try {
-        let response = await TrainerNotes.find({interns:id});
+        let response = await TrainerNotes.find({Assignedby:id});
 
 
         console.log(response,"response");

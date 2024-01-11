@@ -1,5 +1,6 @@
 
 import UUser from "../../models/Admintraine.js";
+import AssignmentIntern from "../../models/Intern/Assignment.js";
 import Intern from "../../models/admIntern.js";
 import Assignment from "../../models/traine/assignment.js";
 import TrainerBatch from "../../models/traine/trainerBatch.js";
@@ -116,30 +117,6 @@ export const getTrainerIntern = async(req,res)=>{
     const {id} = req.params;
    try {
     const result = await Assignment.findById(id)
-
-    // let getIntern = result.map(async(item) =>{
-    //   const {...other} = item;
-    //    const batch = await TrainerBatch.findById(item.batch);
-       
-    //    if(batch){
-    //     const { ...batchOther } = batch
-
-
-    //     let r =  await Promise.all( item.interns.map(async(idOfIntern)=>{
-    //     const internall = await Intern.findById(idOfIntern);  
-    //     const {...others} = internall
-    //     return {...others._doc}
-
-    //       }) )        
-
-    //     return {...other._doc,BatchName:batchOther._doc.name,studentData:r }
-    //   }else{
-    //     return other._doc
-    //   }
-    // })
-
-    // const getinternn = await Promise.all(getIntern);
-    // console.log(getinternn,'getIntern');
     res.status(200).json(result);
   } catch (error) {
     res.json({ message: error.message, status: false });
@@ -190,6 +167,77 @@ export const trainerBatchName = async(req,res)=>{
     console.log(result,"arrrrrrrr");
   } catch (error) {
     res.json({message : error.message})
+  }
+}
+
+export const InternSubmittedData = async(req,res)=>{
+  try {
+    let response = await AssignmentIntern.find();
+
+    let responseData =await Promise.all( response.map(async(assignment)=>{
+      const {...other} = assignment;
+      let obj ={
+        ...other._doc,
+
+      }
+      
+      const result =  await Intern.findById(assignment.Assignedby);
+      // console.log(result,'rrr');
+      if(result){
+        obj.StudentName = result.name;
+        // return {...other._doc , BatchLeadername:result.name}
+      }
+
+      const ASSIGNMENT_COLLECTION = await Assignment.findById(assignment.assignmentid);
+      if(ASSIGNMENT_COLLECTION){
+        obj.AssignmentData = ASSIGNMENT_COLLECTION._doc;
+
+        // const  {...others_assignemt_collection} = ASSIGNMENT_COLLECTION;
+        // return {...other._doc,studentName:result.name,assignmentData:others_assignemt_collection._doc}
+      }
+      return obj
+
+
+    }))
+    console.log(responseData,'responseData');
+
+    res.status(200).json(responseData) 
+  } catch (error) {
+    console.log({message : error.message, status:false});
+  }
+}
+
+export const ApproveAssign = async(req,res)=>{
+  let { id } = req.params
+  console.log(id,"id");
+  try {
+    let response = await AssignmentIntern.findByIdAndUpdate(id,{$set:{statusOfSubmit:"Evaluated"}},{new:true});
+    console.log(response,"res");
+
+    if (!response) {
+      return res.status(404).json({ error: 'data not found' });
+    }
+
+    res.status(202).json(response)
+  } catch (error) {
+    console.log({message : error.message, status:false});
+  }
+}
+
+export const RejectAssign = async(req,res)=>{
+  let { id } = req.params
+  console.log(id,"id");
+  try {
+    let response = await AssignmentIntern.findByIdAndUpdate(id,{$set:{statusOfSubmit:"Rejected"}},{new:true});
+    console.log(response,"res");
+
+    if (!response) {
+      return res.status(404).json({ error: 'data not found' });
+    }
+
+    res.status(202).json(response)
+  } catch (error) {
+    console.log({message : error.message, status:false});
   }
 }
   
