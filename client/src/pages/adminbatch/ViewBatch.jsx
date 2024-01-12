@@ -13,8 +13,8 @@ export default function App() {
     const fetchData = async () => {
         try {
           const response = await axios.get("http://localhost:4000/api/admin/getbatch");
-    
           setData(response.data);
+          console.log(response.data);
         } catch (error) {
           errorToast(error.message);
         }
@@ -83,7 +83,14 @@ export default function App() {
                             <tr style={{textAlign:"center"}} className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{user.trainerData.name}</td>
+                            {
+                              user.trainernewData.map((items)=>{
+                                console.log(items,"items");
+                                return(
+                                  <td className="whitespace-nowrap px-6 py-4">{items.name}</td>
+                                )
+                              })
+                            }
                             <td className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
                                 <Link to={`/admin/updatebatch/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>

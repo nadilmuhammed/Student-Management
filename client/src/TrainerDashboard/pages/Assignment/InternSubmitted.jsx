@@ -45,11 +45,30 @@ export default function App({refresh,setRefresh}) {
       }
     }
 
+    // const updateDueDate = async(id)=>{
+    //   const currentDate = new Date();
+    //   const dueDate = new Date(user.AssignmentData.validto);
+
+    //   if(currentDate > dueDate && user.statusOfSubmit !== 'Late submition'){
+    //     try {
+    //       await axios.put(`http://localhost:4000/api/trainer/updateduedate/${id._id}`,{
+    //         statusOfSubmit: 'Late submition'
+    //       });
+    //       fetchData();
+    //     } catch (error) {
+    //       errorToast(error.data.message);
+    //     }
+    //   }
+    // }
+
 
     useEffect(()=>{
       fetchData();
     },[refresh]);
 
+    // data.forEach((user)=>{
+    //   updateDueDate(user);
+    // });
 
     
 
@@ -77,8 +96,8 @@ export default function App({refresh,setRefresh}) {
                   <th scope="col" className="px-6 py-4">Description</th>
                   <th scope="col" className="px-6 py-4">InternStatus</th>
                   <th scope="col" className="px-6 py-4">From</th>
-                  <th scope="col" className="px-6 py-4">Due Date</th>
-                  <th scope="col" className="px-6 py-4">file</th>
+                  <th scope="col" className="px-6 py-4">Due</th>
+                  <th scope="col" className="px-6 py-4">Answers</th>
                   <th scope="col" className="px-6 py-4"></th>
                 
                 </tr>
@@ -94,8 +113,8 @@ export default function App({refresh,setRefresh}) {
                             <td className="whitespace-nowrap px-6 py-4">{user?.AssignmentData?.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user?.AssignmentData?.description}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user?.statusOfSubmit}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{ new Date(user.AssignmentData.validfrom ).getDay()}-{new Date(user.AssignmentData.validfrom ).getMonth()}-{new Date(user?.AssignmentData.validfrom ).getFullYear()}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{new Date(user?.AssignmentData.validto).getDay()}-{new Date(user?.AssignmentData.validto).getMonth()}-{new Date(user?.AssignmentData.validto).getFullYear()}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{ new Date(user.AssignmentData.validfrom ).getDay()}-{new Date(user.AssignmentData.validfrom ).getMonth() + 1}-{new Date(user?.AssignmentData.validfrom ).getFullYear()}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{new Date(user?.AssignmentData.validto).getDay()}-{new Date(user?.AssignmentData.validto).getMonth() + 1}-{new Date(user?.AssignmentData.validto).getFullYear()}</td>
                             <td className="whitespace-nowrap px-6 py-4">
                             <Link to={`http://localhost:4000/internfiles/${user.file}`}  download=''>
                               <button><FaDownload /></button>

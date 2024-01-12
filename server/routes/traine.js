@@ -57,6 +57,7 @@ routerTraine.get("/getbatchid/:id", trainerBatchName);
 routerTraine.get("/getinterndata", InternSubmittedData);
 routerTraine.put("/approvedata/:id", ApproveAssign);
 routerTraine.put("/rejectdata/:id", RejectAssign);
+// routerTraine.put("/updateduedate/:id", UpdateDuedate);
 
 // batch
 routerTraine.post("/createBatchtrainer", createBatchTrainer);

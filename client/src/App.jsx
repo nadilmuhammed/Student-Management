@@ -41,6 +41,7 @@ import Addnote from "./TrainerDashboard/pages/Notes/Addnote";
 import Viewnote from "./TrainerDashboard/pages/Notes/Viewnote";
 import UpdatNote from "./TrainerDashboard/pages/Notes/UpdatNote";
 import InternNotes from "./InternDashboard/pages/notes/InternNotes";
+import Otp from "./Login/Otp";
 
 function App() {
   const location = useLocation();
@@ -70,6 +71,7 @@ function App() {
         </Route>
         <Route exact path="/adminlogin" element={<Login/>} />
         <Route exact path="/user/register" element= {<Register/>}/> 
+        <Route exact path="/user/otp" element= {<Otp/>}/> 
 
         {/* --------------------------- */}
         

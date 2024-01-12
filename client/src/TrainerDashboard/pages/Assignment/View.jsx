@@ -78,8 +78,8 @@ export default function App() {
                             <td style={{maxWidth:"200px",overflow:"scroll"}} className="whitespace-nowrap px-6 py-4">{user.description}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.BatchName && user.BatchName}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.studentData && user.studentData.map((item)=> <div className="">{item.name}</div>  )}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{ new Date(user.validfrom ).getDay()}-{new Date(user.validfrom ).getMonth()}-{new Date(user.validfrom ).getFullYear()}</td>
-                            <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth()}-{new Date(user.validto).getFullYear()}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{ new Date(user.validfrom ).getDay()}-{new Date(user.validfrom ).getMonth() + 1}-{new Date(user.validfrom ).getFullYear()}</td>
+                            <td className="whitespace-nowrap px-6 py-4">{new Date(user.validto).getDay()}-{new Date(user.validto).getMonth() + 1}-{new Date(user.validto).getFullYear()}</td>
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:"1rem"}}>
                                 <button className='rounded' style={{background:"#BB3628",color:"white",padding:"10px"}} onClick={()=>handleDelete(user._id)}><MdDelete className='text-xl' /></button>
                                 <Link to={`/trainer/updateassignment/${user._id}`}><button className='rounded' style={{background:"#2891BB",color:"white",padding:"10px"}}><FaEdit className='text-xl flex justify-center items-center' /></button></Link>

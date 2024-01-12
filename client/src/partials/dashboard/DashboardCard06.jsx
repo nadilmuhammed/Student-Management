@@ -39,7 +39,9 @@ function DashboardCard06() {
   },[])
 
   const labels = batch.map((items)=> items.batch) ;
-  // const data = internData.map((items)=> items.name.length );
+  console.log(labels,"label");
+  const data = batch.map((items)=> items.trainerData.name.length );
+  console.log(data,"dduh");
   // const generateChartData = () =>{
 
   //   return {
@@ -66,7 +68,7 @@ function DashboardCard06() {
 
   // const chartData = generateChartData();   
 
- 
+ console.log(batch,'batch');
   const chartData = {
 
     // labels: ['United States', 'Italy', 'Other'],
@@ -76,9 +78,9 @@ function DashboardCard06() {
       {
         label: "Trainers",
         // data,
-        // data: [
-        //   90, 30, 35,
-        // ],
+         data: [
+           90, 30, 35,
+        ],
         backgroundColor: [
           tailwindConfig().theme.colors.indigo[500],
           tailwindConfig().theme.colors.blue[400],

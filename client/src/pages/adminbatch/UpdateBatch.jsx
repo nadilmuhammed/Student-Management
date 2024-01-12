@@ -50,6 +50,7 @@ useEffect(()=>{
           batch:batch,
           trainerReference:trainerId
       })
+      console.log(response.data,"update");
       if(response.data){
         successToast('created.');
       }

@@ -51,7 +51,7 @@ export const createInternAssignment = async(req,res)=>{
     try {
         let response = await Assignment.find({interns:id});
         
-    let r = await Promise.all(    response.map(async(items) => {
+    let r = await Promise.all(response.map(async(items) => {
           const {...other } = items
           const assignment = await AssignmentIntern.findOne({assignmentid:items._id,Assignedby:id})
 

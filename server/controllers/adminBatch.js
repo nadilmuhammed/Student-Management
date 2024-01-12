@@ -70,15 +70,16 @@ export const getBatch = async (req, res) => {
 
     let getBatchall = result.map(async (inter) => {
       const { ...other } = inter;
-      const trainer = await Trainer.findById(inter.trainerReference);
+      const trainer = await Trainer.find({_id: {$in: inter.trainerReference}});
       const { ...trainerOther } = trainer;
-      console.log(trainer, "trainer");
+      const data = await Trainer.find({_id: {$in: inter.trainerReference}});
+      const { ...dataOther } = data;
+      console.log(data, "data");
 
-      return { ...other._doc, trainerData: trainerOther._doc };
+      return { ...other._doc, trainerData: trainerOther._doc,trainernewData:data };
     });
 
     const getTrainers = await Promise.all(getBatchall);
-    console.log(getTrainers, "ffff");
 
     // console.log(result);
     res.status(200).json(getTrainers);

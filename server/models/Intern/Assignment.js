@@ -23,7 +23,7 @@ const UserSchema = new Schema({
     },
     statusOfSubmit: {
         type: [String],  // Specify that it's an array of strings
-        enum: ['pending','Approved', 'Rejected', 'Evaluated','Submited'],  // Specify the allowed values
+        enum: ['pending','Approved', 'Rejected', 'Evaluated','Submited','Late submition'],  // Specify the allowed values
         default: ['Submited']  // Set the default value to 'submit'
     },
     likes:[

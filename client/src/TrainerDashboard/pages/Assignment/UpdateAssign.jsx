@@ -24,9 +24,10 @@ function UpdateAssign() {
   const getDataID = async(id)=>{
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/getassignmentOne/${id}`);
-      console.log(response.data,"dhud");
       setName(response.data.name);
       setDescription(response.data.description);
+      setValidfrom(response.data.validfrom);
+      setValidTo(response.data.validto);
     } catch (error) {
       console.log(error.message);
     }
@@ -43,7 +44,6 @@ function UpdateAssign() {
           label:items.name,value:items._id
         }
       })  
-      console.log(result,"result");
       setOptions(result)
     } catch (error) {
       console.log(error.message);
@@ -54,7 +54,6 @@ function UpdateAssign() {
     try {
       let response = await axios.get(`http://localhost:4000/api/trainer/getbatchtrainerID/${localStorage.getItem("id")}`);
       setGetBatch(response.data);
-      console.log(response.data,"loggggg");
     } catch (error) {
       console.log(error.message);
     }
@@ -64,15 +63,6 @@ function UpdateAssign() {
     setGetintern(e.target.value);
     console.log(e.target.value);
   }
-
- 
-
-  useEffect(()=>{
-    getDataID(id)
-    getBatchDetails();
-    getallIntern()
-    handleClickIntern();
-  },[])
 
 
   const {id} =useParams();
@@ -99,24 +89,27 @@ function UpdateAssign() {
 
     } catch (error) {
       console.log(error.message);
-      errorToast(error.message);
+      errorToast(error.response.data.message);
     }
   }
 
+  useEffect(()=>{
+    getDataID(id)
+    getBatchDetails();
+    getallIntern()
+    handleClickIntern();
+  },[])
+
 
   const handleClickBtach = async(id)=>{
-    console.log(id,'_____');
-    // setBranchId(id)
     setOnebatch(id);
 
     let dataOne = getBatch.find((item)=> item._id == id)
     let result = dataOne.studentsData.map((items)=>{
-      // console.log(items._id,"jvgjvgkv");
       return{
         label:items.name,value:items._id
       }
     });
-    console.log(result,"result");
     setData(result);
    
   }
@@ -171,13 +164,14 @@ function UpdateAssign() {
         
         <div className='mt-3'>
           <p>Validfrom:</p>
-          <input type="date" placeholder='valid from' 
+          <input type="date"
             value={validfrom}
             onChange={(e)=>setValidfrom(e.target.value)}
             />
           </div>
         <div className='mt-3'>
-          <p>Validto:</p><input type="date" placeholder='valid to' 
+          <p>Validto:</p>
+          <input type="date" 
           value={validto}
           onChange={(e)=>setValidTo(e.target.value)}
           />

@@ -25,7 +25,7 @@ export default function Example() {
       console.log(response, "ress");
       if (response.data) {
         successToast("success");
-        navigate("/");
+        navigate("/user/otp");
       }
     } catch (error) {
       errorToast(error.response.data.message);

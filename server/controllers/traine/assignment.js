@@ -77,14 +77,14 @@ export const getTrainerIntern = async(req,res)=>{
       return res.status(400).json({ message: "validfrom is required" });
     } 
     if(!validto) {
-      return res.status(400).json({message:"validto an image"})
+      return res.status(400).json({message:"validto required"})
     }
   
     try {
         const updatedUser = await Assignment.findByIdAndUpdate(id,{$set:{ name,description,batch,interns,validfrom,validto,Assignedby }},{new:true});
         res.status(201).json(updatedUser);
     } catch (error) {
-      res.json({response : error.message , status :false});
+      res.json({message : error.message , status :false});
     }
   }
 
@@ -240,4 +240,21 @@ export const RejectAssign = async(req,res)=>{
     console.log({message : error.message, status:false});
   }
 }
+
+
+// export const UpdateDuedate = async(req,res)=>{
+//   let { id } = req.params;
+//   let { statusOfSubmit } = req.body;
+//   try {
+//     let response = await AssignmentIntern.findByIdAndUpdate(id,{statusOfSubmit:statusOfSubmit},{new:true});
+
+//     if(!response){
+//       return res.status(401).json({message : "User not found"});
+//     }
+
+//     res.status(200).json(response)
+//   } catch (error) {
+//     res.json({message: error.message, status:false});
+//   }
+// }
   

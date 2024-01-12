@@ -7,7 +7,7 @@ const UserSchema = new Schema({
         unique:true 
     },
     trainerReference : {
-        type: String,
+        type: Array,
         required : true
     }
  
