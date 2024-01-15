@@ -47,7 +47,7 @@ export default function App() {
         </>        
     ): (
         
-    <div className="flex flex-col">
+    <div className="flex flex-col max-h-96">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
           <p className='viewformheading'>Batch Details</p>  
@@ -83,14 +83,18 @@ export default function App() {
                             <tr style={{textAlign:"center"}} className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.batch}</td>
-                            {
-                              user.trainernewData.map((items)=>{
-                                console.log(items,"items");
-                                return(
-                                  <td className="whitespace-nowrap px-6 py-4">{items.name}</td>
-                                )
-                              })
-                            }
+                            <td className="whitespace-nowrap px-6 py-4">
+                              <ul>
+                                {
+                                  user.trainernewData.map((items)=>{
+                                    console.log(items,"items");
+                                    return(
+                                      <li>{items.name}</li>
+                                    )
+                                  })
+                                }
+                              </ul>
+                            </td>
                             <td className='whitespace-nowrap px-6 py-4' style={{display:"flex",justifyContent:"space-around"}}>
                                 <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
                                 <Link to={`/admin/updatebatch/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>

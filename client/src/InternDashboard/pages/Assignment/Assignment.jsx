@@ -15,8 +15,13 @@ export default function App() {
           const response = await axios.get(`http://localhost:4000/api/intern/getassignment/${localStorage.getItem("id")}`);
           console.log(response.data,"ddatatat");
           setData(response.data);
+
+          // if(!response == null){
+          //   errorToast("No assignments found");
+          // }
+
         } catch (error) {
-          errorToast(error.message);
+          errorToast(error.response.data.message);
         }
       };
 
@@ -51,7 +56,7 @@ export default function App() {
           <div className="overflow-hidden viewAllform p-0">
             <table className="min-w-full text-left text-sm font-light">
               <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white">
-                <tr style={{textAlign:"center"}}>
+                <tr className='text-center'>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Topic</th>
                   <th scope="col" className="px-6 py-4">Question</th>

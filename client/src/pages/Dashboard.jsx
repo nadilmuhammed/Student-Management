@@ -110,7 +110,7 @@ function Dashboard() {
               {/* <DashboardCard05 /> */}
               {/* Doughnut chart (Top Countries) */}
               {/* <DashboardCard06 /> */}
-              <Card6Copy/>
+              {/* <Card6Copy/> */}
               <Cardnew/>
               {/* Table (Top Channels) */}
               {/* <DashboardCard07 /> */}

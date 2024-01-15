@@ -3,6 +3,7 @@ import { Internlogin, getInternDetails, getInternDetailsID, updateInternLogin } 
 import multer from "multer";
 import path from "path";
 import { createInternAssignment, getAssignIntern, getAssignmentOneID, getInternAssignmentID, likeAssign } from "../controllers/Intern/Assignment.js";
+import { getallIdnotes } from "../controllers/Intern/notes.js";
 
 const routerIntern = express.Router();
 
@@ -48,7 +49,7 @@ routerIntern.get("/getassignmentall/:id", getAssignmentOneID);
 routerIntern.post("/like/:id", likeAssign);
 
 // notes
-routerIntern.get("/getallNotes/:id", getAssignmentOneID);
+routerIntern.get("/getallNotes/:id", getallIdnotes);
 
 
 

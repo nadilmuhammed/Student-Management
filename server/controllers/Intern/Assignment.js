@@ -50,6 +50,10 @@ export const createInternAssignment = async(req,res)=>{
     const { id } = req.params
     try {
         let response = await Assignment.find({interns:id});
+
+        if(!response){
+          return res.status(400).json({message : "No assignment found"});
+        }
         
     let r = await Promise.all(response.map(async(items) => {
           const {...other } = items

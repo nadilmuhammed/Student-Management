@@ -52,14 +52,16 @@ export default function App() {
         </>        
     ): (
         
-    <div className="flex flex-col">
+    <div className="flex flex-col h-96">
       <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8"> 
-        <p className='viewformheading'>Intern Details</p>   
-          <div className="overflow-hidden viewAllform">
-            <div className=' flex lg:flex-row md:flex-col max-sm:flex-col  gap-3'>
+        <p className='text-center text-4xl font-bold'>Intern Details</p>   
+          <div className="overflow-hidden">
+            <div className=' flex lg:flex-row md:flex-col max-sm:flex-col gap-3 mt-3'>
               <div>
-              <Link to="/admin/addIntern"><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Add</button></Link>
+              <Link to="/admin/addIntern">
+                <button className='bg-blue-500 text-white p-2 w-20 rounded'>Add</button>
+              </Link>
               </div>
               <div>
                 <input
@@ -78,8 +80,8 @@ export default function App() {
                   />
               </div>
             </div>
-            <table className="min-w-full text-left text-sm font-light">
-              <thead className="border-b font-medium dark:border-neutral-500">
+            <table className="min-w-full text-left text-sm font-light mt-3">
+              <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white">
                 <tr style={{textAlign:"center"}}>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
@@ -88,6 +90,7 @@ export default function App() {
                   <th scope="col" className="px-6 py-4">Image</th>
                   <th scope="col" className="px-6 py-4">Traine</th>
                   <th scope="col" className="px-6 py-4">Batch</th>
+                  <th scope="col" className="px-6 py-4"></th>
                 </tr>
               </thead>
               <tbody style={{textAlign:"center"}}>
@@ -110,9 +113,11 @@ export default function App() {
                             </td>
                             <td className="whitespace-nowrap px-6 py-4">{user.trainerData.name}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.batchData.batch}</td>
-                            <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around"}}>
-                                <button style={{background:"#BB3628",color:"white",width:"5rem",padding:"10px"}} onClick={()=>handleDelete(user._id)}>Delete</button>
-                                <Link to={`/admin/updateintern/${user._id}`}><button style={{background:"#2891BB",color:"white",width:"5rem",padding:"10px"}}>Edit</button></Link>
+                            <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:"1rem"}}>
+                                <button className='bg-red-800 text-white p-2 w-20 rounded' onClick={()=>handleDelete(user._id)}>Delete</button>
+                                <Link to={`/admin/updateintern/${user._id}`}>
+                                  <button className='bg-blue-600 text-white p-2 w-20 rounded'>Edit</button>
+                                </Link>
                             </div>
                             </tr>
                         </>

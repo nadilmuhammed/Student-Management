@@ -75,14 +75,13 @@ export default function App() {
                             <tr className="border-b dark:border-neutral-500" key={index}>
                             <td className="whitespace-nowrap px-6 py-4 font-medium">{index+1}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.name}</td>
-                            <td style={{maxWidth:"200px",overflow:"scroll"}} className="whitespace-nowrap px-6 py-4">{user.description}</td>
+                            <td style={{maxWidth:"200px",overflow:"auto"}} className="whitespace-nowrap px-6 py-4">{user.description}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.BatchName && user.BatchName}</td>
                             <td className="whitespace-nowrap px-6 py-4">{user.studentData && user.studentData.map((item)=> <div className="">{item.name}</div>  )}</td>
                             <td className="whitespace-nowrap px-6 py-4">
                                 <Link to={`http://localhost:4000/trainernotes/${user.file}`} download=''>
                                     <button className='p-2 bg-gray-700 rounded'><FaDownload className='text-xl text-white'/></button>
                                 </Link>
-                                    {/* {`http://localhost:4000/trainernotes/${user.file}`} */}
                             </td>
 
                             <div className='whitespace-nowrap px-6 py-4 buttonspace' style={{display:"flex",justifyContent:"space-around",gap:"1rem"}}>

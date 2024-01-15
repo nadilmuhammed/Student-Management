@@ -25,7 +25,6 @@ export default function BasicPie() {
   const transformBatchData = () => {
       // Transform the batch data to the format expected by PieChart
       return batch.map((batchItem, index) => (
-        console.log(batchItem.trainerData,'batchItem'),
         {
       id: index,
       value: 1,

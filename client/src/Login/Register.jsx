@@ -2,6 +2,8 @@ import  axios from "axios";
 import { useState } from "react";
 import { errorToast, successToast } from "../Toastify/Toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { auth, google } from "./firebase.config";
+import { signInWithPopup } from "firebase/auth";
 
 export default function Example() {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ export default function Example() {
   const [username,setName] = useState(null)
   const [email, setEmail] = useState(null);
   const [password, setPasswrod] = useState(null);
+  const [user, setUser] = useState(null);
 
   const handlePassword = (e) => setPasswrod(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
@@ -31,6 +34,17 @@ export default function Example() {
       errorToast(error.response.data.message);
     }
   };
+
+
+  const signInWithGoogle = ()=>{
+    signInWithPopup(auth, google).then((result)=>{
+      const user = result.user;
+      navigate('/admin')
+      setUser(user)
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <>
@@ -134,6 +148,7 @@ export default function Example() {
                   Login
                 </button>
               </Link>
+              <button onClick={signInWithGoogle}>Sign in with Google</button>
               
             </div>
             

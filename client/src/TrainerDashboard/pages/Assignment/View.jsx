@@ -55,7 +55,7 @@ export default function App() {
         <p className='viewformheading'>Assignment Details</p>   
           <div className="overflow-hidden">
             <table className="min-w-full text-left text-sm font-light mt-3">
-              <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white ">
+              <thead className="border-b font-medium dark:border-neutral-500 bg-slate-700 text-white">
                 <tr className='text-center'>
                   <th scope="col" className="px-6 py-4">#</th>
                   <th scope="col" className="px-6 py-4">Name</th>
