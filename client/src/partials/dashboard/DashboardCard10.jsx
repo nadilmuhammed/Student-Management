@@ -30,7 +30,7 @@ function DashboardCard10() {
   return (
     <div className="col-span-full xl:col-span-6 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
       <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 className="font-semibold text-slate-800 dark:text-slate-100">trainers</h2>
+        <h2 className="font-semibold text-slate-800 dark:text-slate-800">trainers</h2>
       </header>
       <div className="p-3">
 
@@ -75,16 +75,16 @@ function DashboardCard10() {
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                          <div className="font-medium text-slate-800 dark:text-slate-100">{items.name}</div>
+                          <div className="font-medium text-slate-800 dark:text-slate-600">{items.name}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{items.email}</div>
+                        <div className="text-left dark:text-slate-600">{items.email}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left font-medium text-green-500">{items.password}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{items.username}</div>
+                        <div className="text-left dark:text-slate-600">{items.username}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left font-medium text-green-500">{items.id_no}</div>

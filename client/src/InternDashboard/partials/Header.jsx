@@ -5,6 +5,7 @@ import Notifications from '../components/DropdownNotifications';
 import Help from '../components/DropdownHelp';
 import UserMenu from '../components/DropdownProfile';
 import ThemeToggle from '../components/ThemeToggle';
+import ThemeSwitch from '../components/ThemeSwitch';
 
 function Header({ sidebarOpen, setSidebarOpen }) {
   const [searchModalOpen, setSearchModalOpen] = useState(false);
@@ -63,7 +64,8 @@ function Header({ sidebarOpen, setSidebarOpen }) {
             </div>
             <Notifications align="right" />
             <Help align="right" />
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
+            <ThemeSwitch/>
             {/*  Divider */}
             <hr className="w-px h-6 bg-slate-200 dark:bg-slate-700 border-none" />
             <UserMenu align="right" />

@@ -24,7 +24,7 @@ function Card10Interns() {
   return (
     <div className="col-span-full xl:col-span-6 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
       <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 className="font-semibold text-slate-800 dark:text-slate-100">Interns</h2>
+        <h2 className="font-semibold text-slate-800 dark:text-slate-800">Interns</h2>
       </header>
       <div className="p-3">
 
@@ -69,19 +69,19 @@ function Card10Interns() {
                         </div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                          <div className="font-medium text-slate-800 dark:text-slate-100">{items.name}</div>
+                          <div className="font-medium text-slate-800 dark:text-slate-600">{items.name}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{items.email}</div>
+                        <div className="text-left dark:text-slate-600">{items.email}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
                         <div className="text-left font-medium text-green-500">{items.password}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{items.trainerData.name}</div>
+                        <div className="text-left dark:text-slate-600">{items.trainerData.name}</div>
                       </td>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="text-left">{items.batchData.batch}</div>
+                        <div className="text-left dark:text-slate-600">{items.batchData.batch}</div>
                       </td>
                     </tr>
                   )

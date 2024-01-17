@@ -4,6 +4,8 @@ import { useThemeProvider } from '../utils/ThemeContext';
 export default function ThemeToggle() {
   const { currentTheme, changeCurrentTheme } = useThemeProvider();
 
+  console.log(currentTheme,"theme");
+
   return (
     <div>
       <input

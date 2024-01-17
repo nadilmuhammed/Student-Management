@@ -9,8 +9,8 @@ module.exports = {
   theme: {
       extend: {},
   },
-  darkMode: "class",
-  plugins: [require("tw-elements-react/dist/plugin.cjs")]
+  // darkMode: "class",
+  // plugins: [require("tw-elements-react/dist/plugin.cjs")]
   }
 
   const withMT = require("@material-tailwind/react/utils/withMT");

@@ -4,6 +4,7 @@ import { errorToast, successToast } from "../Toastify/Toast";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { auth, google } from "./firebase.config";
 import { signInWithPopup } from "firebase/auth";
+import {FcGoogle } from "react-icons/fc"
 
 export default function Example() {
   const navigate = useNavigate();
@@ -148,7 +149,10 @@ export default function Example() {
                   Login
                 </button>
               </Link>
-              <button onClick={signInWithGoogle}>Sign in with Google</button>
+              <div className="flex justify-center items-center mt-4 gap-2 ">
+              <FcGoogle className="text-3xl"/>
+                <button onClick={signInWithGoogle}>Sign in with Google</button>
+              </div>
               
             </div>
             

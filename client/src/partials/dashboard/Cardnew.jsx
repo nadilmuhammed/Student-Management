@@ -37,7 +37,7 @@ export default function BasicPie() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 xl:col-span-5 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
       <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 className="font-semibold text-slate-800 dark:text-slate-100">Batches</h2>
+        <h2 className="font-semibold text-slate-800 dark:text-slate-800">Batches</h2>
       </header>
       <PieChart
       series={[
@@ -46,7 +46,7 @@ export default function BasicPie() {
         //     { id: 0, value: 10, label: 'series A' },
         //     { id: 1, value: 15, label: 'series B' },
         //     { id: 2, value: 20, label: 'series C' },
-        //   ],
+        //   ],xd
         data: transformBatchData(),
         },
       ]}

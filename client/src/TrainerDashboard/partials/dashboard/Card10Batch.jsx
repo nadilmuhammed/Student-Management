@@ -25,7 +25,7 @@ function Card10Batch() {
   return (
     <div className="col-span-full xl:col-span-6 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
       <header className="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 className="font-semibold text-slate-800 dark:text-slate-100">Batch Details</h2>
+        <h2 className="font-semibold text-slate-800 dark:text-slate-900">Batch Details</h2>
       </header>
       <div className="p-3">
 
@@ -51,12 +51,12 @@ function Card10Batch() {
                   return (
                     <tr key={items.id}>
                       <td className="p-2 whitespace-nowrap">
-                        <div className="font-medium text-slate-800 dark:text-slate-100">{items.name}</div>
+                        <div className="font-medium text-slate-800 dark:text-slate-600">{items.name}</div>
                       </td>
                         <div className="text-left">{items.internData.map((items)=>{
                             console.log(items,"ns cmn");
                             return(
-                                <td className="p-2 whitespace-nowrap">{items.name}</td>
+                                <td className="p-2 whitespace-nowrap dark:text-slate-600">{items.name}</td>
                             )
                             
                         })}</div>
